@@ -1,0 +1,138 @@
+/* OpenSeat UI kit — shared component styles behind components/ui/*.tsx.
+   Dense by default: 32px controls, hairline borders, shadows only where
+   something actually floats (menus, toasts, modals). */
+
+/* Button */
+.os-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1, 4px);
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  border: var(--border-width-hairline) solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+}
+.os-btn:focus-visible {
+  outline: var(--border-width-thick) solid var(--border-focus);
+  outline-offset: 1px;
+}
+.os-btn-sm { height: 28px; padding: 0 8px; }
+.os-btn-lg { height: 40px; padding: 0 16px; }
+
+.os-btn-primary { background: var(--primary); color: var(--on-primary); }
+.os-btn-primary:hover { background: var(--primary-hover); }
+.os-btn-primary:active { background: var(--primary-active); }
+.os-btn-primary:disabled { opacity: var(--opacity-disabled); cursor: default; background: var(--primary); }
+
+.os-btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--border-default); }
+.os-btn-secondary:hover { background: var(--surface-hover); border-color: var(--border-strong); }
+.os-btn-secondary:active { background: var(--surface-selected); }
+.os-btn-secondary:disabled { opacity: var(--opacity-disabled); cursor: default; background: var(--surface); border-color: var(--border-default); }
+
+.os-btn-ghost { background: transparent; color: var(--ink-muted); }
+.os-btn-ghost:hover { color: var(--ink); background: var(--surface-hover); }
+.os-btn-ghost:active { background: var(--surface-selected); }
+.os-btn-ghost:disabled { opacity: var(--opacity-disabled); cursor: default; background: transparent; color: var(--ink-muted); }
+
+.os-btn-danger { background: var(--danger); color: var(--on-primary); }
+.os-btn-danger:hover { background: var(--danger-hover); }
+.os-btn-danger:disabled { opacity: var(--opacity-disabled); cursor: default; background: var(--danger); }
+
+/* Input */
+.os-field-group { display: flex; flex-direction: column; gap: 4px; box-sizing: border-box; }
+.os-field {
+  background: var(--surface-sunken);
+  border: var(--border-width-hairline) solid var(--border-default);
+  border-radius: var(--radius-md);
+  height: 32px;
+  padding: 0 10px;
+  color: var(--ink);
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              background-color var(--duration-fast) var(--ease-standard);
+}
+.os-field::placeholder { color: var(--ink-faint); }
+.os-field:hover { border-color: var(--border-strong); }
+.os-field:focus { outline: var(--border-width-thick) solid var(--border-focus); outline-offset: 1px; border-color: var(--border-focus); }
+.os-field:disabled { opacity: var(--opacity-disabled); }
+.os-field-error { border-color: var(--danger); }
+.os-field-helper { color: var(--ink-muted); }
+.os-field-helper-error { color: var(--danger); }
+textarea.os-field { height: auto; min-height: 88px; padding: 8px 10px; resize: vertical; font: inherit; }
+
+/* Card */
+.os-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: var(--border-width-hairline) solid var(--border-subtle);
+  padding: 16px;
+  box-sizing: border-box;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
+}
+.os-card-raised { box-shadow: var(--elevation-1); }
+.os-card-hover:hover { background: var(--surface-hover); border-color: var(--border-strong); cursor: pointer; }
+.os-card-selected { border-color: var(--border-focus); background: var(--primary-bg); }
+.os-card-title { margin: 0; color: var(--ink); }
+.os-card-meta { color: var(--ink-muted); margin: 4px 0 0 0; }
+.os-card-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 8px; border-top: var(--border-width-hairline) solid var(--border-subtle); }
+
+/* Badge */
+.os-badge { display: inline-flex; align-items: center; height: 20px; border-radius: var(--radius-sm); padding: 0 6px; white-space: nowrap; }
+.os-badge-neutral { background: var(--surface-sunken); color: var(--ink-muted); }
+.os-badge-primary { background: var(--primary-bg); color: var(--primary); }
+.os-badge-success { background: var(--success-bg); color: var(--success); }
+.os-badge-warning { background: var(--warning-bg); color: var(--warning); }
+.os-badge-danger { background: var(--danger-bg); color: var(--danger); }
+.os-badge-outline { background: transparent; color: var(--ink-muted); border: var(--border-width-hairline) solid var(--border-default); }
+
+/* Avatar */
+.os-avatar { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-full); color: var(--on-primary); font-weight: 500; box-sizing: border-box; flex: none; }
+.os-avatar-20 { width: 20px; height: 20px; font-size: 9px; }
+.os-avatar-24 { width: 24px; height: 24px; font-size: 10px; }
+.os-avatar-32 { width: 32px; height: 32px; font-size: 12px; }
+.os-avatar-fill-1 { background: var(--primary); }
+.os-avatar-fill-2 { background: var(--success); color: var(--canvas); }
+.os-avatar-fill-3 { background: var(--warning); color: var(--canvas); }
+.os-avatar-fill-4 { background: var(--border-strong); color: var(--canvas); }
+.os-avatar-overflow { background: var(--surface-sunken); color: var(--ink-muted); border-radius: var(--radius-pill); font-size: 10px; padding: 0 2px; }
+.os-avatar-stack { display: flex; }
+.os-avatar-stack .os-avatar { border: var(--border-width-hairline) solid var(--surface); margin-left: -6px; }
+.os-avatar-stack .os-avatar:first-child { margin-left: 0; }
+.os-avatar-dot-wrap { position: relative; display: inline-flex; }
+.os-status-dot { position: absolute; bottom: -1px; right: -1px; width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--success); border: var(--border-width-hairline) solid var(--surface); }
+
+/* Nav */
+.os-nav { display: flex; align-items: center; justify-content: space-between; background: var(--surface); border-bottom: var(--border-width-hairline) solid var(--border-subtle); padding: 0 16px; height: 48px; box-sizing: border-box; }
+.os-nav-brand { color: var(--ink); }
+.os-nav-items { display: flex; gap: 16px; align-items: center; }
+.os-nav-item { color: var(--ink-muted); cursor: pointer; padding: 2px 0; border-bottom: var(--border-width-thick) solid transparent; transition: color var(--duration-fast) var(--ease-standard); text-decoration: none; }
+.os-nav-item:hover { color: var(--ink); }
+.os-nav-item-active { color: var(--ink); border-bottom-color: var(--primary); }
+.os-nav-right { display: flex; align-items: center; gap: 12px; }
+
+/* Empty state */
+.os-empty-wrap { display: flex; align-items: center; justify-content: center; padding: 32px 16px; }
+.os-empty { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 300px; }
+.os-empty-icon { width: 36px; height: 36px; border-radius: var(--radius-full); background: var(--primary-bg); color: var(--primary); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.os-empty-title { margin: 0; color: var(--ink); }
+.os-empty-desc { margin: 4px 0 0 0; color: var(--ink-muted); }
+.os-empty .os-btn { margin-top: 16px; }
+
+/* Toast */
+.os-toast-stack { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+.os-toast { display: flex; align-items: flex-start; gap: 8px; background: var(--surface); border: var(--border-width-hairline) solid var(--border-subtle); border-radius: var(--radius-lg); box-shadow: var(--elevation-2); padding: 12px; max-width: 340px; box-sizing: border-box; }
+.os-toast svg { flex: none; margin-top: 2px; }
+.os-toast-msg { color: var(--ink); flex: 1; }
+.os-toast-tone-neutral svg { stroke: var(--ink-muted); }
+.os-toast-tone-success svg { stroke: var(--success); }
+.os-toast-tone-warning svg { stroke: var(--warning); }
+.os-toast-tone-danger svg { stroke: var(--danger); }
+.os-toast-close { color: var(--ink-muted); cursor: pointer; flex: none; font-size: 12px; line-height: 16px; background: none; border: none; padding: 0; }
