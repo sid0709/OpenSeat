@@ -71,7 +71,7 @@ export function Menu({ trigger, items, align = "start" }: MenuProps) {
   );
 }
 
-/** Aliases — Astryx splits this anatomy into DropdownMenu and TopNavMenu by trigger context; same component. */
+/** Aliases — OpenSeat splits this anatomy into DropdownMenu and TopNavMenu by trigger context; same component. */
 export const DropdownMenu = Menu;
 export type DropdownMenuProps = MenuProps;
 export const TopNavMenu = Menu;

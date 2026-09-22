@@ -1,8 +1,8 @@
-/* Astryx-shaped UI kit. Visual language matches https://astryx.atmeta.com/
+/* OpenSeat-shaped UI kit. Visual language matches https://astryx.atmeta.com/
    (system fonts, 32px controls, --radius-element on buttons, no chrome borders
    on primary/ghost). Color comes only from tokens.css. */
 
-/* Button — Astryx: 32×, 8/12 padding, 12px radius, no border */
+/* Button — OpenSeat: 32×, 8/12 padding, 12px radius, no border */
 .os-btn {
   display: inline-flex;
   align-items: center;
@@ -135,7 +135,7 @@ select.os-field { appearance: none; background-image: linear-gradient(45deg, tra
 .os-avatar-dot-wrap { position: relative; display: inline-flex; }
 .os-status-dot { position: absolute; bottom: -1px; right: -1px; width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--color-success); border: 1px solid var(--color-background-surface); }
 
-/* Nav / Top Nav — Astryx docs chrome */
+/* Nav / Top Nav — OpenSeat docs chrome */
 .os-nav {
   display: flex;
   align-items: center;

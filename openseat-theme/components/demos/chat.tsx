@@ -21,13 +21,13 @@ export default function ChatDemo() {
             <ChatLayout composer={<ChatComposer onSubmit={() => undefined} placeholder="Write a message" />}>
               <ChatMessageList>
                 <ChatSystemMessage>Order #1043 · Placed</ChatSystemMessage>
-                <ChatMessage sender="assistant" name="Astryx">
+                <ChatMessage sender="assistant" name="OpenSeat">
                   <ChatMessageBubble>Can you show me the full details?</ChatMessageBubble>
                 </ChatMessage>
                 <ChatMessage sender="user">
                   <ChatMessageBubble>Here’s everything I have on order #1043.</ChatMessageBubble>
                 </ChatMessage>
-                <ChatMessage sender="assistant" name="Astryx">
+                <ChatMessage sender="assistant" name="OpenSeat">
                   <ChatMessageBubble>Estimated arrival tomorrow by 8pm.</ChatMessageBubble>
                 </ChatMessage>
               </ChatMessageList>

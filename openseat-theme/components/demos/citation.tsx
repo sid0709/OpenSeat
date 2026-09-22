@@ -9,13 +9,13 @@ export default function CitationDemo() {
     <Examples>
       <Preview label="In copy">
         <Text>
-          Astryx is fully customizable
-          <Citation number={1} source={{ title: "Astryx", url: "https://astryx.atmeta.com/" }} />.
+          OpenSeat is fully customizable
+          <Citation number={1} source={{ title: "OpenSeat", url: "https://astryx.atmeta.com/" }} />.
         </Text>
       </Preview>
       <Preview label="Standalone">
         <Row>
-          <Citation number={1} source={{ title: "Astryx", url: "https://astryx.atmeta.com/" }} />
+          <Citation number={1} source={{ title: "OpenSeat", url: "https://astryx.atmeta.com/" }} />
           <Citation number={2} source={{ title: "React", url: "https://react.dev/" }} />
         </Row>
       </Preview>

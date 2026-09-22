@@ -50,6 +50,6 @@ export function Modal({ open, onClose, title, children, footer }: ModalProps) {
   );
 }
 
-/** Alias — Astryx names this pattern Dialog; same component. */
+/** Alias — OpenSeat names this pattern Dialog; same component. */
 export const Dialog = Modal;
 export type DialogProps = ModalProps;

@@ -36,7 +36,7 @@ export function DocsChrome({ children }: { children: ReactNode }) {
       topNav={
         <TopNav
           label="Documentation"
-          heading={<TopNavHeading heading="Astryx" headingHref="/" />}
+          heading={<TopNavHeading heading="OpenSeat" headingHref="/" />}
           startContent={
             <>
               <TopNavItem
@@ -59,7 +59,7 @@ export function DocsChrome({ children }: { children: ReactNode }) {
       sideNav={
         <ClientOnly>
           <SideNav
-            header={<SideNavHeading heading="Astryx" headingHref="/" />}
+            header={<SideNavHeading heading="OpenSeat" headingHref="/" />}
             topContent={
               <TextInput
                 label="Search"

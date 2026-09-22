@@ -10,7 +10,7 @@ export default function SideNavDemo() {
     <Examples>
       <Preview label="Sections">
         <Card width={240} height={280} padding={0}>
-          <SideNav header={<SideNavHeading heading="Astryx" />}>
+          <SideNav header={<SideNavHeading heading="OpenSeat" />}>
             <SideNavItem label="Overview" href="#overview" isSelected icon={<Icon icon="viewColumns" />} />
             <SideNavItem label="Action" icon={<Icon icon="check" />} collapsible>
               <SideNavItem label="Button" href="#button" />

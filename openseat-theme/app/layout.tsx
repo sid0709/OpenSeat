@@ -4,7 +4,7 @@ import { DocsChrome } from "@/components/DocsChrome";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Astryx",
+  title: "OpenSeat",
   description: "Accessible, themeable React components from Meta.",
 };
 

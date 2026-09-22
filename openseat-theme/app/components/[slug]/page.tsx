@@ -18,7 +18,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const item = findItem(slug);
   return {
-    title: item ? `${item.title} · Astryx` : "Astryx",
+    title: item ? `${item.title} · OpenSeat` : "OpenSeat",
     description: item?.description,
   };
 }

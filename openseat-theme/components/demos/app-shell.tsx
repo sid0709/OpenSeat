@@ -18,7 +18,7 @@ export default function AppShellDemo() {
             topNav={
               <TopNav
                 label="Preview navigation"
-                heading={<TopNavHeading heading="Astryx" />}
+                heading={<TopNavHeading heading="OpenSeat" />}
                 startContent={<TopNavItem label="Home" href="#home" isSelected />}
               />
             }

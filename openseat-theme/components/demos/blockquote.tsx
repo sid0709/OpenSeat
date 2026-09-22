@@ -7,7 +7,7 @@ export default function BlockquoteDemo() {
   return (
     <Examples>
       <Preview label="Cited">
-        <Blockquote cite="Astryx">Accessible, themeable React components.</Blockquote>
+        <Blockquote cite="OpenSeat">Accessible, themeable React components.</Blockquote>
       </Preview>
       <Preview label="Uncited">
         <Blockquote>Start anywhere. Change anything. Ship faster.</Blockquote>

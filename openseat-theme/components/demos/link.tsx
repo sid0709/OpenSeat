@@ -15,14 +15,14 @@ export default function LinkDemo() {
       </Preview>
       <Preview label="Inline">
         <Text>
-          Read the <Link href="#docs">documentation</Link> for more information about using Astryx
+          Read the <Link href="#docs">documentation</Link> for more information about using OpenSeat
           components.
         </Text>
       </Preview>
       <Preview label="External">
         <Stack gap={2}>
           <Link href="https://astryx.atmeta.com/" isExternalLink isStandalone>
-            Astryx docs
+            OpenSeat docs
           </Link>
           <Link href="https://react.dev/" isExternalLink isStandalone>
             React documentation

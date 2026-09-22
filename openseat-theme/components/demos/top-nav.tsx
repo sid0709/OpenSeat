@@ -10,7 +10,7 @@ export default function TopNavDemo() {
       <Preview label="Product bar">
         <TopNav
           label="Product"
-          heading={<TopNavHeading heading="Astryx" />}
+          heading={<TopNavHeading heading="OpenSeat" />}
           startContent={
             <>
               <TopNavItem label="Dashboard" href="#dashboard" isSelected />
