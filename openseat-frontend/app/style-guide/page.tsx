@@ -167,7 +167,10 @@ export default function StyleGuidePage() {
 
       <Section title="Nav">
         <Nav
+          brand="OpenSeat"
           items={[{ label: "Dashboard", active: true }, { label: "Job rooms" }, { label: "Messages" }]}
+          cta="Post a sealed job"
+          showAvatar
         />
       </Section>
 

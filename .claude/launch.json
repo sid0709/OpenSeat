@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "next-dev",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "openseat-frontend"],
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "--cwd", "openseat-frontend", "dev"],
       "port": 3000
     }
   ]

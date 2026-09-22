@@ -2,7 +2,7 @@
 
 import { ButtonHTMLAttributes, forwardRef } from "react";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "destructive";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -15,6 +15,7 @@ const VARIANT_CLASS: Record<ButtonVariant, string> = {
   secondary: "os-btn-secondary",
   ghost: "os-btn-ghost",
   danger: "os-btn-danger",
+  destructive: "os-btn-danger",
 };
 
 const SIZE_CLASS: Record<ButtonSize, string> = {

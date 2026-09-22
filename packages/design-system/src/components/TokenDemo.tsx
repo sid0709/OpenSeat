@@ -1,11 +1,27 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { Button } from "./Button";
 
 type Theme = "dark" | "light";
 
 const COLOR_GROUPS: { title: string; tokens: string[] }[] = [
+  {
+    title: "Meta blue ramp",
+    tokens: [
+      "meta-blue-50",
+      "meta-blue-100",
+      "meta-blue-200",
+      "meta-blue-300",
+      "meta-blue-400",
+      "meta-blue-500",
+      "meta-blue-600",
+      "meta-blue-700",
+      "meta-blue-800",
+      "meta-blue-900",
+      "meta-blue-950",
+    ],
+  },
   { title: "Canvas & surface", tokens: ["canvas", "surface", "surface-sunken", "surface-hover", "surface-selected"] },
   { title: "Border", tokens: ["border-subtle", "border-default", "border-strong", "border-focus"] },
   { title: "Ink", tokens: ["ink", "ink-muted", "ink-faint", "on-primary"] },
@@ -55,15 +71,17 @@ function readTokens(): Record<string, string> {
 
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="mb-8">
-      <h3 className="h3 mb-3">{title}</h3>
+    <div className="os-token-group">
+      <h3 className="h3" style={{ marginBottom: 12 }}>
+        {title}
+      </h3>
       {children}
     </div>
   );
 }
 
 function Value({ children }: { children: string }) {
-  return <code className="caption block truncate text-ink-muted">{children || "—"}</code>;
+  return <code className="caption text-ink-muted">{children || "—"}</code>;
 }
 
 /**
@@ -77,10 +95,16 @@ export function TokenDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
   const [values, setValues] = useState<Record<string, string>>({});
   const [motionKey, setMotionKey] = useState(0);
 
+  useEffect(() => {
+    if (!open) return;
+    const current = document.documentElement.getAttribute("data-theme");
+    if (current === "light" || current === "dark") setTheme(current);
+    setValues(readTokens());
+  }, [open]);
+
   const show = (next: boolean) => {
     setOpen(next);
     if (!next) return;
-    // Pick up whatever theme <html> currently carries, then snapshot values.
     const current = document.documentElement.getAttribute("data-theme");
     if (current === "light" || current === "dark") setTheme(current);
     setValues(readTokens());
@@ -93,52 +117,38 @@ export function TokenDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
   };
 
   return (
-    <div className="rounded-lg border border-border-subtle bg-surface p-4">
-      <div className="flex flex-wrap items-center gap-3">
-        <label className="flex cursor-pointer items-center gap-2">
-          <input
-            type="checkbox"
-            className="accent-primary"
-            checked={open}
-            onChange={(e) => show(e.target.checked)}
-          />
+    <div className="os-token-demo">
+      <div className="os-token-demo-toolbar">
+        <label className="os-check">
+          <input type="checkbox" checked={open} onChange={(e) => show(e.target.checked)} />
           <span className="body-strong">Show design token demo</span>
         </label>
         {open && (
-          <>
-            <span className="text-ink-faint">·</span>
-            <div className="flex items-center gap-1" role="group" aria-label="Theme">
-              <Button
-                size="sm"
-                variant={theme === "dark" ? "secondary" : "ghost"}
-                onClick={() => switchTheme("dark")}
-              >
-                Dark
-              </Button>
-              <Button
-                size="sm"
-                variant={theme === "light" ? "secondary" : "ghost"}
-                onClick={() => switchTheme("light")}
-              >
-                Light
-              </Button>
-            </div>
-          </>
+          <div role="group" aria-label="Theme">
+            <Button size="sm" variant={theme === "dark" ? "secondary" : "ghost"} onClick={() => switchTheme("dark")}>
+              Dark
+            </Button>
+            <Button size="sm" variant={theme === "light" ? "secondary" : "ghost"} onClick={() => switchTheme("light")}>
+              Light
+            </Button>
+          </div>
         )}
       </div>
 
       {open && (
-        <div className="mt-6">
+        <div style={{ marginTop: 24 }}>
           <Group title="Color">
             {COLOR_GROUPS.map((g) => (
-              <div key={g.title} className="mb-4">
-                <p className="label mb-2 text-ink-muted">{g.title}</p>
-                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+              <div key={g.title} style={{ marginBottom: 16 }}>
+                <p className="label text-ink-muted" style={{ marginBottom: 8 }}>
+                  {g.title}
+                </p>
+                <div className="os-swatch-grid">
                   {g.tokens.map((t) => (
-                    <div key={t} className="overflow-hidden rounded-md border border-border-subtle bg-surface-sunken">
-                      <div className="h-10 border-b border-border-subtle" style={{ background: `var(--${t})` }} />
-                      <div className="p-2">
-                        <span className="caption block truncate text-ink">--{t}</span>
+                    <div key={t} className="os-swatch">
+                      <div className="os-swatch-chip" style={{ background: `var(--${t})` }} />
+                      <div className="os-swatch-body">
+                        <span className="caption text-ink">--{t}</span>
                         <Value>{values[t]}</Value>
                       </div>
                     </div>
@@ -149,12 +159,17 @@ export function TokenDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
           </Group>
 
           <Group title="Radius">
-            <div className="flex flex-wrap gap-4">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
               {RADII.map((t) => (
-                <div key={t} className="flex flex-col items-center gap-2">
+                <div key={t} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
                   <div
-                    className="h-16 w-16 border border-border-default bg-primary-bg"
-                    style={{ borderRadius: `var(--${t})` }}
+                    style={{
+                      width: 64,
+                      height: 64,
+                      border: "1px solid var(--border-default)",
+                      background: "var(--primary-bg)",
+                      borderRadius: `var(--${t})`,
+                    }}
                   />
                   <span className="caption text-ink">--{t}</span>
                   <Value>{values[t]}</Value>
@@ -164,12 +179,18 @@ export function TokenDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
           </Group>
 
           <Group title="Elevation">
-            <div className="flex flex-wrap gap-6 rounded-lg bg-canvas p-6">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 24, padding: 24, background: "var(--canvas)", borderRadius: 8 }}>
               {ELEVATIONS.map((t) => (
-                <div key={t} className="flex flex-col items-center gap-2">
+                <div key={t} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
                   <div
-                    className="h-16 w-24 rounded-lg border border-border-subtle bg-surface"
-                    style={{ boxShadow: `var(--${t})` }}
+                    style={{
+                      width: 96,
+                      height: 64,
+                      borderRadius: 8,
+                      border: "1px solid var(--border-subtle)",
+                      background: "var(--surface)",
+                      boxShadow: `var(--${t})`,
+                    }}
                   />
                   <span className="caption text-ink">--{t}</span>
                   <Value>{values[t]}</Value>
@@ -179,12 +200,19 @@ export function TokenDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
           </Group>
 
           <Group title="Border width">
-            <div className="flex flex-wrap gap-6">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 24 }}>
               {BORDER_WIDTHS.map((t) => (
-                <div key={t} className="flex flex-col items-center gap-2">
+                <div key={t} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
                   <div
-                    className="h-12 w-24 rounded-md border-border-strong bg-surface-sunken"
-                    style={{ borderStyle: "solid", borderWidth: `var(--${t})` }}
+                    style={{
+                      width: 96,
+                      height: 48,
+                      borderRadius: 6,
+                      background: "var(--surface-sunken)",
+                      borderStyle: "solid",
+                      borderColor: "var(--border-strong)",
+                      borderWidth: `var(--${t})`,
+                    }}
                   />
                   <span className="caption text-ink">--{t}</span>
                   <Value>{values[t]}</Value>
@@ -194,11 +222,11 @@ export function TokenDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
           </Group>
 
           <Group title="Opacity">
-            <div className="flex flex-wrap gap-6">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 24 }}>
               {OPACITIES.map((t) => (
-                <div key={t} className="flex flex-col items-center gap-2">
-                  <div className="relative h-12 w-24 overflow-hidden rounded-md bg-primary">
-                    <div className="absolute inset-0 bg-ink" style={{ opacity: `var(--${t})` }} />
+                <div key={t} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+                  <div style={{ position: "relative", width: 96, height: 48, overflow: "hidden", borderRadius: 6, background: "var(--primary)" }}>
+                    <div style={{ position: "absolute", inset: 0, background: "var(--ink)", opacity: `var(--${t})` }} />
                   </div>
                   <span className="caption text-ink">--{t}</span>
                   <Value>{values[t]}</Value>
@@ -208,32 +236,36 @@ export function TokenDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
           </Group>
 
           <Group title="Motion">
-            <p className="body-sm mb-3 text-ink-muted">
+            <p className="body-sm text-ink-muted" style={{ marginBottom: 12 }}>
               Each row pairs a duration with an easing. Press play to run them all.
             </p>
             <Button size="sm" variant="secondary" onClick={() => setMotionKey((k) => k + 1)}>
               Play
             </Button>
-            <div className="mt-4 flex flex-col gap-3">
+            <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
               {DURATIONS.map((d, i) => {
                 const e = EASINGS[i];
                 return (
-                  <div key={d} className="flex items-center gap-4">
-                    <div className="w-56 shrink-0">
-                      <span className="caption block text-ink">--{d} / --{e}</span>
+                  <div key={d} style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                    <div style={{ width: 220, flex: "none" }}>
+                      <span className="caption text-ink">
+                        --{d} / --{e}
+                      </span>
                       <Value>{`${values[d]} · ${values[e]}`}</Value>
                     </div>
-                    <div className="relative h-6 flex-1 rounded-pill bg-surface-sunken">
+                    <div style={{ position: "relative", height: 24, flex: 1, borderRadius: 999, background: "var(--surface-sunken)" }}>
                       <div
                         key={motionKey}
-                        className="absolute top-1 h-4 w-4 rounded-full bg-primary"
                         style={
                           {
+                            position: "absolute",
+                            top: 4,
+                            height: 16,
+                            width: 16,
+                            borderRadius: 999,
+                            background: "var(--primary)",
                             left: "4px",
-                            animation:
-                              motionKey > 0
-                                ? `os-token-slide var(--${d}) var(--${e}) forwards`
-                                : "none",
+                            animation: motionKey > 0 ? `os-token-slide var(--${d}) var(--${e}) forwards` : "none",
                           } as CSSProperties
                         }
                       />
@@ -246,10 +278,15 @@ export function TokenDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
           </Group>
 
           <Group title="Type styles">
-            <div className="flex flex-col gap-2">
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               {TYPE_STYLES.map((cls) => (
-                <div key={cls} className="flex items-baseline gap-4 border-b border-border-subtle pb-2">
-                  <code className="caption w-24 shrink-0 text-ink-muted">.{cls}</code>
+                <div
+                  key={cls}
+                  style={{ display: "flex", alignItems: "baseline", gap: 16, borderBottom: "1px solid var(--border-subtle)", paddingBottom: 8 }}
+                >
+                  <code className="caption text-ink-muted" style={{ width: 96, flex: "none" }}>
+                    .{cls}
+                  </code>
                   <span className={cls}>Sealed rooms, invited bidders.</span>
                 </div>
               ))}
