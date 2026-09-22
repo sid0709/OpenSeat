@@ -1,24 +1,36 @@
-"use client";
-
-import { useState } from "react";
-import { notFound, useParams } from "next/navigation";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Heading } from "@astryxdesign/core/Heading";
 import { Text } from "@astryxdesign/core/Text";
 import { Stack } from "@astryxdesign/core/Stack";
-import { Tab, TabList } from "@astryxdesign/core/TabList";
-import { CodeBlock } from "@astryxdesign/core/CodeBlock";
-import { findItem } from "@/lib/catalog";
-import { ClientOnly } from "@/components/ClientOnly";
-import { DEMOS, Preview } from "@/components/Demos";
+import { COMPONENT_ITEMS, findItem } from "@/lib/catalog";
+import { ComponentDocs } from "@/components/ComponentDocs";
 
-export default function ComponentPage() {
-  const params = useParams<{ slug: string }>();
-  const item = findItem(params.slug);
-  const [tab, setTab] = useState("overview");
+export function generateStaticParams() {
+  return COMPONENT_ITEMS.map((item) => ({ slug: item.slug }));
+}
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const item = findItem(slug);
+  return {
+    title: item ? `${item.title} · Astryx` : "Astryx",
+    description: item?.description,
+  };
+}
+
+export default async function ComponentPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const item = findItem(slug);
   if (!item || item.slug === "tokens") notFound();
-
-  const Demo = DEMOS[item.slug];
 
   return (
     <Stack gap={5}>
@@ -28,23 +40,7 @@ export default function ComponentPage() {
           {item.description}
         </Text>
       </Stack>
-      <TabList value={tab} onChange={setTab} hasDivider>
-        <Tab value="overview" label="Overview" />
-        <Tab value="usage" label="Usage" />
-      </TabList>
-      {tab === "overview" && (
-        <ClientOnly>
-          <Preview label={item.title}>{Demo ? Demo() : <Text color="secondary">No demo yet.</Text>}</Preview>
-        </ClientOnly>
-      )}
-      {tab === "usage" && (
-        <CodeBlock
-          language="tsx"
-          title="Import"
-          width="100%"
-          code={`import { ${item.importName} } from "@astryxdesign/core/${item.importName}";`}
-        />
-      )}
+      <ComponentDocs slug={item.slug} importName={item.importName} />
     </Stack>
   );
 }

@@ -93,8 +93,8 @@
   --radius-chat: 28px;
   --radius-full: 9999px;
 
-  /* Type — Figtree, 14px × 1.2 geometric scale */
-  --font-family-body: var(--font-figtree), Figtree, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Type — system UI stack, 14px × 1.2 geometric scale */
+  --font-family-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-family-heading: var(--font-family-body);
   --font-family-code: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 

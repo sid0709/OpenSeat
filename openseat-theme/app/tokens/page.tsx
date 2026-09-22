@@ -1,10 +1,9 @@
-"use client";
-
 import { Heading } from "@astryxdesign/core/Heading";
 import { Text } from "@astryxdesign/core/Text";
 import { Stack } from "@astryxdesign/core/Stack";
 import { Grid } from "@astryxdesign/core/Grid";
 import { Card } from "@astryxdesign/core/Card";
+import { MetadataList, MetadataListItem } from "@astryxdesign/core/MetadataList";
 
 const TOKEN_GROUPS: { title: string; tokens: string[] }[] = [
   {
@@ -38,44 +37,27 @@ const TOKEN_GROUPS: { title: string; tokens: string[] }[] = [
   },
 ];
 
-function Swatch({ token }: { token: string }) {
-  const isColor = token.startsWith("--color");
-  return (
-    <Card>
-      <Stack gap={2}>
-        {isColor ? (
-          <div
-            style={{
-              height: 48,
-              borderRadius: 12,
-              background: `var(${token})`,
-              border: "1px solid var(--color-border)",
-            }}
-          />
-        ) : null}
-        <Text type="code" display="block">
-          {token}
-        </Text>
-      </Stack>
-    </Card>
-  );
-}
-
 export default function TokensPage() {
   return (
     <Stack gap={6}>
       <Stack gap={2}>
         <Heading level={1}>Tokens</Heading>
         <Text color="secondary" display="block">
-          Neutral theme tokens from @astryxdesign/theme-neutral. Color is unchanged from Astryx.
+          OpenSeat theme tokens — Neutral structure with Meta blue accent and system fonts.
         </Text>
       </Stack>
       {TOKEN_GROUPS.map((group) => (
         <Stack key={group.title} gap={3}>
           <Heading level={2}>{group.title}</Heading>
-          <Grid columns={{ minWidth: 180 }} gap={3}>
+          <Grid columns={{ minWidth: 220 }} gap={3}>
             {group.tokens.map((token) => (
-              <Swatch key={token} token={token} />
+              <Card key={token}>
+                <MetadataList>
+                  <MetadataListItem label="Token">
+                    <Text type="code">{token}</Text>
+                  </MetadataListItem>
+                </MetadataList>
+              </Card>
             ))}
           </Grid>
         </Stack>

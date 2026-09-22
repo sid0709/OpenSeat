@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import { DocsChrome } from "@/components/DocsChrome";
 import "./globals.css";
-
-const figtree = Figtree({
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Astryx",
@@ -16,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" data-theme="light" suppressHydrationWarning className={figtree.className}>
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <body>
         <Providers>
           <DocsChrome>{children}</DocsChrome>

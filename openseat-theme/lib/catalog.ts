@@ -1,3 +1,5 @@
+import type { IconName } from "@astryxdesign/core/Icon";
+
 export type CatalogItem = {
   slug: string;
   title: string;
@@ -7,23 +9,26 @@ export type CatalogItem = {
 
 export type CatalogGroup = {
   category: string;
+  icon: IconName;
   items: CatalogItem[];
 };
 
 export const CATALOG: CatalogGroup[] = [
   {
     category: "Foundations",
+    icon: "wrench",
     items: [
       {
         slug: "tokens",
         title: "Tokens",
-        description: "Neutral theme primitives — color, type, space, radius, motion.",
+        description: "OpenSeat theme primitives — Meta blue accent, system fonts, space, radius.",
         importName: "tokens",
       },
     ],
   },
   {
     category: "Action",
+    icon: "check",
     items: [
       { slug: "button", title: "Button", description: "The single-action control.", importName: "Button" },
       { slug: "button-group", title: "Button Group", description: "Related Buttons joined into one cluster.", importName: "ButtonGroup" },
@@ -39,6 +44,7 @@ export const CATALOG: CatalogGroup[] = [
   },
   {
     category: "Layout",
+    icon: "viewColumns",
     items: [
       { slug: "app-shell", title: "App Shell", description: "Top-level page frame — nav, optional rail, content.", importName: "AppShell" },
       { slug: "aspect-ratio", title: "Aspect Ratio", description: "Keeps children at a fixed width-to-height ratio.", importName: "AspectRatio" },
@@ -54,6 +60,7 @@ export const CATALOG: CatalogGroup[] = [
   },
   {
     category: "Content",
+    icon: "copy",
     items: [
       { slug: "avatar", title: "Avatar", description: "A face or initials for a person.", importName: "Avatar" },
       { slug: "blockquote", title: "Blockquote", description: "A quoted passage set off from surrounding copy.", importName: "Blockquote" },
@@ -73,6 +80,7 @@ export const CATALOG: CatalogGroup[] = [
   },
   {
     category: "Container",
+    icon: "menu",
     items: [
       { slug: "card", title: "Card", description: "A contained block of related content.", importName: "Card" },
       { slug: "carousel", title: "Carousel", description: "A horizontally paged set of slides.", importName: "Carousel" },
@@ -81,6 +89,7 @@ export const CATALOG: CatalogGroup[] = [
   },
   {
     category: "Data input",
+    icon: "search",
     items: [
       { slug: "calendar", title: "Calendar", description: "A month grid for choosing a date.", importName: "Calendar" },
       { slug: "checkbox", title: "Checkbox", description: "A binary choice in a form.", importName: "CheckboxInput" },
@@ -101,6 +110,7 @@ export const CATALOG: CatalogGroup[] = [
   },
   {
     category: "Feedback & status",
+    icon: "info",
     items: [
       { slug: "badge", title: "Badge", description: "A status label. Always pairs a color with a word.", importName: "Badge" },
       { slug: "banner", title: "Banner", description: "A page- or section-level message.", importName: "Banner" },
@@ -113,6 +123,7 @@ export const CATALOG: CatalogGroup[] = [
   },
   {
     category: "Navigation",
+    icon: "chevronRight",
     items: [
       { slug: "breadcrumbs", title: "Breadcrumbs", description: "The path from the product root to here.", importName: "Breadcrumbs" },
       { slug: "pagination", title: "Pagination", description: "Move between pages of a collection.", importName: "Pagination" },
@@ -124,6 +135,7 @@ export const CATALOG: CatalogGroup[] = [
   },
   {
     category: "Overlay",
+    icon: "moreHorizontal",
     items: [
       { slug: "bottom-sheet", title: "Bottom Sheet", description: "A focused overlay that rises from the bottom.", importName: "BottomSheet" },
       { slug: "command-palette", title: "Command Palette", description: "Search and run an action from the keyboard.", importName: "CommandPalette" },
@@ -136,6 +148,7 @@ export const CATALOG: CatalogGroup[] = [
   },
   {
     category: "Table & list",
+    icon: "viewColumns",
     items: [
       { slug: "list", title: "List", description: "A vertical stack of rows.", importName: "List" },
       { slug: "metadata-list", title: "Metadata List", description: "Label / value pairs.", importName: "MetadataList" },
@@ -146,12 +159,14 @@ export const CATALOG: CatalogGroup[] = [
   },
   {
     category: "Chat",
+    icon: "microphone",
     items: [
       { slug: "chat", title: "Chat", description: "Messages, a system line, and a composer.", importName: "ChatLayout" },
     ],
   },
   {
     category: "Utility",
+    icon: "eyeSlash",
     items: [
       { slug: "visually-hidden", title: "Visually Hidden", description: "Content for assistive tech only.", importName: "VisuallyHidden" },
     ],
@@ -159,6 +174,8 @@ export const CATALOG: CatalogGroup[] = [
 ];
 
 export const ALL_ITEMS = CATALOG.flatMap((g) => g.items);
+
+export const COMPONENT_ITEMS = ALL_ITEMS.filter((item) => item.slug !== "tokens");
 
 export function findItem(slug: string) {
   return ALL_ITEMS.find((i) => i.slug === slug);

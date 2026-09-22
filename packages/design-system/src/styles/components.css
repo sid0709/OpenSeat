@@ -1,5 +1,5 @@
 /* Astryx-shaped UI kit. Visual language matches https://astryx.atmeta.com/
-   (Figtree, 32px controls, --radius-element on buttons, no chrome borders
+   (system fonts, 32px controls, --radius-element on buttons, no chrome borders
    on primary/ghost). Color comes only from tokens.css. */
 
 /* Button — Astryx: 32×, 8/12 padding, 12px radius, no border */
