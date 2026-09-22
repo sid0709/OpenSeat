@@ -1,5 +1,6 @@
 "use client";
 
+import { ReactNode } from "react";
 import { Button } from "./Button";
 import { Avatar } from "./Avatar";
 
@@ -10,20 +11,24 @@ export interface NavItem {
 }
 
 export interface NavProps {
-  brand?: string;
+  brand?: ReactNode;
   items?: NavItem[];
   cta?: string;
   onCtaClick?: () => void;
   initials?: string;
+  trailing?: ReactNode;
+  showAvatar?: boolean;
 }
 
 /** The 48px top-level product bar — calm infrastructure, never a second accent. */
 export function Nav({
   brand = "OpenSeat",
   items = [],
-  cta = "Post a sealed job",
+  cta,
   onCtaClick,
   initials = "JM",
+  trailing,
+  showAvatar = false,
 }: NavProps) {
   return (
     <div className="os-nav">
@@ -40,11 +45,17 @@ export function Nav({
         ))}
       </div>
       <div className="os-nav-right">
-        <Button variant="primary" size="sm" onClick={onCtaClick}>
-          {cta}
-        </Button>
-        <Avatar initials={initials} size={24} />
+        {cta && (
+          <Button variant="primary" size="sm" onClick={onCtaClick}>
+            {cta}
+          </Button>
+        )}
+        {trailing}
+        {showAvatar && <Avatar initials={initials} size={24} />}
       </div>
     </div>
   );
 }
+
+export const TopNav = Nav;
+export type TopNavProps = NavProps;

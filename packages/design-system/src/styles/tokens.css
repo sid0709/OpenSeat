@@ -1,10 +1,26 @@
-/* OpenSeat design tokens — dark-first. :root/[data-theme="dark"] carries the
-   product's default values; [data-theme="light"] overrides the same names.
-   Compiled by hand from the OpenSeat Design System artifact's tokens.json —
-   keep this file in sync if that artifact changes. */
+/* OpenSeat design tokens — Meta / Facebook blue as the brand primitive.
+   Semantic colors, radii, elevation, motion, and type all resolve through
+   these names. :root and [data-theme="dark"] are the product default;
+   [data-theme="light"] overrides the same names.
+
+   Brand source: Facebook blue #1877F2 (Meta), with the published ramp used
+   across facebook.com / Messenger. See https://astryx.atmeta.com/. */
 
 :root,
 [data-theme="dark"] {
+  /* Primitive Meta blue ramp — every brand token below is one of these. */
+  --meta-blue-50: #E7F3FF;
+  --meta-blue-100: #C5DCFF;
+  --meta-blue-200: #9EC2FF;
+  --meta-blue-300: #6AA6FF;
+  --meta-blue-400: #4599FF;
+  --meta-blue-500: #2E89FF;
+  --meta-blue-600: #1877F2;
+  --meta-blue-700: #166FE5;
+  --meta-blue-800: #0C5DC7;
+  --meta-blue-900: #0A4BA0;
+  --meta-blue-950: #072F66;
+
   --canvas: #0B0C0E;
   --surface: #141517;
   --surface-sunken: #1A1B1E;
@@ -13,17 +29,17 @@
   --border-subtle: #1F2024;
   --border-default: #33353B;
   --border-strong: #8B8F97;
-  --border-focus: #FF6D47;
+  --border-focus: var(--meta-blue-500);
   --ink: #F4F5F6;
   --ink-muted: #8B8F97;
   --ink-faint: #61656C;
-  --on-primary: #1A0B06;
-  --primary: #FF6D47;
-  --primary-hover: #FF9B7C;
-  --primary-active: #F0542F;
-  --primary-bg: #2A1510;
-  --link: #FF6D47;
-  --link-hover: #FF9B7C;
+  --on-primary: #FFFFFF;
+  --primary: var(--meta-blue-500);
+  --primary-hover: var(--meta-blue-400);
+  --primary-active: var(--meta-blue-600);
+  --primary-bg: var(--meta-blue-950);
+  --link: var(--meta-blue-400);
+  --link-hover: var(--meta-blue-300);
   --success: #45C38D;
   --success-bg: #0E2A20;
   --warning: #E5A344;
@@ -37,8 +53,21 @@
   --radius-md: 6px;
   --radius-lg: 8px;
   --radius-xl: 12px;
+  --radius-2xl: 16px;
   --radius-pill: 999px;
   --radius-full: 9999px;
+
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
 
   --elevation-0: none;
   --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.32);
@@ -59,45 +88,55 @@
   --ease-decelerate: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
 
-  /* --font-inter is set on <html> by next/font in app/layout.tsx */
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --z-nav: 40;
+  --z-overlay: 100;
+  --z-toast: 110;
+  --z-tooltip: 120;
+
+  /* --font-inter is set on <html> by next/font in the consuming app. */
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --control-height-sm: 28px;
+  --control-height: 32px;
+  --control-height-lg: 40px;
 }
 
 [data-theme="light"] {
-  --canvas: #F8F8F9;
+  --canvas: #F7F8FA;
   --surface: #FFFFFF;
-  --surface-sunken: #EFEFF1;
-  --surface-hover: #EFEFF1;
-  --surface-selected: #E5E6E9;
-  --border-subtle: #E5E6E9;
-  --border-default: #D3D4D9;
-  --border-strong: #8B8F97;
-  --border-focus: #CC4526;
-  --ink: #141517;
-  --ink-muted: #61656C;
-  --ink-faint: #8B8F97;
+  --surface-sunken: #F0F2F5;
+  --surface-hover: #E7F3FF;
+  --surface-selected: var(--meta-blue-50);
+  --border-subtle: #E4E6EB;
+  --border-default: #CCD0D5;
+  --border-strong: #8A8D91;
+  --border-focus: var(--meta-blue-600);
+  --ink: #050505;
+  --ink-muted: #65676B;
+  --ink-faint: #8A8D91;
   --on-primary: #FFFFFF;
-  --primary: #CC4526;
-  --primary-hover: #A8371F;
-  --primary-active: #832B18;
-  --primary-bg: #FFF1ED;
-  --link: #A8371F;
-  --link-hover: #832B18;
-  --success: #0D6B4B;
-  --success-bg: #E7F5EF;
-  --warning: #8A4B0C;
-  --warning-bg: #FBF0DC;
-  --danger: #B3261E;
-  --danger-hover: #8C1F19;
-  --danger-bg: #FBEAE8;
-  --overlay: rgba(16, 17, 19, 0.38);
+  --primary: var(--meta-blue-600);
+  --primary-hover: var(--meta-blue-700);
+  --primary-active: var(--meta-blue-800);
+  --primary-bg: var(--meta-blue-50);
+  --link: var(--meta-blue-600);
+  --link-hover: var(--meta-blue-800);
+  --success: #31A24C;
+  --success-bg: #E7F6EC;
+  --warning: #F5A623;
+  --warning-bg: #FFF4E0;
+  --danger: #E41E3F;
+  --danger-hover: #BE1933;
+  --danger-bg: #FDE8EC;
+  --overlay: rgba(5, 5, 5, 0.45);
 
-  --elevation-1: 0 1px 2px rgba(16, 17, 19, 0.05);
-  --elevation-2: 0 4px 12px rgba(16, 17, 19, 0.08);
-  --elevation-3: 0 16px 48px rgba(16, 17, 19, 0.12);
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --elevation-3: 0 16px 48px rgba(0, 0, 0, 0.18);
 }
 
-/* Type styles — one family (Inter), separated by size/weight/tracking. */
+/* Type styles — one family, separated by size/weight/tracking. */
 .display { font: 600 48px/52px var(--font-sans); letter-spacing: -0.03em; }
 .h1 { font: 600 28px/34px var(--font-sans); letter-spacing: -0.022em; }
 .h2 { font: 600 21px/28px var(--font-sans); letter-spacing: -0.018em; }
@@ -109,3 +148,13 @@
 .label { font: 500 12px/16px var(--font-sans); }
 .caption { font: 500 11px/16px var(--font-sans); letter-spacing: 0.01em; }
 .button { font: 500 13px/20px var(--font-sans); letter-spacing: -0.006em; }
+
+.text-ink { color: var(--ink); }
+.text-ink-muted { color: var(--ink-muted); }
+.text-ink-faint { color: var(--ink-faint); }
+.text-primary { color: var(--primary); }
+.text-link { color: var(--link); }
+.text-danger { color: var(--danger); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-on-primary { color: var(--on-primary); }
