@@ -1,0 +1,51 @@
+---
+description: OpenSeat monorepo conventions — bun, no hardcoding, shared packages
+alwaysApply: true
+---
+
+# OpenSeat project conventions
+
+This is a **bun workspaces monorepo**. Work from the repo root. Shared UI lives in `packages/*` (e.g. `@openseat/design-system`). Apps consume shared packages; do not copy the same component, token, or helper into more than one workspace.
+
+## Package manager
+
+Use **bun only**. Never npm, yarn, or pnpm.
+
+```bash
+bun install
+bun add <pkg>
+bun add -d <pkg>
+bun run <script>
+bunx <cli>
+```
+
+Do not create or commit `package-lock.json`, `yarn.lock`, or `pnpm-lock.yaml`. Prefer `bun.lock`.
+
+## No hardcoding
+
+Never hardcode values that belong in config, tokens, env, or shared constants:
+
+- URLs, API hosts, feature flags → env / config module
+- Colors, spacing, type, radii, shadows → design tokens (`tokens.css`)
+- Copy used in more than one place → shared constants (or i18n)
+- Magic numbers, IDs, timeouts, limits → named constants
+- Secrets → env only, never in source
+
+```ts
+// ❌
+fetch("https://api.example.com/jobs");
+<div style={{ color: "#111", padding: 16 }} />;
+
+// ✅
+fetch(`${env.API_BASE_URL}/jobs`);
+<div className="text-fg p-md" />;
+```
+
+If a constant is used in more than one workspace, put it in a shared package — not duplicated per app.
+
+## Best practice
+
+- Prefer composition and reuse over duplication.
+- Keep modules small and single-purpose. Split a file when it mixes unrelated concerns or grows past a focused unit of work.
+- Colocate types with the code that owns them; share types from packages when more than one app needs them.
+- Change the source of truth (tokens, shared components, config) instead of patching call sites with one-off values.

@@ -9,7 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@openseat/design-system": "*",
+    "@astryxdesign/cli": "^0.6.2",
+    "@astryxdesign/core": "^0.6.2",
+    "@astryxdesign/theme-neutral": "^0.6.2",
+    "@stylexjs/stylex": "^0.19.1",
     "next": "16.3.5",
     "react": "19.2.8",
     "react-dom": "19.2.8"

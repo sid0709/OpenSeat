@@ -1,9 +1,12 @@
-import { EmptyState, PageBody } from "@openseat/design-system";
+import { EmptyState } from "@astryxdesign/core/EmptyState";
+import { Button } from "@astryxdesign/core/Button";
 
 export default function NotFound() {
   return (
-    <PageBody>
-      <EmptyState title="Not found" description="That component isn’t in the library." />
-    </PageBody>
+    <EmptyState
+      title="Not found"
+      description="That component isn’t in the library."
+      actions={<Button label="Back to library" href="/" variant="secondary" />}
+    />
   );
 }

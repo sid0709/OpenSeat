@@ -1,308 +1,342 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
+import { ClientOnly } from "@/components/ClientOnly";
+import { AppShell } from "@astryxdesign/core/AppShell";
+import { AspectRatio } from "@astryxdesign/core/AspectRatio";
+import { Avatar } from "@astryxdesign/core/Avatar";
+import { AvatarGroup } from "@astryxdesign/core/AvatarGroup";
+import { Badge } from "@astryxdesign/core/Badge";
+import { Banner } from "@astryxdesign/core/Banner";
+import { Blockquote } from "@astryxdesign/core/Blockquote";
+import { BottomSheet } from "@astryxdesign/core/BottomSheet";
+import { Breadcrumbs, BreadcrumbItem } from "@astryxdesign/core/Breadcrumbs";
+import { Button } from "@astryxdesign/core/Button";
+import { ButtonGroup } from "@astryxdesign/core/ButtonGroup";
+import { Calendar } from "@astryxdesign/core/Calendar";
+import type { ISODateString } from "@astryxdesign/core/Calendar";
+import { Card } from "@astryxdesign/core/Card";
+import { Carousel } from "@astryxdesign/core/Carousel";
 import {
-  AspectRatio,
-  Avatar,
-  AvatarStack,
-  Badge,
-  Banner,
-  Blockquote,
-  BottomSheet,
-  Breadcrumbs,
-  Button,
-  ButtonGroup,
-  Calendar,
-  Card,
-  Carousel,
-  Chat,
   ChatComposer,
+  ChatLayout,
   ChatMessage,
+  ChatMessageBubble,
+  ChatMessageList,
   ChatSystemMessage,
-  Checkbox,
-  Citation,
-  Code,
-  CodeBlock,
-  Collapsible,
-  CommandPalette,
-  ContextMenu,
-  DateInput,
-  Dialog,
-  Divider,
-  DropdownMenu,
-  EmptyState,
-  Field,
-  FileInput,
-  FormLayout,
-  Grid,
-  Heading,
-  Icon,
-  IconButton,
-  Input,
-  Kbd,
+} from "@astryxdesign/core/Chat";
+import { CheckboxInput } from "@astryxdesign/core/CheckboxInput";
+import { Citation } from "@astryxdesign/core/Citation";
+import { CodeBlock } from "@astryxdesign/core/CodeBlock";
+import { Collapsible } from "@astryxdesign/core/Collapsible";
+import { CommandPalette } from "@astryxdesign/core/CommandPalette";
+import { ContextMenu } from "@astryxdesign/core/ContextMenu";
+import { DateInput } from "@astryxdesign/core/DateInput";
+import { Dialog, DialogHeader } from "@astryxdesign/core/Dialog";
+import { Divider } from "@astryxdesign/core/Divider";
+import { DropdownMenu } from "@astryxdesign/core/DropdownMenu";
+import { EmptyState } from "@astryxdesign/core/EmptyState";
+import { Field } from "@astryxdesign/core/Field";
+import { FileInput } from "@astryxdesign/core/FileInput";
+import { FormLayout } from "@astryxdesign/core/FormLayout";
+import { Grid } from "@astryxdesign/core/Grid";
+import { HoverCard } from "@astryxdesign/core/HoverCard";
+import { Icon } from "@astryxdesign/core/Icon";
+import { IconButton } from "@astryxdesign/core/IconButton";
+import { Kbd } from "@astryxdesign/core/Kbd";
+import {
   Layout,
-  Link,
-  List,
-  Markdown,
-  Menu,
-  MetadataList,
-  MoreMenu,
-  Nav,
-  NumberInput,
-  OverflowList,
-  Pagination,
-  Popover,
-  Preview,
-  ProgressBar,
-  RadioList,
-  ResizeHandle,
-  ScrollableArea,
-  Section,
-  SegmentedControl,
-  Select,
-  SideNav,
-  Skeleton,
-  Slider,
-  Spinner,
-  Stack,
-  StatusDot,
-  Stepper,
-  Switch,
-  TabList,
-  Table,
-  Text,
-  TextArea,
-  TimeInput,
-  Timestamp,
-  Toast,
-  ToggleButton,
-  ToggleButtonGroup,
-  Token,
-  Tokenizer,
-  Toolbar,
-  ToolbarDivider,
-  Tooltip,
-  TreeList,
-  Typeahead,
-  VisuallyHidden,
-} from "@openseat/design-system";
+  LayoutContent,
+  LayoutFooter,
+  LayoutHeader,
+  LayoutPanel,
+} from "@astryxdesign/core/Layout";
+import { Link } from "@astryxdesign/core/Link";
+import { List, ListItem } from "@astryxdesign/core/List";
+import { Markdown } from "@astryxdesign/core/Markdown";
+import { MetadataList, MetadataListItem } from "@astryxdesign/core/MetadataList";
+import { MoreMenu } from "@astryxdesign/core/MoreMenu";
+import { NumberInput } from "@astryxdesign/core/NumberInput";
+import { OverflowList } from "@astryxdesign/core/OverflowList";
+import { Pagination } from "@astryxdesign/core/Pagination";
+import { Popover } from "@astryxdesign/core/Popover";
+import { ProgressBar } from "@astryxdesign/core/ProgressBar";
+import { RadioList, RadioListItem } from "@astryxdesign/core/RadioList";
+import { ResizeHandle, useResizable } from "@astryxdesign/core/Resizable";
+import { ScrollableArea } from "@astryxdesign/core/ScrollableArea";
+import { Section } from "@astryxdesign/core/Section";
+import { SegmentedControl, SegmentedControlItem } from "@astryxdesign/core/SegmentedControl";
+import { Selector } from "@astryxdesign/core/Selector";
+import { SideNav, SideNavItem } from "@astryxdesign/core/SideNav";
+import { Skeleton } from "@astryxdesign/core/Skeleton";
+import { Slider } from "@astryxdesign/core/Slider";
+import { Spinner } from "@astryxdesign/core/Spinner";
+import { Stack, HStack } from "@astryxdesign/core/Stack";
+import { StatusDot } from "@astryxdesign/core/StatusDot";
+import { Step, Stepper } from "@astryxdesign/core/Stepper";
+import { Switch } from "@astryxdesign/core/Switch";
+import { Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "@astryxdesign/core/Table";
+import { Tab, TabList } from "@astryxdesign/core/TabList";
+import { Heading, Text } from "@astryxdesign/core/Text";
+import { TextArea } from "@astryxdesign/core/TextArea";
+import { TextInput } from "@astryxdesign/core/TextInput";
+import { Thumbnail } from "@astryxdesign/core/Thumbnail";
+import { TimeInput } from "@astryxdesign/core/TimeInput";
+import { Timestamp } from "@astryxdesign/core/Timestamp";
+import { ToggleButton, ToggleButtonGroup } from "@astryxdesign/core/ToggleButton";
+import { Token } from "@astryxdesign/core/Token";
+import { Tokenizer } from "@astryxdesign/core/Tokenizer";
+import { Toolbar } from "@astryxdesign/core/Toolbar";
+import { Tooltip } from "@astryxdesign/core/Tooltip";
+import { TopNav, TopNavHeading, TopNavItem } from "@astryxdesign/core/TopNav";
+import { TreeList } from "@astryxdesign/core/TreeList";
+import { Typeahead, createStaticSource } from "@astryxdesign/core/Typeahead";
+import { VisuallyHidden } from "@astryxdesign/core/VisuallyHidden";
+import { useToast } from "@astryxdesign/core/Toast";
+
+const SEARCH_ITEMS = [
+  { id: "button", label: "Button" },
+  { id: "dialog", label: "Dialog" },
+  { id: "input", label: "Text Input" },
+  { id: "table", label: "Table" },
+];
 
 function Row({ children }: { children: ReactNode }) {
   return (
-    <Layout gap={12} align="center" wrap>
+    <HStack gap={2} vAlign="center" wrap="wrap">
       {children}
-    </Layout>
+    </HStack>
+  );
+}
+
+export function Preview({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <Card>
+      <Stack gap={3}>
+        <Text type="label" color="secondary">
+          {label}
+        </Text>
+        {children}
+      </Stack>
+    </Card>
   );
 }
 
 export const DEMOS: Record<string, () => ReactNode> = {
   button: () => (
     <Row>
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="destructive">Destructive</Button>
-      <Button variant="primary" disabled>
-        Disabled
-      </Button>
+      <Button label="Primary" variant="primary" />
+      <Button label="Secondary" variant="secondary" />
+      <Button label="Ghost" variant="ghost" />
+      <Button label="Destructive" variant="destructive" />
+      <Button label="Disabled" variant="primary" isDisabled />
     </Row>
   ),
   "button-group": () => (
-    <ButtonGroup>
-      <Button variant="secondary">Copy</Button>
-      <Button variant="secondary">Cut</Button>
-      <Button variant="secondary">Paste</Button>
+    <ButtonGroup label="Edit actions">
+      <Button label="Copy" variant="secondary" />
+      <Button label="Cut" variant="secondary" />
+      <Button label="Paste" variant="secondary" />
     </ButtonGroup>
   ),
   "icon-button": () => (
     <Row>
-      <IconButton label="Search">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-          <circle cx="11" cy="11" r="7" />
-          <path d="M21 21l-4.3-4.3" />
-        </svg>
-      </IconButton>
-      <IconButton label="Settings" size="lg">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-          <circle cx="12" cy="12" r="3" />
-          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-        </svg>
-      </IconButton>
+      <IconButton label="Search" icon={<Icon icon="search" />} />
+      <IconButton label="Settings" icon={<Icon icon="wrench" />} variant="ghost" />
     </Row>
   ),
   link: () => <Link href="#link">Documentation</Link>,
   "dropdown-menu": () => (
-    <DropdownMenu
-      trigger={<Button variant="secondary">Actions</Button>}
-      items={[
-        { label: "Edit" },
-        { label: "Duplicate" },
-        { divider: true, label: "" },
-        { label: "Delete", danger: true },
-      ]}
-    />
+    <HStack>
+      <DropdownMenu
+        button={{ label: "Actions" }}
+        items={[
+          { label: "Edit" },
+          { label: "Duplicate" },
+          { type: "divider" },
+          { label: "Delete", variant: "destructive" },
+        ]}
+      />
+    </HStack>
   ),
   "more-menu": () => (
-    <MoreMenu items={[{ label: "Rename" }, { label: "Archive" }, { label: "Delete", danger: true }]} />
+    <HStack>
+      <MoreMenu
+        className=""
+        style={{}}
+        items={[
+          { label: "Rename" },
+          { label: "Archive" },
+          { type: "divider" },
+          { label: "Delete", variant: "destructive" },
+        ]}
+      />
+    </HStack>
   ),
   "segmented-control": () => {
     const Demo = () => {
-      const [v, setV] = useState("grid");
+      const [value, setValue] = useState("grid");
       return (
-        <SegmentedControl
-          value={v}
-          onChange={setV}
-          options={[
-            { label: "Grid", value: "grid" },
-            { label: "List", value: "list" },
-            { label: "Table", value: "table" },
-          ]}
-        />
+        <SegmentedControl label="View" value={value} onChange={setValue}>
+          <SegmentedControlItem value="grid" label="Grid" />
+          <SegmentedControlItem value="list" label="List" />
+          <SegmentedControlItem value="table" label="Table" />
+        </SegmentedControl>
       );
     };
     return <Demo />;
   },
   "toggle-button": () => {
     const Demo = () => {
-      const [on, setOn] = useState(true);
-      return (
-        <ToggleButton pressed={on} onPressedChange={setOn}>
-          Notifications
-        </ToggleButton>
-      );
+      const [pressed, setPressed] = useState(true);
+      return <ToggleButton label="Notifications" isPressed={pressed} onPressedChange={setPressed} />;
     };
     return <Demo />;
   },
   "toggle-button-group": () => {
     const Demo = () => {
-      const [v, setV] = useState(["active"]);
+      const [value, setValue] = useState<string | null>("active");
       return (
-        <ToggleButtonGroup
-          value={v}
-          onChange={setV}
-          options={[
-            { label: "Active", value: "active" },
-            { label: "Pending", value: "pending" },
-            { label: "Closed", value: "closed" },
-          ]}
-        />
+        <ToggleButtonGroup label="Status" value={value} onChange={setValue}>
+          <ToggleButton label="Active" value="active" />
+          <ToggleButton label="Pending" value="pending" />
+          <ToggleButton label="Closed" value="closed" />
+        </ToggleButtonGroup>
       );
     };
     return <Demo />;
   },
   toolbar: () => (
-    <Toolbar>
-      <Button variant="secondary" size="sm">
-        Bold
-      </Button>
-      <Button variant="secondary" size="sm">
-        Italic
-      </Button>
-      <ToolbarDivider />
-      <IconButton label="Link" size="sm">
-        ↗
-      </IconButton>
-    </Toolbar>
+    <Toolbar
+      label="Formatting"
+      startContent={
+        <Row>
+          <Button label="Bold" variant="secondary" size="sm" />
+          <Button label="Italic" variant="secondary" size="sm" />
+          <IconButton label="Search" size="sm" icon={<Icon icon="search" />} />
+        </Row>
+      }
+    />
   ),
   "app-shell": () => (
-    <div style={{ width: "100%", border: "1px solid var(--border-subtle)", borderRadius: 12, overflow: "hidden" }}>
-      <Nav brand="OpenSeat" items={[{ label: "Rooms", active: true }, { label: "Bids" }]} />
-      <Layout>
-        <div style={{ width: 160, padding: 12, borderRight: "1px solid var(--border-subtle)" }}>
-          <Text size="sm" muted>
-            Sidebar
-          </Text>
-        </div>
-        <div style={{ padding: 16, flex: 1 }}>
-          <Text size="sm">Content</Text>
-        </div>
-      </Layout>
+    <div style={{ height: 220, borderRadius: 16, overflow: "hidden" }}>
+      <AppShell
+        variant="elevated"
+        contentPadding={4}
+        topNav={
+          <TopNav
+            label="Preview navigation"
+            heading={<TopNavHeading heading="Astryx" />}
+            startContent={<TopNavItem label="Home" href="#home" isSelected />}
+          />
+        }
+        sideNav={
+          <SideNav>
+            <SideNavItem label="Overview" href="#overview" isSelected />
+            <SideNavItem label="Button" href="#button" />
+          </SideNav>
+        }
+      >
+        <Text>Content</Text>
+      </AppShell>
     </div>
   ),
   "aspect-ratio": () => (
-    <div style={{ width: 240 }}>
-      <Stack gap={12} direction="row">
-        <div style={{ width: 80 }}>
-          <AspectRatio ratio={1}>
-            <div style={{ background: "var(--primary)", width: "100%", height: "100%" }} />
-          </AspectRatio>
-        </div>
-        <div style={{ width: 120 }}>
-          <AspectRatio ratio={4 / 3}>
-            <div style={{ background: "var(--meta-blue-400)", width: "100%", height: "100%" }} />
-          </AspectRatio>
-        </div>
-        <div style={{ width: 160 }}>
-          <AspectRatio ratio={16 / 9}>
-            <div style={{ background: "var(--meta-blue-700)", width: "100%", height: "100%" }} />
-          </AspectRatio>
-        </div>
-      </Stack>
-    </div>
+    <HStack gap={3}>
+      <div style={{ width: 80 }}>
+        <AspectRatio ratio={1}>
+          <div style={{ width: "100%", height: "100%", background: "var(--color-accent)" }} />
+        </AspectRatio>
+      </div>
+      <div style={{ width: 120 }}>
+        <AspectRatio ratio={16 / 9}>
+          <div style={{ width: "100%", height: "100%", background: "var(--color-background-muted)" }} />
+        </AspectRatio>
+      </div>
+    </HStack>
   ),
   divider: () => (
     <div style={{ width: 240 }}>
-      <Text size="sm">Above</Text>
+      <Text display="block">Above</Text>
       <Divider />
-      <Text size="sm">Below</Text>
+      <Text display="block">Below</Text>
     </div>
   ),
-  "form-layout": () => (
-    <div style={{ width: 280 }}>
-      <FormLayout>
-        <Field label="Name" placeholder="Jordan" />
-        <Field label="Role" placeholder="Designer" />
-      </FormLayout>
-    </div>
-  ),
+  "form-layout": () => {
+    const Demo = () => {
+      const [name, setName] = useState("");
+      const [role, setRole] = useState("");
+      return (
+        <div style={{ width: 280 }}>
+          <FormLayout>
+            <TextInput label="Name" value={name} onChange={setName} placeholder="Jordan" />
+            <TextInput label="Role" value={role} onChange={setRole} placeholder="Designer" />
+          </FormLayout>
+        </div>
+      );
+    };
+    return <Demo />;
+  },
   grid: () => (
-    <Grid columns={3} gap={8}>
-      <Card title="A" />
-      <Card title="B" />
-      <Card title="C" />
+    <Grid columns={3} gap={3}>
+      <Card>
+        <Text>A</Text>
+      </Card>
+      <Card>
+        <Text>B</Text>
+      </Card>
+      <Card>
+        <Text>C</Text>
+      </Card>
     </Grid>
   ),
   layout: () => (
-    <Layout gap={8} align="center">
-      <Button size="sm">One</Button>
-      <Button size="sm" variant="secondary">
-        Two
-      </Button>
-    </Layout>
+    <div style={{ height: 160 }}>
+      <Layout
+        height="fill"
+        header={<LayoutHeader hasDivider>Header</LayoutHeader>}
+        start={<LayoutPanel width={120}>Start</LayoutPanel>}
+        content={<LayoutContent>Content</LayoutContent>}
+        footer={<LayoutFooter hasDivider>Footer</LayoutFooter>}
+      />
+    </div>
   ),
   section: () => (
-    <Section title="Proof of fit" description="What this room is asking for.">
-      <Text>Invited bidders can see this room.</Text>
+    <Section>
+      <Stack gap={2}>
+        <Heading level={3}>Proof of fit</Heading>
+        <Text color="secondary">What this surface is asking for.</Text>
+      </Stack>
     </Section>
   ),
   stack: () => (
-    <Stack gap={8}>
-      <Button variant="secondary" size="sm">
-        First
-      </Button>
-      <Button variant="secondary" size="sm">
-        Second
-      </Button>
+    <Stack gap={2}>
+      <Button label="First" variant="secondary" size="sm" />
+      <Button label="Second" variant="secondary" size="sm" />
     </Stack>
   ),
   "resize-handle": () => {
     const Demo = () => {
-      const [w, setW] = useState(120);
+      const pane = useResizable({ defaultSize: 160, minSize: 80, maxSize: 280 });
       return (
-        <Layout>
-          <div style={{ width: w, padding: 8, background: "var(--surface)" }}>Pane</div>
-          <ResizeHandle onResize={(d) => setW((x) => Math.max(80, x + d))} />
-          <div style={{ padding: 8 }}>Content</div>
-        </Layout>
+        <div style={{ display: "flex", height: 140 }}>
+          <div style={{ width: pane.size, overflow: "hidden", padding: 12 }}>
+            <Text>Pane</Text>
+          </div>
+          <ResizeHandle resizable={pane.props} hasDivider />
+          <div style={{ flex: 1, padding: 12 }}>
+            <Text>Content</Text>
+          </div>
+        </div>
       );
     };
     return <Demo />;
   },
   "scrollable-area": () => (
-    <ScrollableArea maxHeight={120}>
-      <Stack gap={8}>
+    <ScrollableArea label="Rows" height={120}>
+      <Stack gap={2}>
         {Array.from({ length: 8 }, (_, i) => (
-          <Text key={i} size="sm">
+          <Text key={i} display="block">
             Row {i + 1}
           </Text>
         ))}
@@ -311,195 +345,284 @@ export const DEMOS: Record<string, () => ReactNode> = {
   ),
   avatar: () => (
     <Row>
-      <Avatar initials="JM" size={20} />
-      <Avatar initials="AR" size={24} />
-      <Avatar initials="DK" size={32} status />
-      <AvatarStack
-        people={[
-          { initials: "JM", size: 24 },
-          { initials: "AR", size: 24 },
-          { initials: "DK", size: 24 },
-        ]}
-        overflow={3}
-      />
+      <Avatar name="Jordan Miles" size="sm" />
+      <Avatar name="Alex Rivera" size="md" />
+      <Avatar name="Dana Kim" size="lg" />
+      <AvatarGroup>
+        <Avatar name="Jordan Miles" />
+        <Avatar name="Alex Rivera" />
+        <Avatar name="Dana Kim" />
+      </AvatarGroup>
     </Row>
   ),
-  blockquote: () => <Blockquote>Sealed rooms, invited bidders.</Blockquote>,
-  citation: () => <Citation source="OpenSeat design system" />,
+  blockquote: () => <Blockquote cite="Astryx">Accessible, themeable React components.</Blockquote>,
+  citation: () => <Citation number={1} source={{ title: "Astryx", url: "https://astryx.atmeta.com/" }} />,
   code: () => (
     <Text>
-      Import <Code>Button</Code> from the design system.
+      Import <Text type="code">Button</Text> from the core package.
     </Text>
   ),
   "code-block": () => (
-    <div style={{ width: "100%" }}>
-      <CodeBlock language="ts" code={`import { Button } from "@openseat/design-system";\n\n<Button>Post a sealed job</Button>`} />
-    </div>
+    <CodeBlock
+      language="tsx"
+      code={`import { Button } from "@astryxdesign/core/Button";\n\n<Button label="Save" variant="primary" />`}
+      width="100%"
+    />
   ),
   "empty-state": () => (
-    <EmptyState title="No bids yet" description="Invited bidders will show up here." actionLabel="Invite a bidder" />
+    <EmptyState
+      title="No results"
+      description="Try a different search."
+      actions={<Button label="Clear search" variant="secondary" />}
+    />
   ),
   heading: () => (
-    <Stack gap={8}>
+    <Stack gap={2}>
       <Heading level={1}>Brand refresh brief</Heading>
       <Heading level={2}>Proof of fit</Heading>
       <Heading level={3}>Landing page copy</Heading>
     </Stack>
   ),
   icon: () => (
-    <Icon size={20} label="Search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-        <circle cx="11" cy="11" r="7" />
-        <path d="M21 21l-4.3-4.3" />
-      </svg>
-    </Icon>
-  ),
-  kbd: () => (
     <Row>
-      <Kbd>⌘</Kbd>
-      <Kbd>K</Kbd>
+      <Icon icon="search" />
+      <Icon icon="calendar" />
+      <Icon icon="check" color="success" />
     </Row>
   ),
-  markdown: () => <Markdown>{"Invite **two** bidders. Use `sealed` rooms."}</Markdown>,
+  kbd: () => <Kbd keys="mod+k" />,
+  markdown: () => <Markdown>{"Invite **two** people. Use `sealed` rooms."}</Markdown>,
   text: () => (
-    <Stack gap={4}>
-      <Text size="lg">Scope: a full identity refresh.</Text>
-      <Text>Invited bidders can see this room.</Text>
-      <Text size="sm" muted>
+    <Stack gap={1}>
+      <Text type="large" display="block">
+        Scope: a full identity refresh.
+      </Text>
+      <Text display="block">Invited people can see this room.</Text>
+      <Text type="supporting" display="block">
         Posted 2 days ago
       </Text>
     </Stack>
   ),
-  thumbnail: () => (
-    <Row>
-      <Thumbnail alt="Placeholder" size={48} />
-      <Thumbnail alt="Placeholder" size={64} />
-    </Row>
+  thumbnail: () => <Thumbnail label="Preview" />,
+  timestamp: () => (
+    <ClientOnly>
+      <Timestamp value={1758564000} />
+    </ClientOnly>
   ),
-  timestamp: () => <Timestamp date={new Date(Date.now() - 1000 * 60 * 90)} />,
   token: () => {
     const Demo = () => {
       const [show, setShow] = useState(true);
-      if (!show) return <Button size="sm" variant="secondary" onClick={() => setShow(true)}>Reset</Button>;
+      if (!show) return <Button label="Reset" size="sm" variant="secondary" onClick={() => setShow(true)} />;
       return <Token label="Sealed" onRemove={() => setShow(false)} />;
     };
     return <Demo />;
   },
   card: () => (
     <Row>
-      <Card title="Brand refresh brief" meta="Fixed · $2,400" footer="Posted 2 days ago" />
-      <Card title="Landing page copy" meta="Hourly · $65/hr" interactive />
-      <Card title="Selected bid" meta="Chosen for this room" selected />
+      <Card width={220}>
+        <Stack gap={1}>
+          <Heading level={4}>Brand refresh brief</Heading>
+          <Text color="secondary">Fixed · $2,400</Text>
+        </Stack>
+      </Card>
+      <Card width={220} variant="muted">
+        <Stack gap={1}>
+          <Heading level={4}>Landing page copy</Heading>
+          <Text color="secondary">Hourly · $65/hr</Text>
+        </Stack>
+      </Card>
     </Row>
   ),
   carousel: () => (
     <div style={{ width: 280 }}>
-      <Carousel
-        slides={[
-          <Card key="a" title="1:1" />,
-          <Card key="b" title="4:3" />,
-          <Card key="c" title="16:9" />,
-        ]}
-      />
+      <Carousel aria-label="Slides">
+        <Card>
+          <Text>1:1</Text>
+        </Card>
+        <Card>
+          <Text>4:3</Text>
+        </Card>
+        <Card>
+          <Text>16:9</Text>
+        </Card>
+      </Carousel>
     </div>
   ),
   collapsible: () => (
     <div style={{ width: 320 }}>
-      <Collapsible title="What is a sealed room?" defaultOpen>
-        Invited bidders can see this room and will show up here once they respond.
+      <Collapsible trigger="What is a sealed room?" defaultIsOpen>
+        Invited people can see this room and will show up here once they respond.
       </Collapsible>
     </div>
   ),
   calendar: () => {
     const Demo = () => {
-      const [d, setD] = useState(new Date());
-      return <Calendar value={d} onChange={setD} />;
-    };
-    return <Demo />;
-  },
-  checkbox: () => <Checkbox label="Notify me" defaultChecked />,
-  "date-input": () => (
-    <div style={{ width: 220 }}>
-      <DateInput label="Start date" />
-    </div>
-  ),
-  field: () => (
-    <div style={{ width: 240 }}>
-      <Field label="When can you start" placeholder="e.g. Next Monday" />
-    </div>
-  ),
-  "file-input": () => (
-    <div style={{ width: 280 }}>
-      <FileInput />
-    </div>
-  ),
-  "number-input": () => (
-    <div style={{ width: 160 }}>
-      <NumberInput label="Rate" defaultValue={65} />
-    </div>
-  ),
-  radio: () => {
-    const Demo = () => {
-      const [v, setV] = useState("fixed");
+      const [value, setValue] = useState<ISODateString>("2026-09-22");
       return (
-        <RadioList
-          name="rate"
-          value={v}
-          onChange={setV}
-          options={[
-            { label: "Fixed", value: "fixed" },
-            { label: "Hourly", value: "hourly" },
-          ]}
-        />
+        <ClientOnly>
+          <Calendar value={value} onChange={setValue} />
+        </ClientOnly>
       );
     };
     return <Demo />;
   },
-  select: () => (
-    <div style={{ width: 200 }}>
-      <Select label="Role" defaultValue="design">
-        <option value="design">Design</option>
-        <option value="eng">Engineering</option>
-        <option value="pm">Product</option>
-      </Select>
-    </div>
-  ),
-  slider: () => (
-    <div style={{ width: 220 }}>
-      <Slider label="Opacity" defaultValue={60} />
-    </div>
-  ),
-  switch: () => <Switch label="Show completed" defaultChecked />,
-  "text-area": () => (
-    <div style={{ width: 280 }}>
-      <TextArea label="Brief" placeholder="What do you need?" />
-    </div>
-  ),
-  "text-input": () => (
-    <div style={{ width: 240 }}>
-      <Input label="Your rate" placeholder="0" />
-    </div>
-  ),
-  "time-input": () => (
-    <div style={{ width: 180 }}>
-      <TimeInput label="Start time" />
-    </div>
-  ),
+  checkbox: () => {
+    const Demo = () => {
+      const [value, setValue] = useState(true);
+      return <CheckboxInput label="Notify me" value={value} onChange={setValue} />;
+    };
+    return <Demo />;
+  },
+  "date-input": () => {
+    const Demo = () => {
+      const [value, setValue] = useState<ISODateString | undefined>("2026-09-22");
+      return (
+        <ClientOnly>
+          <div style={{ width: 220 }}>
+            <DateInput label="Start date" value={value} onChange={setValue} />
+          </div>
+        </ClientOnly>
+      );
+    };
+    return <Demo />;
+  },
+  field: () => {
+    const Demo = () => {
+      const [value, setValue] = useState("");
+      return (
+        <div style={{ width: 240 }}>
+          <Field label="When can you start" inputID="start-field">
+            <TextInput
+              label="When can you start"
+              isLabelHidden
+              value={value}
+              onChange={setValue}
+              placeholder="e.g. Next Monday"
+            />
+          </Field>
+        </div>
+      );
+    };
+    return <Demo />;
+  },
+  "file-input": () => {
+    const Demo = () => {
+      const [file, setFile] = useState<File | File[] | null>(null);
+      return (
+        <div style={{ width: 280 }}>
+          <FileInput label="Attachment" value={file} onChange={setFile} />
+        </div>
+      );
+    };
+    return <Demo />;
+  },
+  "number-input": () => {
+    const Demo = () => {
+      const [value, setValue] = useState<number | null>(65);
+      return (
+        <div style={{ width: 160 }}>
+          <NumberInput label="Rate" value={value} onChange={setValue} hasClear />
+        </div>
+      );
+    };
+    return <Demo />;
+  },
+  radio: () => {
+    const Demo = () => {
+      const [value, setValue] = useState("fixed");
+      return (
+        <RadioList label="Rate" value={value} onChange={setValue}>
+          <RadioListItem label="Fixed" value="fixed" />
+          <RadioListItem label="Hourly" value="hourly" />
+        </RadioList>
+      );
+    };
+    return <Demo />;
+  },
+  select: () => {
+    const Demo = () => {
+      const [value, setValue] = useState("design");
+      return (
+        <div style={{ width: 200 }}>
+          <Selector
+            label="Role"
+            value={value}
+            onChange={setValue}
+            options={[
+              { value: "design", label: "Design" },
+              { value: "eng", label: "Engineering" },
+              { value: "pm", label: "Product" },
+            ]}
+          />
+        </div>
+      );
+    };
+    return <Demo />;
+  },
+  slider: () => {
+    const Demo = () => {
+      const [value, setValue] = useState(60);
+      return (
+        <div style={{ width: 220 }}>
+          <Slider label="Opacity" value={value} onChange={setValue} />
+        </div>
+      );
+    };
+    return <Demo />;
+  },
+  switch: () => {
+    const Demo = () => {
+      const [value, setValue] = useState(true);
+      return <Switch label="Show completed" value={value} onChange={setValue} />;
+    };
+    return <Demo />;
+  },
+  "text-area": () => {
+    const Demo = () => {
+      const [value, setValue] = useState("");
+      return (
+        <div style={{ width: 280 }}>
+          <TextArea label="Brief" value={value} onChange={setValue} placeholder="What do you need?" />
+        </div>
+      );
+    };
+    return <Demo />;
+  },
+  "text-input": () => {
+    const Demo = () => {
+      const [value, setValue] = useState("");
+      return (
+        <div style={{ width: 240 }}>
+          <TextInput label="Your rate" value={value} onChange={setValue} placeholder="0" />
+        </div>
+      );
+    };
+    return <Demo />;
+  },
+  "time-input": () => {
+    const Demo = () => {
+      const [value, setValue] = useState("09:00" as `${number}${number}:${number}${number}`);
+      return (
+        <div style={{ width: 180 }}>
+          <TimeInput label="Start time" value={value as never} onChange={setValue as never} />
+        </div>
+      );
+    };
+    return <Demo />;
+  },
   tokenizer: () => {
     const Demo = () => {
-      const [tokens, setTokens] = useState(["Design", "Sealed"]);
-      const [v, setV] = useState("");
+      const items = SEARCH_ITEMS;
+      const source = useMemo(() => createStaticSource(items), []);
+      const [value, setValue] = useState(items.slice(0, 2));
       return (
         <div style={{ width: 280 }}>
           <Tokenizer
-            tokens={tokens}
-            onRemove={(t) => setTokens(tokens.filter((x) => x !== t))}
-            value={v}
-            onChange={setV}
-            onSubmit={(t) => {
-              setTokens([...tokens, t]);
-              setV("");
-            }}
+            label="Tags"
+            searchSource={source}
+            value={value}
+            onChange={setValue}
+            hasEntriesOnFocus
           />
         </div>
       );
@@ -508,14 +631,16 @@ export const DEMOS: Record<string, () => ReactNode> = {
   },
   typeahead: () => {
     const Demo = () => {
-      const [v, setV] = useState("");
+      const source = useMemo(() => createStaticSource(SEARCH_ITEMS), []);
+      const [value, setValue] = useState<(typeof SEARCH_ITEMS)[number] | null>(null);
       return (
         <div style={{ width: 240 }}>
           <Typeahead
-            value={v}
-            onChange={setV}
-            placeholder="Find a room"
-            options={["Brand refresh", "Landing page", "Product hunt", "Onboarding"]}
+            label="Find a component"
+            searchSource={source}
+            value={value}
+            onChange={setValue}
+            hasEntriesOnFocus
           />
         </div>
       );
@@ -524,102 +649,114 @@ export const DEMOS: Record<string, () => ReactNode> = {
   },
   badge: () => (
     <Row>
-      <Badge label="Invited" />
-      <Badge label="Selected" tone="primary" />
-      <Badge label="Bid submitted" tone="success" />
-      <Badge label="Pending" tone="warning" />
-      <Badge label="Revoked" tone="danger" />
-      <Badge label="Viewed" tone="outline" />
+      <Badge label="Neutral" />
+      <Badge label="Info" variant="info" />
+      <Badge label="Success" variant="success" />
+      <Badge label="Warning" variant="warning" />
+      <Badge label="Error" variant="error" />
     </Row>
   ),
   banner: () => (
-    <div style={{ width: "100%" }}>
-      <Banner tone="primary" title="2 items are running low" description="Invite another bidder before the room closes." />
-    </div>
+    <Banner status="info" title="2 items are running low" description="Invite another person before the room closes." />
   ),
   "progress-bar": () => (
     <div style={{ width: 240 }}>
-      <ProgressBar value={64} label="Uploading brief" />
+      <ProgressBar value={64} label="Uploading" hasValueLabel />
     </div>
   ),
   skeleton: () => (
     <div style={{ width: 200 }}>
-      <Stack gap={8}>
+      <Stack gap={2}>
         <Skeleton height={16} />
         <Skeleton height={16} width="70%" />
-        <Skeleton circle width={32} height={32} />
+        <Skeleton height={32} width={32} radius="rounded" />
       </Stack>
     </div>
   ),
   spinner: () => <Spinner />,
   "status-dot": () => (
     <Row>
-      <StatusDot />
-      <StatusDot tone="primary" />
-      <StatusDot tone="success" />
-      <StatusDot tone="warning" />
-      <StatusDot tone="danger" />
+      <StatusDot variant="neutral" label="Neutral" />
+      <StatusDot variant="accent" label="Accent" />
+      <StatusDot variant="success" label="Success" />
+      <StatusDot variant="warning" label="Warning" />
+      <StatusDot variant="error" label="Error" />
     </Row>
   ),
-  toast: () => (
-    <Stack gap={8}>
-      <Toast message="Invite sent to 2 bidders" tone="success" />
-      <Toast message="This invite expires in 24 hours" tone="warning" />
-    </Stack>
-  ),
-  breadcrumbs: () => (
-    <Breadcrumbs items={[{ label: "Rooms", href: "#" }, { label: "Brand refresh" }, { label: "Bids" }]} />
-  ),
-  pagination: () => {
+  toast: () => {
     const Demo = () => {
-      const [p, setP] = useState(2);
-      return <Pagination page={p} pageCount={5} onChange={setP} />;
-    };
-    return <Demo />;
-  },
-  "side-nav": () => (
-    <div style={{ width: 220, height: 240, border: "1px solid var(--border-subtle)", borderRadius: 8, overflow: "hidden" }}>
-      <SideNav
-        searchable={false}
-        items={[
-          { label: "Overview", href: "#", active: true },
-          { label: "Button", href: "#" },
-          { label: "Dialog", href: "#" },
-        ]}
-      />
-    </div>
-  ),
-  stepper: () => <Stepper current={1} steps={[{ label: "Invite" }, { label: "Review" }, { label: "Award" }]} />,
-  "tab-list": () => {
-    const Demo = () => {
-      const [v, setV] = useState("overview");
+      const toast = useToast();
       return (
-        <TabList
-          value={v}
-          onChange={setV}
-          tabs={[
-            { label: "Overview", value: "overview" },
-            { label: "Properties", value: "properties" },
-          ]}
+        <Button
+          label="Show toast"
+          variant="secondary"
+          onClick={() => toast({ body: "Invite sent", type: "info" })}
         />
       );
     };
     return <Demo />;
   },
-  "top-nav": () => (
-    <div style={{ width: "100%" }}>
-      <Nav brand="OpenSeat" items={[{ label: "Dashboard", active: true }, { label: "Job rooms" }]} cta="Post a sealed job" showAvatar />
+  breadcrumbs: () => (
+    <Breadcrumbs>
+      <BreadcrumbItem href="#rooms">Rooms</BreadcrumbItem>
+      <BreadcrumbItem href="#brief">Brand refresh</BreadcrumbItem>
+      <BreadcrumbItem isCurrent>Bids</BreadcrumbItem>
+    </Breadcrumbs>
+  ),
+  pagination: () => {
+    const Demo = () => {
+      const [page, setPage] = useState(2);
+      return <Pagination page={page} onChange={setPage} totalPages={5} />;
+    };
+    return <Demo />;
+  },
+  "side-nav": () => (
+    <div style={{ width: 220, height: 240, overflow: "hidden", borderRadius: 16 }}>
+      <SideNav>
+        <SideNavItem label="Overview" href="#overview" isSelected />
+        <SideNavItem label="Button" href="#button" />
+        <SideNavItem label="Dialog" href="#dialog" />
+      </SideNav>
     </div>
+  ),
+  stepper: () => (
+    <Stepper activeStep={1} label="Onboarding">
+      <Step step={0} label="Invite" />
+      <Step step={1} label="Review" />
+      <Step step={2} label="Award" />
+    </Stepper>
+  ),
+  "tab-list": () => {
+    const Demo = () => {
+      const [value, setValue] = useState("overview");
+      return (
+        <TabList value={value} onChange={setValue}>
+          <Tab value="overview" label="Overview" />
+          <Tab value="properties" label="Properties" />
+        </TabList>
+      );
+    };
+    return <Demo />;
+  },
+  "top-nav": () => (
+    <TopNav
+      label="Product"
+      heading={<TopNavHeading heading="Astryx" />}
+      startContent={
+        <>
+          <TopNavItem label="Dashboard" href="#dashboard" isSelected />
+          <TopNavItem label="Library" href="#library" />
+        </>
+      }
+    />
   ),
   "bottom-sheet": () => {
     const Demo = () => {
       const [open, setOpen] = useState(false);
       return (
         <>
-          <Button variant="secondary" onClick={() => setOpen(true)}>
-            Open sheet
-          </Button>
-          <BottomSheet open={open} onClose={() => setOpen(false)} title="Invite a bidder">
+          <Button label="Open sheet" variant="secondary" onClick={() => setOpen(true)} />
+          <BottomSheet isOpen={open} onOpenChange={setOpen} label="Invite">
             <Text>Send this room to someone on your allowlist.</Text>
           </BottomSheet>
         </>
@@ -630,28 +767,21 @@ export const DEMOS: Record<string, () => ReactNode> = {
   "command-palette": () => {
     const Demo = () => {
       const [open, setOpen] = useState(false);
+      const source = useMemo(() => createStaticSource(SEARCH_ITEMS), []);
       return (
         <>
-          <Button variant="secondary" onClick={() => setOpen(true)}>
-            Open palette
-          </Button>
-          <CommandPalette
-            open={open}
-            onClose={() => setOpen(false)}
-            items={[
-              { label: "Post a sealed job", hint: "N" },
-              { label: "Invite a bidder", hint: "I" },
-              { label: "Switch theme", hint: "T" },
-            ]}
-          />
+          <Button label="Open palette" variant="secondary" onClick={() => setOpen(true)} />
+          <CommandPalette isOpen={open} onOpenChange={setOpen} searchSource={source} />
         </>
       );
     };
     return <Demo />;
   },
   "context-menu": () => (
-    <ContextMenu items={[{ label: "Open" }, { label: "Duplicate" }, { label: "Delete", danger: true }]}>
-      <Card title="Right-click me" meta="Context menu" />
+    <ContextMenu items={[{ label: "Open" }, { label: "Duplicate" }, { type: "divider" }, { label: "Delete", variant: "destructive" }]}>
+      <Card>
+        <Text>Right-click me</Text>
+      </Card>
     </ContextMenu>
   ),
   dialog: () => {
@@ -659,23 +789,27 @@ export const DEMOS: Record<string, () => ReactNode> = {
       const [open, setOpen] = useState(false);
       return (
         <>
-          <Button onClick={() => setOpen(true)}>Open dialog</Button>
-          <Dialog
-            open={open}
-            onClose={() => setOpen(false)}
-            title="Close this room?"
-            footer={
-              <>
-                <Button variant="ghost" onClick={() => setOpen(false)}>
-                  Cancel
-                </Button>
-                <Button variant="danger" onClick={() => setOpen(false)}>
-                  Close room
-                </Button>
-              </>
-            }
-          >
-            <Text>Bidders will no longer be able to submit.</Text>
+          <HStack>
+            <Button label="Open dialog" variant="secondary" onClick={() => setOpen(true)} />
+          </HStack>
+          <Dialog isOpen={open} onOpenChange={setOpen}>
+            <Layout
+              height="auto"
+              header={<DialogHeader title="Close this room?" onOpenChange={setOpen} />}
+              content={
+                <LayoutContent>
+                  <Text>People will no longer be able to submit.</Text>
+                </LayoutContent>
+              }
+              footer={
+                <LayoutFooter hasDivider>
+                  <HStack gap={2} hAlign="end">
+                    <Button label="Cancel" variant="ghost" onClick={() => setOpen(false)} />
+                    <Button label="Close room" variant="destructive" onClick={() => setOpen(false)} />
+                  </HStack>
+                </LayoutFooter>
+              }
+            />
           </Dialog>
         </>
       );
@@ -683,126 +817,152 @@ export const DEMOS: Record<string, () => ReactNode> = {
     return <Demo />;
   },
   "hover-card": () => (
-    <Popover trigger={<Button variant="secondary">Preview</Button>}>
-      <Text size="sm">Jordan · invited 2 days ago</Text>
-    </Popover>
+    <HoverCard className="" style={{}} content={<Text>Jordan · invited 2 days ago</Text>}>
+      <Button label="Preview" variant="secondary" />
+    </HoverCard>
   ),
   popover: () => (
-    <Popover trigger={<Button variant="secondary">Open</Button>}>
-      <Stack gap={8}>
-        <Text size="sm" strong>
-          Shipping method
-        </Text>
-        <Text size="sm" muted>
-          Delivered in 5–7 business days
-        </Text>
-      </Stack>
+    <Popover
+      className=""
+      style={{}}
+      content={
+        <Stack gap={2}>
+          <Text weight="medium">Shipping method</Text>
+          <Text color="secondary">Delivered in 5–7 business days</Text>
+        </Stack>
+      }
+    >
+      <Button label="Open" variant="secondary" />
     </Popover>
   ),
   tooltip: () => (
-    <Tooltip label="Post a sealed job">
-      <IconButton label="New">
-        +
-      </IconButton>
+    <Tooltip content="Post a sealed job">
+      <IconButton label="New" icon={<Icon icon="search" />} />
     </Tooltip>
   ),
   list: () => (
     <div style={{ width: 320 }}>
-      <List
-        items={[
-          { title: "Brand refresh", description: "Fixed · $2,400", leading: <Avatar initials="BR" /> },
-          { title: "Landing page", description: "Hourly · $65/hr", leading: <Avatar initials="LP" /> },
-        ]}
-      />
+      <List>
+        <ListItem label="Brand refresh" description="Fixed · $2,400" startContent={<Avatar name="Brand refresh" size="sm" />} />
+        <ListItem label="Landing page" description="Hourly · $65/hr" startContent={<Avatar name="Landing page" size="sm" />} />
+      </List>
     </div>
   ),
   "metadata-list": () => (
-    <MetadataList
-      items={[
-        { label: "Status", value: "Sealed" },
-        { label: "Budget", value: "$2,400" },
-        { label: "Posted", value: "2 days ago" },
-      ]}
-    />
+    <MetadataList>
+      <MetadataListItem label="Status">Sealed</MetadataListItem>
+      <MetadataListItem label="Budget">$2,400</MetadataListItem>
+      <MetadataListItem label="Posted">2 days ago</MetadataListItem>
+    </MetadataList>
   ),
-  "overflow-list": () => <OverflowList items={["Design", "Copy", "Motion", "Research", "Brand"]} max={3} />,
-  table: () => (
-    <div style={{ width: "100%" }}>
-      <Table
-        columns={[
-          { key: "item", header: "Item" },
-          { key: "available", header: "Available" },
-          { key: "tags", header: "Tags" },
-        ]}
-        rows={[
-          { item: "Butter Croissant", available: 64, tags: "Fresh" },
-          { item: "Pancakes", available: 38, tags: "Popular" },
-          { item: "Belgian Waffle", available: 51, tags: "New" },
-        ]}
-      />
+  "overflow-list": () => (
+    <div style={{ width: 220 }}>
+      <OverflowList maxVisibleItems={3}>
+        <Badge label="Design" />
+        <Badge label="Copy" />
+        <Badge label="Motion" />
+        <Badge label="Research" />
+        <Badge label="Brand" />
+      </OverflowList>
     </div>
+  ),
+  table: () => (
+    <Table>
+      <TableHeader>
+        <TableRow isHeaderRow>
+          <TableHeaderCell>Item</TableHeaderCell>
+          <TableHeaderCell>Available</TableHeaderCell>
+          <TableHeaderCell>Tags</TableHeaderCell>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>Butter Croissant</TableCell>
+          <TableCell>64</TableCell>
+          <TableCell>Fresh</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Pancakes</TableCell>
+          <TableCell>38</TableCell>
+          <TableCell>Popular</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   ),
   "tree-list": () => (
     <TreeList
       items={[
-        { label: "Rooms", children: [{ label: "Brand refresh" }, { label: "Landing page" }] },
-        { label: "People", children: [{ label: "Jordan" }, { label: "Alex" }] },
+        {
+          id: "rooms",
+          label: "Rooms",
+          children: [
+            { id: "brand", label: "Brand refresh" },
+            { id: "landing", label: "Landing page" },
+          ],
+        },
+        {
+          id: "people",
+          label: "People",
+          children: [
+            { id: "jordan", label: "Jordan" },
+            { id: "alex", label: "Alex" },
+          ],
+        },
       ]}
     />
   ),
-  chat: () => {
-    const Demo = () => {
-      const [v, setV] = useState("");
-      return (
-        <Chat>
-          <ChatSystemMessage>Order #1043 · Placed</ChatSystemMessage>
-          <ChatMessage author="Astryx" initials="AX" body="Can you show me the full details?" time="1:59 pm" />
-          <ChatMessage own body="Here’s everything I have on order #1043." />
-          <ChatComposer value={v} onChange={setV} onSend={() => setV("")} />
-        </Chat>
-      );
-    };
-    return <Demo />;
-  },
+  chat: () => (
+    <ClientOnly fallback={<Text color="secondary">Chat</Text>}>
+      <div style={{ height: 320 }}>
+        <ChatLayout composer={<ChatComposer onSubmit={() => undefined} placeholder="Write a message" />}>
+          <ChatMessageList>
+            <ChatSystemMessage>Order #1043 · Placed</ChatSystemMessage>
+            <ChatMessage sender="assistant" name="Astryx">
+              <ChatMessageBubble>Can you show me the full details?</ChatMessageBubble>
+            </ChatMessage>
+            <ChatMessage sender="user">
+              <ChatMessageBubble>Here’s everything I have on order #1043.</ChatMessageBubble>
+            </ChatMessage>
+          </ChatMessageList>
+        </ChatLayout>
+      </div>
+    </ClientOnly>
+  ),
   "visually-hidden": () => (
     <Row>
-      <Button>
+      <Button label="Save">
         Save
         <VisuallyHidden> draft to this room</VisuallyHidden>
       </Button>
-      <Text size="sm" muted>
-        Extra text is announced, not shown.
-      </Text>
+      <Text color="secondary">Extra text is announced, not shown.</Text>
     </Row>
   ),
   tokens: () => (
-    <Text size="sm" muted>
-      Open the Tokens page in the top nav for the live ramp.
-    </Text>
+    <Text color="secondary">Open Tokens in the top nav for the live ramp.</Text>
   ),
 };
 
 export function OverviewDemos() {
   return (
-    <>
-      <Preview label="Button">
-        {DEMOS.button()}
-      </Preview>
-      <Preview label="Button Group">{DEMOS["button-group"]()}</Preview>
-      <Preview label="Dropdown Menu">{DEMOS["dropdown-menu"]()}</Preview>
-      <Preview label="Icon Button">{DEMOS["icon-button"]()}</Preview>
-      <Preview label="Link">{DEMOS.link()}</Preview>
-      <Preview label="More Menu">{DEMOS["more-menu"]()}</Preview>
-      <Preview label="Segmented Control">{DEMOS["segmented-control"]()}</Preview>
-      <Preview label="Toggle Button">{DEMOS["toggle-button"]()}</Preview>
-      <Preview label="Toggle Button Group">{DEMOS["toggle-button-group"]()}</Preview>
-      <Preview label="Toolbar">{DEMOS.toolbar()}</Preview>
-      <Preview label="Avatar">{DEMOS.avatar()}</Preview>
-      <Preview label="Badge">{DEMOS.badge()}</Preview>
-      <Preview label="Card">{DEMOS.card()}</Preview>
-      <Preview label="Toast">{DEMOS.toast()}</Preview>
-      <Preview label="Chat">{DEMOS.chat()}</Preview>
-      <Preview label="Calendar">{DEMOS.calendar()}</Preview>
-    </>
+    <ClientOnly>
+      <Grid columns={{ minWidth: 280, max: 2 }} gap={4}>
+        <Preview label="Button">{DEMOS.button()}</Preview>
+        <Preview label="Button Group">{DEMOS["button-group"]()}</Preview>
+        <Preview label="Dropdown Menu">{DEMOS["dropdown-menu"]()}</Preview>
+        <Preview label="Icon Button">{DEMOS["icon-button"]()}</Preview>
+        <Preview label="Link">{DEMOS.link()}</Preview>
+        <Preview label="More Menu">{DEMOS["more-menu"]()}</Preview>
+        <Preview label="Segmented Control">{DEMOS["segmented-control"]()}</Preview>
+        <Preview label="Toggle Button">{DEMOS["toggle-button"]()}</Preview>
+        <Preview label="Toggle Button Group">{DEMOS["toggle-button-group"]()}</Preview>
+        <Preview label="Toolbar">{DEMOS.toolbar()}</Preview>
+        <Preview label="Avatar">{DEMOS.avatar()}</Preview>
+        <Preview label="Badge">{DEMOS.badge()}</Preview>
+        <Preview label="Card">{DEMOS.card()}</Preview>
+        <Preview label="Toast">{DEMOS.toast()}</Preview>
+        <Preview label="Chat">{DEMOS.chat()}</Preview>
+        <Preview label="Calendar">{DEMOS.calendar()}</Preview>
+      </Grid>
+    </ClientOnly>
   );
 }

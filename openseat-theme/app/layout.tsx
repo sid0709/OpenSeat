@@ -1,28 +1,26 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Figtree } from "next/font/google";
+import { Providers } from "@/components/Providers";
 import { DocsChrome } from "@/components/DocsChrome";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const figtree = Figtree({
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "OpenSeat Theme",
-  description: "OpenSeat design system — Meta blue tokens and components, shared across the product.",
+  title: "Astryx",
+  description: "Accessible, themeable React components from Meta.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      data-theme="light"
-      suppressHydrationWarning
-      className={`${inter.variable} h-full antialiased`}
-    >
-      <body className="min-h-full">
-        <DocsChrome>{children}</DocsChrome>
+    <html lang="en" data-theme="light" suppressHydrationWarning className={figtree.className}>
+      <body>
+        <Providers>
+          <DocsChrome>{children}</DocsChrome>
+        </Providers>
       </body>
     </html>
   );

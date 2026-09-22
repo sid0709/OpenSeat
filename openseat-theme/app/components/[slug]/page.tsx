@@ -1,19 +1,15 @@
 "use client";
 
-import { notFound, useParams } from "next/navigation";
-import {
-  CodeBlock,
-  Heading,
-  PageBody,
-  Preview,
-  Section,
-  Stack,
-  TabList,
-  Text,
-} from "@openseat/design-system";
-import { findItem } from "@/lib/catalog";
-import { DEMOS } from "@/components/Demos";
 import { useState } from "react";
+import { notFound, useParams } from "next/navigation";
+import { Heading } from "@astryxdesign/core/Heading";
+import { Text } from "@astryxdesign/core/Text";
+import { Stack } from "@astryxdesign/core/Stack";
+import { Tab, TabList } from "@astryxdesign/core/TabList";
+import { CodeBlock } from "@astryxdesign/core/CodeBlock";
+import { findItem } from "@/lib/catalog";
+import { ClientOnly } from "@/components/ClientOnly";
+import { DEMOS, Preview } from "@/components/Demos";
 
 export default function ComponentPage() {
   const params = useParams<{ slug: string }>();
@@ -25,33 +21,30 @@ export default function ComponentPage() {
   const Demo = DEMOS[item.slug];
 
   return (
-    <PageBody>
-      <Stack gap={8}>
-        <div>
-          <Heading level={1}>{item.title}</Heading>
-          <Text muted>{item.description}</Text>
-        </div>
-        <TabList
-          value={tab}
-          onChange={setTab}
-          tabs={[
-            { label: "Overview", value: "overview" },
-            { label: "Usage", value: "usage" },
-          ]}
-        />
-        {tab === "overview" && (
-          <Preview label={item.title}>{Demo ? Demo() : <Text muted>No demo yet.</Text>}</Preview>
-        )}
-        {tab === "usage" && (
-          <Section title="Usage" description="Import from the shared design system. Do not restyle in the app.">
-            <CodeBlock
-              language="ts"
-              filename="tsx"
-              code={`import { ${item.title.replace(/\s/g, "")} } from "@openseat/design-system";`}
-            />
-          </Section>
-        )}
+    <Stack gap={5}>
+      <Stack gap={2}>
+        <Heading level={1}>{item.title}</Heading>
+        <Text color="secondary" display="block">
+          {item.description}
+        </Text>
       </Stack>
-    </PageBody>
+      <TabList value={tab} onChange={setTab} hasDivider>
+        <Tab value="overview" label="Overview" />
+        <Tab value="usage" label="Usage" />
+      </TabList>
+      {tab === "overview" && (
+        <ClientOnly>
+          <Preview label={item.title}>{Demo ? Demo() : <Text color="secondary">No demo yet.</Text>}</Preview>
+        </ClientOnly>
+      )}
+      {tab === "usage" && (
+        <CodeBlock
+          language="tsx"
+          title="Import"
+          width="100%"
+          code={`import { ${item.importName} } from "@astryxdesign/core/${item.importName}";`}
+        />
+      )}
+    </Stack>
   );
 }

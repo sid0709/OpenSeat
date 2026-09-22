@@ -1,22 +1,20 @@
 "use client";
 
-import { Heading, PageBody, PageHero, PreviewGrid, Stack, Text } from "@openseat/design-system";
+import { Heading } from "@astryxdesign/core/Heading";
+import { Text } from "@astryxdesign/core/Text";
+import { Stack } from "@astryxdesign/core/Stack";
 import { OverviewDemos } from "@/components/Demos";
 
 export default function ThemeHome() {
   return (
-    <PageBody>
-      <PageHero>
-        <Stack gap={12} align="center">
-          <Heading level={1}>Browse the library</Heading>
-          <Text muted>
-            Every component, built on OpenSeat tokens — Meta’s Facebook blue, shared with the product.
-          </Text>
-        </Stack>
-      </PageHero>
-      <PreviewGrid>
-        <OverviewDemos />
-      </PreviewGrid>
-    </PageBody>
+    <Stack gap={6}>
+      <Stack gap={2}>
+        <Heading level={1}>Browse the library</Heading>
+        <Text color="secondary" display="block">
+          Every component from @astryxdesign/core, using the default Neutral theme.
+        </Text>
+      </Stack>
+      <OverviewDemos />
+    </Stack>
   );
 }
