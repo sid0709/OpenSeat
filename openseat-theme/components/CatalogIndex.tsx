@@ -2,22 +2,41 @@ import { Heading } from "@astryxdesign/core/Heading";
 import { Text } from "@astryxdesign/core/Text";
 import { Stack } from "@astryxdesign/core/Stack";
 import { List, ListItem } from "@astryxdesign/core/List";
+import { ClientOnly } from "@/components/ClientOnly";
 import { CATALOG, itemHref, type CatalogGroup } from "@/lib/catalog";
+
+function CategoryFallback({ group }: { group: CatalogGroup }) {
+  return (
+    <Stack gap={3}>
+      {group.items.map((item) => (
+        <Stack key={item.slug} gap={0}>
+          <Text type="label">{item.title}</Text>
+          <Text type="supporting" color="secondary" display="block">
+            {item.description}
+          </Text>
+        </Stack>
+      ))}
+    </Stack>
+  );
+}
 
 function CategoryList({ group }: { group: CatalogGroup }) {
   return (
     <Stack gap={3}>
       <Heading level={2}>{group.category}</Heading>
-      <List>
-        {group.items.map((item) => (
-          <ListItem
-            key={item.slug}
-            label={item.title}
-            description={item.description}
-            href={itemHref(item.slug)}
-          />
-        ))}
-      </List>
+      {/* Links mount client-side so browser extensions cannot inject attrs before hydrate. */}
+      <ClientOnly fallback={<CategoryFallback group={group} />}>
+        <List>
+          {group.items.map((item) => (
+            <ListItem
+              key={item.slug}
+              label={item.title}
+              description={item.description}
+              href={itemHref(item.slug)}
+            />
+          ))}
+        </List>
+      </ClientOnly>
     </Stack>
   );
 }
@@ -28,8 +47,8 @@ export function CatalogIndex() {
       <Stack gap={2}>
         <Heading level={1}>Browse the library</Heading>
         <Text color="secondary" display="block">
-          Every component from @astryxdesign/core, using the default Neutral theme. Open a
-          component to see live examples.
+          Every component from @astryxdesign/core, using the OpenSeat theme. Open a component to see
+          live examples.
         </Text>
       </Stack>
       {CATALOG.map((group) => (
