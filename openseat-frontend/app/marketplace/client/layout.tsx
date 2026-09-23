@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useMockAuth } from "@/src/shared/auth/MockAuthContext";
 
-export default function MarketplaceIndexPage() {
+export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { currentUser } = useMockAuth();
 
@@ -13,21 +13,10 @@ export default function MarketplaceIndexPage() {
       router.replace("/marketplace/login");
       return;
     }
-
-    if (!currentUser.role) {
-      router.replace("/marketplace/join");
-      return;
-    }
-
-    if (currentUser.role === "Candidate") {
+    if (currentUser.role && currentUser.role !== "Client") {
       router.replace("/marketplace/candidate/dashboard");
-      return;
-    }
-
-    if (currentUser.role === "Client") {
-      router.replace("/marketplace/client/dashboard");
     }
   }, [currentUser, router]);
 
-  return null;
+  return <>{children}</>;
 }

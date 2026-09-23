@@ -1,4 +1,4 @@
-import { JobRoomRecord } from "../types/marketplace";
+import { JobRoomRecord } from "@/src/shared/types/job-room";
 
 export const MOCK_JOB_ROOMS: JobRoomRecord[] = [
   {
@@ -14,9 +14,10 @@ export const MOCK_JOB_ROOMS: JobRoomRecord[] = [
     experienceLevelRequired: "Expert",
     durationEstimateText: "More than 6 months",
     weeklyCommitmentText: "30+ hrs/week",
-    descriptionParagraph: "Chief Marketing Officer (CMO) – Data-Driven & Direct Response eCommerce 📍 Remote (Full-Time) 💰 Competitive salary + performance-based bonuses 🚀 Work directly with a 9-figure entrepreneur in the eCommerce industry About Us We are a fast-scaling eCommerce group operating...",
+    descriptionParagraph:
+      "Chief Marketing Officer (CMO) – Data-Driven & Direct Response eCommerce. Remote (Full-Time). Competitive salary + performance-based bonuses. Work directly with a 9-figure entrepreneur in the eCommerce industry.",
     skillsTags: ["Creative Strategy", "Advertisement", "Direct Response Copywriting"],
-    proposalsCountText: "Less than 5"
+    proposalsCountText: "Less than 5",
   },
   {
     id: "room-dev-002",
@@ -30,8 +31,9 @@ export const MOCK_JOB_ROOMS: JobRoomRecord[] = [
     experienceLevelRequired: "Intermediate",
     durationEstimateText: "1 to 3 months",
     weeklyCommitmentText: "Less than 30 hrs/week",
-    descriptionParagraph: "We are seeking a skilled web developer to create a robust e-commerce website using either Magento or WooCommerce. The ideal candidate should have experience in building user-friendly online stores, optimizing for performance, and ensuring mobile responsiveness. Your expertise will...",
+    descriptionParagraph:
+      "We are seeking a skilled web developer to create a robust e-commerce website using either Magento or WooCommerce. The ideal candidate should have experience in building user-friendly online stores.",
     skillsTags: ["WooCommerce", "Ecommerce Website Development", "Magento", "Web Development", "PHP"],
-    proposalsCountText: "Less than 5"
-  }
+    proposalsCountText: "Less than 5",
+  },
 ];

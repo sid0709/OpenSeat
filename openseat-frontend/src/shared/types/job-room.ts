@@ -24,3 +24,25 @@ export interface FilterState {
   experienceLevels: ExperienceLevel[];
   budgetTypes: BudgetType[];
 }
+
+export interface ProposalRecord {
+  id: string;
+  candidateName: string;
+  candidateTitle: string;
+  candidateRate: string;
+  coverLetterText: string;
+  status: "Pending" | "In Discussion" | "Approved";
+}
+
+export interface ChatMessage {
+  senderRole: "Client" | "Candidate";
+  text: string;
+  timestamp: string;
+}
+
+export interface RoomApplicationsMap {
+  [roomId: string]: {
+    proposals: ProposalRecord[];
+    chatHistory: { [candidateId: string]: ChatMessage[] };
+  };
+}

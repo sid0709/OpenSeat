@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-// Navigating across to the root src folder to pull type safety rules
-import { FilterState, ExperienceLevel, BudgetType } from "../../src/types/marketplace";
+import { FilterState, ExperienceLevel, BudgetType } from "@/src/candidate/types";
 
 interface FilterSidebarProps {
   filters: FilterState;
@@ -42,16 +41,20 @@ export function FilterSidebar({ filters, onFilterChange }: FilterSidebarProps) {
         </div>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2, 8px)", borderTop: "var(--border-width-hairline, 1px) solid var(--border-subtle)", paddingTop: "var(--space-4, 16px)" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--space-2, 8px)",
+          borderTop: "var(--border-width-hairline, 1px) solid var(--border-subtle)",
+          paddingTop: "var(--space-4, 16px)",
+        }}
+      >
         <p className="body-strong">Job Type</p>
         <div className="label text-ink-muted" style={{ display: "flex", flexDirection: "column", gap: "var(--space-2, 8px)" }}>
           {(["Hourly", "Fixed-Price"] as BudgetType[]).map((type) => (
             <label key={type} style={{ display: "flex", alignItems: "center", gap: "var(--space-2, 8px)", cursor: "pointer" }}>
-              <input
-                type="checkbox"
-                checked={filters.budgetTypes.includes(type)}
-                onChange={() => toggleBudget(type)}
-              />
+              <input type="checkbox" checked={filters.budgetTypes.includes(type)} onChange={() => toggleBudget(type)} />
               {type}
             </label>
           ))}
