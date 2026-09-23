@@ -1,0 +1,143 @@
+/* OpenSeat design tokens — dark-first. :root/[data-theme="dark"] carries the
+   product's default values; [data-theme="light"] overrides the same names.
+   Compiled by hand from the OpenSeat Design System artifact's tokens.json —
+   keep this file in sync if that artifact changes. */
+
+:root,
+[data-theme="dark"] {
+  --canvas: #0b0c0e;
+  --surface: #141517;
+  --surface-sunken: #1a1b1e;
+  --surface-hover: #1f2024;
+  --surface-selected: #26282d;
+  --border-subtle: #1f2024;
+  --border-default: #33353b;
+  --border-strong: #8b8f97;
+  --border-focus: #ff6d47;
+  --ink: #f4f5f6;
+  --ink-muted: #8b8f97;
+  --ink-faint: #61656c;
+  --on-primary: #1a0b06;
+  --primary: #ff6d47;
+  --primary-hover: #ff9b7c;
+  --primary-active: #f0542f;
+  --primary-bg: #2a1510;
+  --link: #ff6d47;
+  --link-hover: #ff9b7c;
+  --success: #45c38d;
+  --success-bg: #0e2a20;
+  --warning: #e5a344;
+  --warning-bg: #2c2113;
+  --danger: #f06a5e;
+  --danger-hover: #f5857b;
+  --danger-bg: #2e1512;
+  --overlay: rgba(0, 0, 0, 0.62);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 999px;
+  --radius-full: 9999px;
+
+  --elevation-0: none;
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.32);
+  --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --elevation-3: 0 16px 48px rgba(0, 0, 0, 0.55);
+
+  --border-width-hairline: 1px;
+  --border-width-thick: 2px;
+
+  --opacity-disabled: 0.45;
+  --opacity-overlay: 0.62;
+  --opacity-hover-scrim: 0.08;
+
+  --duration-fast: 80ms;
+  --duration-normal: 120ms;
+  --duration-slow: 200ms;
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-decelerate: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+
+  /* --font-inter is set on <html> by next/font in app/layout.tsx */
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+[data-theme="light"] {
+  --canvas: #f8f8f9;
+  --surface: #ffffff;
+  --surface-sunken: #efeff1;
+  --surface-hover: #efeff1;
+  --surface-selected: #e5e6e9;
+  --border-subtle: #e5e6e9;
+  --border-default: #d3d4d9;
+  --border-strong: #8b8f97;
+  --border-focus: #cc4526;
+  --ink: #141517;
+  --ink-muted: #61656c;
+  --ink-faint: #8b8f97;
+  --on-primary: #ffffff;
+  --primary: #cc4526;
+  --primary-hover: #a8371f;
+  --primary-active: #832b18;
+  --primary-bg: #fff1ed;
+  --link: #a8371f;
+  --link-hover: #832b18;
+  --success: #0d6b4b;
+  --success-bg: #e7f5ef;
+  --warning: #8a4b0c;
+  --warning-bg: #fbf0dc;
+  --danger: #b3261e;
+  --danger-hover: #8c1f19;
+  --danger-bg: #fbeae8;
+  --overlay: rgba(16, 17, 19, 0.38);
+
+  --elevation-1: 0 1px 2px rgba(16, 17, 19, 0.05);
+  --elevation-2: 0 4px 12px rgba(16, 17, 19, 0.08);
+  --elevation-3: 0 16px 48px rgba(16, 17, 19, 0.12);
+}
+
+/* Type styles — one family (Inter), separated by size/weight/tracking. */
+.display {
+  font: 600 48px/52px var(--font-sans);
+  letter-spacing: -0.03em;
+}
+.h1 {
+  font: 600 28px/34px var(--font-sans);
+  letter-spacing: -0.022em;
+}
+.h2 {
+  font: 600 21px/28px var(--font-sans);
+  letter-spacing: -0.018em;
+}
+.h3 {
+  font: 600 16px/24px var(--font-sans);
+  letter-spacing: -0.012em;
+}
+.body-lg {
+  font: 400 15px/24px var(--font-sans);
+  letter-spacing: -0.006em;
+}
+.body {
+  font: 400 14px/20px var(--font-sans);
+  letter-spacing: -0.006em;
+}
+.body-strong {
+  font: 500 14px/20px var(--font-sans);
+  letter-spacing: -0.006em;
+}
+.body-sm {
+  font: 400 13px/18px var(--font-sans);
+  letter-spacing: -0.003em;
+}
+.label {
+  font: 500 12px/16px var(--font-sans);
+}
+.caption {
+  font: 500 11px/16px var(--font-sans);
+  letter-spacing: 0.01em;
+}
+.button {
+  font: 500 13px/20px var(--font-sans);
+  letter-spacing: -0.006em;
+}

@@ -1,0 +1,5 @@
+MSG_FILE="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+
+cd "$(git rev-parse --show-toplevel)/apps/web"
+
+npx commitlint --edit "$MSG_FILE"
