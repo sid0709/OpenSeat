@@ -4,7 +4,15 @@
     "lint": {
       "outputs": []
     },
+    "lint:fix": {
+      "cache": false,
+      "outputs": []
+    },
     "typecheck": {
+      "outputs": []
+    },
+    "format": {
+      "cache": false,
       "outputs": []
     },
     "format:check": {
