@@ -1,0 +1,9 @@
+{
+  "name": "openseat",
+  "private": true,
+  "workspaces": [
+    "openseat-frontend",
+    "openseat-theme",
+    "packages/*"
+  ]
+}
