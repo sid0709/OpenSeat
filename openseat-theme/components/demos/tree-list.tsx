@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Badge, HStack, Icon, Stack, Text, TextInput, Tree, icons, type TreeNode } from "@openseat/design-system";
+import { Avatar, Badge, Button, Card, HStack, Icon, Stack, Text, TextInput, Tree, icons, type TreeNode } from "@openseat/design-system";
 import { Caption, Examples, Preview } from "./shared";
 
 const ROOMS: TreeNode[] = [
@@ -72,6 +72,39 @@ const PERMISSIONS: TreeNode[] = [
 
 const OPEN = ["rooms", "people"];
 
+const TEAM: TreeNode[] = [
+  {
+    id: "jordan",
+    label: "Jordan Miles",
+    description: "Head of design",
+    leading: <Avatar name="Jordan Miles" size="xsm" tooltip={false} />,
+    meta: <Badge label="Owner" variant="info" />,
+    children: [
+      {
+        id: "alex",
+        label: "Alex Rivera",
+        description: "Design lead",
+        leading: <Avatar name="Alex Rivera" size="xsm" tooltip={false} />,
+        children: [
+          { id: "morgan", label: "Morgan Lee", description: "Illustrator", leading: <Avatar name="Morgan Lee" size="xsm" tooltip={false} /> },
+          { id: "riley", label: "Riley Chen", description: "Engineer", leading: <Avatar name="Riley Chen" size="xsm" tooltip={false} /> },
+        ],
+      },
+      {
+        id: "dana",
+        label: "Dana Kim",
+        description: "Copy lead",
+        leading: <Avatar name="Dana Kim" size="xsm" tooltip={false} />,
+        children: [{ id: "priya", label: "Priya Nair", description: "Strategist", leading: <Avatar name="Priya Nair" size="xsm" tooltip={false} />, meta: <Badge label="New" variant="purple" /> }],
+      },
+    ],
+  },
+];
+
+function allIds(nodes: TreeNode[]): string[] {
+  return nodes.flatMap((n) => (n.children ? [n.id, ...allIds(n.children)] : []));
+}
+
 function filterNodes(nodes: TreeNode[], query: string): TreeNode[] {
   const q = query.trim().toLowerCase();
   if (!q) return nodes;
@@ -93,6 +126,8 @@ export default function TreeListDemo() {
   const [query, setQuery] = useState("");
   const [checked, setChecked] = useState<string[]>(["rooms-view", "bids-view"]);
   const filtered = useMemo(() => filterNodes(FILES, query), [query]);
+  const [expanded, setExpanded] = useState<string[]>(["jordan"]);
+  const [person, setPerson] = useState("alex");
 
   return (
     <Examples>
@@ -146,6 +181,30 @@ export default function TreeListDemo() {
         <HStack gap={6} wrap="wrap" vAlign="start">
           <Tree nodes={ROOMS} variant="guides" defaultExpanded={OPEN} />
           <Tree nodes={ROOMS} variant="cards" density="spacious" defaultExpanded={OPEN} />
+        </HStack>
+      </Preview>
+      <Preview label="Org chart — avatars, roles, and controlled expansion">
+        <Stack gap={3}>
+          <HStack gap={2}>
+            <Button label="Expand all" size="sm" onClick={() => setExpanded(allIds(TEAM))} />
+            <Button label="Collapse all" size="sm" variant="ghost" onClick={() => setExpanded([])} />
+          </HStack>
+          <HStack gap={4} wrap="wrap" vAlign="start">
+            <Card width={340}>
+              <Tree nodes={TEAM} variant="selection" expanded={expanded} onExpandedChange={setExpanded} selectedId={person} onSelect={setPerson} label="Team" />
+            </Card>
+            <Caption>Selected: {person} · {expanded.length} open</Caption>
+          </HStack>
+        </Stack>
+      </Preview>
+      <Preview label="Densities — compact for panels, spacious for pages">
+        <HStack gap={6} wrap="wrap" vAlign="start">
+          {(["compact", "regular", "spacious"] as const).map((density) => (
+            <Stack key={density} gap={1}>
+              <Caption>{density}</Caption>
+              <Tree nodes={ROOMS} variant="guides" density={density} defaultExpanded={["rooms"]} />
+            </Stack>
+          ))}
         </HStack>
       </Preview>
     </Examples>

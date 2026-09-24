@@ -3,10 +3,14 @@
 import { useState } from "react";
 import {
   Badge,
+  Button,
+  Card,
+  HStack,
   Icon,
   SegmentedControl,
   SegmentedControlItem,
   Stack,
+  Text,
   Timeline,
   icons,
   type TimelineItem,
@@ -59,6 +63,8 @@ const LOG: TimelineItem[] = [
   { id: "4", time: "09:31:40", title: "Bid accepted", description: "Jordan · $2,400", tone: "success" },
 ];
 
+const DELIVERY = ["Bid accepted", "Contract signed", "First draft", "Revisions", "Final files", "Paid"];
+
 const VARIANTS: { value: TimelineVariant; label: string }[] = [
   { value: "rail", label: "Rail" },
   { value: "cards", label: "Cards" },
@@ -69,6 +75,15 @@ const VARIANTS: { value: TimelineVariant; label: string }[] = [
 
 export default function TimelineDemo() {
   const [variant, setVariant] = useState<TimelineVariant>("rail");
+  const [stage, setStage] = useState(2);
+  const [tone, setTone] = useState<"all" | "success" | "danger">("all");
+  const tracking: TimelineItem[] = DELIVERY.map((title, index) => ({
+    id: title,
+    title,
+    status: index < stage ? "done" : index === stage ? "current" : "upcoming",
+    time: index < stage ? "Done" : index === stage ? "In progress" : undefined,
+  }));
+  const logged = LOG.filter((item) => tone === "all" || item.tone === tone);
 
   return (
     <Examples>
@@ -93,6 +108,36 @@ export default function TimelineDemo() {
       </Preview>
       <Preview label="Milestones">
         <Timeline items={HIRING} variant="horizontal" label="Milestones" />
+      </Preview>
+
+      <Preview label="Live tracking — advance the project and watch the rail fill">
+        <Card>
+          <Stack gap={4}>
+            <HStack hAlign="between" vAlign="center" wrap="wrap" gap={2}>
+              <Text weight="semibold">Brand refresh · {DELIVERY[Math.min(stage, DELIVERY.length - 1)]}</Text>
+              <HStack gap={2}>
+                <Button label="Back" size="sm" variant="ghost" isDisabled={stage === 0} onClick={() => setStage((s) => s - 1)} />
+                <Button label={stage >= DELIVERY.length ? "Done" : "Next step"} size="sm" variant="primary" isDisabled={stage >= DELIVERY.length} onClick={() => setStage((s) => s + 1)} />
+              </HStack>
+            </HStack>
+            <Timeline items={tracking} variant="horizontal" label="Delivery progress" />
+          </Stack>
+        </Card>
+      </Preview>
+
+      <Preview label="Filtered log — show only what matters">
+        <Stack gap={3} hAlign="start">
+          <SegmentedControl label="Filter" size="sm" value={tone} onChange={(v) => setTone(v as typeof tone)}>
+            <SegmentedControlItem value="all" label="All" />
+            <SegmentedControlItem value="success" label="Accepted" />
+            <SegmentedControlItem value="danger" label="Rejected" />
+          </SegmentedControl>
+          <Timeline items={logged} variant="compact" label="Filtered audit log" />
+        </Stack>
+      </Preview>
+
+      <Preview label="Cards with rich meta">
+        <Timeline items={ACTIVITY} variant="cards" label="Room activity as cards" />
       </Preview>
     </Examples>
   );

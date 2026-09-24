@@ -1,4 +1,4 @@
-import type { IconName } from "@astryxdesign/core/Icon";
+import type { IconName } from "@openseat/design-system";
 
 export type CatalogItem = {
   slug: string;
@@ -126,34 +126,34 @@ export const CATALOG: CatalogGroup[] = [
     category: "Navigation",
     icon: "chevronRight",
     items: [
-      { slug: "breadcrumbs", title: "Breadcrumbs", description: "The path from the product root to here.", importName: "Breadcrumbs" },
-      { slug: "pagination", title: "Pagination", description: "Move between pages of a collection.", importName: "Pagination" },
-      { slug: "side-nav", title: "Side Nav", description: "The durable left rail of a product.", importName: "SideNav" },
-      { slug: "stepper", title: "Stepper", description: "A linear sequence of steps.", importName: "Stepper" },
-      { slug: "tab-list", title: "Tab List", description: "Peer views of the same object.", importName: "TabList" },
-      { slug: "top-nav", title: "Top Nav", description: "The product bar.", importName: "TopNav" },
+      { slug: "breadcrumbs", title: "Breadcrumbs", description: "Paths with icons, sibling menus, deep collapsing, and client navigation.", importName: "Breadcrumbs" },
+      { slug: "pagination", title: "Pagination", description: "Pages, count, compact, input, and dots — page sizes and unknown totals.", importName: "Pagination" },
+      { slug: "side-nav", title: "Side Nav", description: "Sections, nesting, a collapsible rail, pinned items, and a footer.", importName: "SideNav" },
+      { slug: "stepper", title: "Stepper", description: "Horizontal and vertical steps — status, optional, collapsing, and a wizard.", importName: "Stepper" },
+      { slug: "tab-list", title: "Tab List", description: "Icons, counts, fill, overflow, tab menus, and full-bleed panels.", importName: "TabList" },
+      { slug: "top-nav", title: "Top Nav", description: "Product bars with search, menus, mega menus, and the OpenSeat Nav.", importName: "TopNav" },
     ],
   },
   {
     category: "Overlay",
     icon: "moreHorizontal",
     items: [
-      { slug: "bottom-sheet", title: "Bottom Sheet", description: "A focused overlay that rises from the bottom.", importName: "BottomSheet" },
-      { slug: "command-palette", title: "Command Palette", description: "Search and run an action from the keyboard.", importName: "CommandPalette" },
-      { slug: "context-menu", title: "Context Menu", description: "A menu anchored to a right-click.", importName: "ContextMenu" },
-      { slug: "dialog", title: "Dialog", description: "A focused, blocking overlay for a single decision.", importName: "Dialog" },
-      { slug: "hover-card", title: "Hover Card", description: "A rich preview on hover.", importName: "HoverCard" },
-      { slug: "popover", title: "Popover", description: "A non-blocking floating panel.", importName: "Popover" },
-      { slug: "tooltip", title: "Tooltip", description: "A short label for an unlabeled control.", importName: "Tooltip" },
+      { slug: "bottom-sheet", title: "Bottom Sheet", description: "Heights, action sheets, snap points, filters, and switching sheets.", importName: "BottomSheet" },
+      { slug: "command-palette", title: "Command Palette", description: "⌘K actions with shortcuts, a people finder, and an inline palette.", importName: "CommandPalette" },
+      { slug: "context-menu", title: "Context Menu", description: "Right-click menus with icons, submenus, sections, and destructive actions.", importName: "ContextMenu" },
+      { slug: "dialog", title: "Dialog", description: "Confirm, alert, form, info, fullscreen, and imperative dialogs.", importName: "Dialog" },
+      { slug: "hover-card", title: "Hover Card", description: "Rich previews for people and rooms — placement and delays.", importName: "HoverCard" },
+      { slug: "popover", title: "Popover", description: "Filter panels, controlled forms, profile menus, and info popovers.", importName: "Popover" },
+      { slug: "tooltip", title: "Tooltip", description: "Labels, shortcuts, placement, delays, truncation, and disabled controls.", importName: "Tooltip" },
     ],
   },
   {
     category: "Table & list",
     icon: "viewColumns",
     items: [
-      { slug: "list", title: "List", description: "A vertical stack of rows.", importName: "List" },
-      { slug: "metadata-list", title: "Metadata List", description: "Label / value pairs.", importName: "MetadataList" },
-      { slug: "overflow-list", title: "Overflow List", description: "Shows a few items, then a remainder count.", importName: "OverflowList" },
+      { slug: "list", title: "List", description: "Markers, density, rich rows, selection, links, checklists, and notifications.", importName: "List" },
+      { slug: "metadata-list", title: "Metadata List", description: "Label and value pairs — top or start labels, columns, icons, and show more.", importName: "MetadataList" },
+      { slug: "overflow-list", title: "Overflow List", description: "Fits what it can and counts the rest — badges, tokens, avatars, and actions.", importName: "OverflowList" },
       { slug: "table", title: "Table", description: "Rows you can stripe, tighten, select, or leave empty.", importName: "Table" },
       { slug: "timeline", title: "Timeline", description: "Events on a rail, in cards, alternating, or across.", importName: "Timeline" },
       { slug: "tree-list", title: "Tree", description: "A hierarchy you can filter, select, and restyle.", importName: "Tree" },
@@ -163,7 +163,7 @@ export const CATALOG: CatalogGroup[] = [
     category: "Chat",
     icon: "microphone",
     items: [
-      { slug: "chat", title: "Chat", description: "Messages, a system line, and a composer.", importName: "ChatLayout" },
+      { slug: "chat", title: "Chat", description: "Threads, an assistant with tool calls and streaming, and a full composer.", importName: "ChatLayout" },
     ],
   },
   {

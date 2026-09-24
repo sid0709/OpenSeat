@@ -1,53 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Token } from "./Content";
 import { Tree, type TreeNode } from "./Tree";
-
-export interface ListItemDef {
-  title: string;
-  description?: string;
-  meta?: ReactNode;
-  leading?: ReactNode;
-}
-
-export function List({ items }: { items: ListItemDef[] }) {
-  return (
-    <div className="os-list">
-      {items.map((item) => (
-        <div key={item.title} className="os-list-item">
-          {item.leading}
-          <div className="os-list-item-body">
-            <p className="body-strong" style={{ margin: 0 }}>
-              {item.title}
-            </p>
-            {item.description && (
-              <p className="body-sm text-ink-muted" style={{ margin: 0 }}>
-                {item.description}
-              </p>
-            )}
-          </div>
-          {item.meta}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export function MetadataList({ items }: { items: { label: string; value: ReactNode }[] }) {
-  return (
-    <dl className="os-meta-list">
-      {items.map((item) => (
-        <div key={item.label} style={{ display: "contents" }}>
-          <dt className="body-sm os-meta-key">{item.label}</dt>
-          <dd className="body-sm os-meta-val" style={{ margin: 0 }}>
-            {item.value}
-          </dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
 
 /** The two-level shorthand for Tree — every branch starts open. */
 export function TreeList({
@@ -61,23 +15,6 @@ export function TreeList({
     children: item.children?.map((child) => ({ id: `${item.label}/${child.label}`, label: child.label })),
   }));
   return <Tree nodes={nodes} variant="guides" defaultExpanded={nodes.map((node) => node.id)} />;
-}
-
-export function OverflowList({ items, max = 3 }: { items: string[]; max?: number }) {
-  const shown = items.slice(0, max);
-  const rest = items.length - shown.length;
-  return (
-    <div style={{ display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" }}>
-      {shown.map((item) => (
-        <Token key={item} label={item} size="sm" />
-      ))}
-      {rest > 0 && <span className="caption text-ink-muted">+{rest}</span>}
-    </div>
-  );
-}
-
-export function VisuallyHidden({ children }: { children: ReactNode }) {
-  return <span className="os-visually-hidden">{children}</span>;
 }
 
 export function PageBody({ children }: { children: ReactNode }) {

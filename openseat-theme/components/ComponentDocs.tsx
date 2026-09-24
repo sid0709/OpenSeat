@@ -2,11 +2,7 @@
 
 import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { Stack } from "@astryxdesign/core/Stack";
-import { Text } from "@astryxdesign/core/Text";
-import { Tab, TabList } from "@astryxdesign/core/TabList";
-import { CodeBlock } from "@astryxdesign/core/CodeBlock";
-import { Spinner } from "@astryxdesign/core/Spinner";
+import { CodeBlock, Spinner, Stack, Tab, TabList, Text } from "@openseat/design-system";
 import { DEMO_LOADERS } from "@/components/demos/load";
 
 export function ComponentDocs({ slug, importName }: { slug: string; importName: string }) {
@@ -34,7 +30,7 @@ export function ComponentDocs({ slug, importName }: { slug: string; importName: 
           language="tsx"
           title="Import"
           width="100%"
-          code={`import { ${importName} } from "@astryxdesign/core/${importName}";`}
+          code={`import { ${importName} } from "@openseat/design-system";`}
         />
       )}
     </Stack>

@@ -1,11 +1,15 @@
 // Original Astryx, OpenSeat-themed: primitives, actions, content, containers,
-// data input, and feedback.
+// data input, feedback, navigation, overlays, lists, and chat.
 export * from "./Primitives";
 export * from "./Action";
 export * from "./Content";
 export * from "./Container";
 export * from "./DataInput";
 export * from "./Feedback";
+export * from "./Navigation";
+export * from "./Overlay";
+export * from "./Lists";
+export * from "./Chat";
 
 export type { ControlSize, FieldSize } from "./size";
 
@@ -16,12 +20,6 @@ export { Nav } from "./Nav";
 export type { NavProps, NavItem } from "./Nav";
 
 export { TokenDemo } from "./TokenDemo";
-
-export { Modal, Dialog } from "./Modal";
-export type { ModalProps, DialogProps } from "./Modal";
-
-export { Menu, ContextMenu } from "./Menu";
-export type { MenuProps, MenuItemDef } from "./Menu";
 
 export * from "./LayoutPrimitives";
 
@@ -66,6 +64,12 @@ export type { CalendarProps, CalendarEvent, CalendarView, CalendarTone, DateRang
 export { DateField } from "./DateField";
 export type { DateFieldProps } from "./DateField";
 
+// Drag-and-drop uploads, built from Astryx parts.
+export { FileUploader } from "./FileUploader";
+export type { FileUploaderProps, UploadItem, UploadStatus, UploadHandler } from "./FileUploader";
+export { useFileDrop, formatBytes, matchesAccept } from "./useFileDrop";
+export type { UseFileDropOptions, FileDropProps } from "./useFileDrop";
+
 export { Rating, RATING_MAX } from "./Rating";
 export type { RatingProps } from "./Rating";
 
@@ -73,37 +77,13 @@ export type { RatingProps } from "./Rating";
 export { TimeInput } from "./TimeInput";
 export type { TimeInputProps, TimeInputVariant, HourCycle, MinuteStep } from "./TimeInput";
 
-export { BottomSheet, Overlay, Tooltip, Popover, HoverCard, Lightbox, CommandPalette } from "./Overlay";
-export type { BottomSheetProps, CommandItem } from "./Overlay";
-
 export {
-  Breadcrumbs,
-  TabList,
-  Pagination,
-  Stepper,
-  Outline,
-} from "./Navigation";
-export type {
-  BreadcrumbItem,
-  TabItem,
-  StepDef,
-} from "./Navigation";
-
-export {
-  List,
-  MetadataList,
   TreeList,
-  OverflowList,
-  VisuallyHidden,
   PageBody,
   PageHero,
   Preview,
   PreviewGrid,
 } from "./Data";
-export type { ListItemDef } from "./Data";
-
-export { Chat, ChatMessage, ChatComposer, ChatSystemMessage } from "./Chat";
-export type { ChatMessageProps } from "./Chat";
 
 export { ThemeToggle } from "./ThemeToggle";
 export type { ThemeName } from "./ThemeToggle";

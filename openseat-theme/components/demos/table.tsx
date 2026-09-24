@@ -5,7 +5,13 @@ import {
   Avatar,
   Badge,
   Button,
+  Card,
   HStack,
+  Heading,
+  MetadataList,
+  MetadataListItem,
+  MoreMenu,
+  ProgressBar,
   Icon,
   SegmentedControl,
   SegmentedControlItem,
@@ -104,6 +110,10 @@ export default function TableDemo() {
   const [single, setSingle] = useState<string[]>(["landing"]);
   const [density, setDensity] = useState<TableDensity>("regular");
   const [loading, setLoading] = useState(false);
+  const [bulk, setBulk] = useState<string[]>([]);
+  const [archived, setArchived] = useState<string[]>([]);
+  const [detail, setDetail] = useState<Room | null>(null);
+  const live = ROWS.filter((row) => !archived.includes(row.id));
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -186,6 +196,75 @@ export default function TableDemo() {
           <Table columns={SIMPLE} rows={ROWS.slice(0, 3)} rowKey={(row) => row.id} loading={loading} />
           <Table columns={SIMPLE} rows={[]} variant="plain" empty="No rooms match this filter." />
         </Stack>
+      </Preview>
+
+      <Preview label="Bulk actions — select rows, act on all of them">
+        <Stack gap={3}>
+          <HStack gap={2} vAlign="center" wrap="wrap">
+            <Text weight="semibold">{bulk.length ? `${bulk.length} selected` : `${live.length} rooms`}</Text>
+            <Button label="Archive" size="sm" icon={<Icon icon={icons.folder} />} isDisabled={!bulk.length} onClick={() => { setArchived((a) => [...a, ...bulk]); setBulk([]); }} />
+            <Button label="Export" size="sm" variant="ghost" icon={<Icon icon={icons.download} />} isDisabled={!bulk.length} />
+            {archived.length > 0 && <Button label={`Restore ${archived.length}`} size="sm" variant="ghost" onClick={() => setArchived([])} />}
+          </HStack>
+          <Table columns={SIMPLE} rows={live} rowKey={(row) => row.id} selection="multiple" selectedKeys={bulk} onSelectionChange={setBulk} density="compact" />
+        </Stack>
+      </Preview>
+
+      <Preview label="Rich cells — people, progress, and row menus">
+        <Table
+          rows={ROWS.slice(0, 5)}
+          rowKey={(row) => row.id}
+          columns={[
+            {
+              key: "name",
+              header: "Room",
+              render: (row) => (
+                <Stack gap={0}>
+                  <Text weight="semibold">{row.name}</Text>
+                  <Text type="supporting" color="secondary">Updated {row.updated}</Text>
+                </Stack>
+              ),
+            },
+            {
+              key: "owner",
+              header: "Owner",
+              render: (row) => (
+                <HStack gap={2} vAlign="center">
+                  <Avatar name={row.owner} size="sm" tooltip={false} />
+                  <Text>{row.owner}</Text>
+                </HStack>
+              ),
+            },
+            { key: "bids", header: "Bids in", width: 160, render: (row) => <ProgressBar label={`${row.name} bids`} isLabelHidden value={Math.min(row.bids, 8)} max={8} variant={row.bids >= 6 ? "success" : "accent"} /> },
+            { key: "actions", header: "", align: "end", width: 56, render: (row) => <MoreMenu label={`${row.name} actions`} items={[{ label: "Open" }, { label: "Duplicate" }, { type: "divider" }, { label: "Archive", variant: "destructive" }]} /> },
+          ]}
+        />
+      </Preview>
+
+      <Preview label="Row click opens details">
+        <HStack gap={4} vAlign="start" wrap="wrap">
+          <Stack width={420}>
+            <Table columns={SIMPLE.slice(0, 2)} rows={ROWS.slice(0, 6)} rowKey={(row) => row.id} onRowClick={setDetail} variant="plain" />
+          </Stack>
+          <Card width={280}>
+            {detail ? (
+              <Stack gap={3}>
+                <HStack hAlign="between" vAlign="center">
+                  <Heading level={4}>{detail.name}</Heading>
+                  <Badge label={detail.status} variant={STATUS_TONE[detail.status]} />
+                </HStack>
+                <MetadataList columns="single" label={{ position: "start", width: 80 }}>
+                  <MetadataListItem label="Owner">{detail.owner}</MetadataListItem>
+                  <MetadataListItem label="Bids">{detail.bids}</MetadataListItem>
+                  <MetadataListItem label="Budget">{money.format(detail.budget)}</MetadataListItem>
+                  <MetadataListItem label="Updated">{detail.updated}</MetadataListItem>
+                </MetadataList>
+              </Stack>
+            ) : (
+              <Caption>Click a row to see its details.</Caption>
+            )}
+          </Card>
+        </HStack>
       </Preview>
     </Examples>
   );
