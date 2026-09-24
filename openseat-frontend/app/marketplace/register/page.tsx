@@ -3,9 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Card } from "@/components/ui/Card";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
+import { Card, Input, Button, ThemeToggle } from "@openseat/design-system";
 import { useMockAuth } from "@/src/shared/auth/MockAuthContext";
 
 export default function MarketplaceRegisterPage() {
@@ -46,6 +44,7 @@ export default function MarketplaceRegisterPage() {
         padding: "var(--space-4, 16px)",
       }}
     >
+      <div style={{ position: "absolute", top: "var(--spacing-4)", right: "var(--spacing-4)" }}><ThemeToggle /></div>
       <Card style={{ width: "100%", maxWidth: "420px", padding: "var(--space-6, 24px)" }}>
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "var(--space-4, 16px)" }}>
           <div>

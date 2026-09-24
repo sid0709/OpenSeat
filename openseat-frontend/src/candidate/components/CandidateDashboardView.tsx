@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useSyncExternalStore } from "react";
-import { Nav } from "@/components/ui/Nav";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
+import { Nav, Input, Button } from "@openseat/design-system";
 import { FilterSidebar } from "@/src/candidate/components/FilterSidebar";
 import { JobRoomCard } from "@/src/shared/components/JobRoomCard";
 import { useCandidateDashboard } from "@/src/candidate/hooks/useCandidateDashboard";

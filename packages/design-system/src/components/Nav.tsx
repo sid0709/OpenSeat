@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 import { Button } from "./Button";
 import { Avatar } from "./Avatar";
+import { ThemeToggle } from "./ThemeToggle";
 
 export interface NavItem {
   label: string;
@@ -45,6 +46,7 @@ export function Nav({
         ))}
       </div>
       <div className="os-nav-right">
+        <ThemeToggle />
         {cta && (
           <Button variant="primary" size="sm" onClick={onCtaClick}>
             {cta}

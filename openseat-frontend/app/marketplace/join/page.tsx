@@ -2,8 +2,7 @@
 
 import React, { useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
-import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+import { Card, Button, ThemeToggle } from "@openseat/design-system";
 import { useMockAuth } from "@/src/shared/auth/MockAuthContext";
 
 const emptySubscribe = () => () => {};
@@ -36,6 +35,7 @@ export default function MarketplaceJoinPage() {
         padding: "var(--space-4, 16px)",
       }}
     >
+      <div style={{ position: "absolute", top: "var(--spacing-4)", right: "var(--spacing-4)" }}><ThemeToggle /></div>
       <Card style={{ width: "100%", maxWidth: "580px", padding: "var(--space-6, 24px)" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4, 16px)", textAlign: "center" }}>
           <div>

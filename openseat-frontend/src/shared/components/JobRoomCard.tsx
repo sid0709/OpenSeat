@@ -1,9 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
+import { Card, Badge, Button } from "@openseat/design-system";
 import { JobRoomRecord } from "@/src/shared/types/job-room";
 
 interface JobRoomCardProps {

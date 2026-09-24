@@ -10,11 +10,17 @@ export function ThemeToggle() {
 
   useEffect(() => {
     const current = document.documentElement.getAttribute("data-theme");
-    if (current === "light" || current === "dark") setTheme(current);
+    const stored = window.localStorage.getItem("openseat-theme");
+    const next = stored === "light" || stored === "dark" ? stored : current;
+    if (next === "light" || next === "dark") {
+      document.documentElement.setAttribute("data-theme", next);
+      setTheme(next);
+    }
   }, []);
 
   const switchTheme = (next: ThemeName) => {
     document.documentElement.setAttribute("data-theme", next);
+    window.localStorage.setItem("openseat-theme", next);
     setTheme(next);
   };
 

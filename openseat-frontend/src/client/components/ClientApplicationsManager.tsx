@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
+import { Card, Button, Input } from "@openseat/design-system";
 import { JobRoomRecord, RoomApplicationsMap } from "@/src/shared/types/job-room";
 
 interface ClientApplicationsManagerProps {

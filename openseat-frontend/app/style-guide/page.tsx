@@ -10,7 +10,7 @@ import {
   EmptyState,
   Toast,
   TokenDemo,
-} from "@/components/ui";
+} from "@openseat/design-system";
 
 const SWATCHES = [
   "canvas",

@@ -2,10 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Card } from "@/components/ui/Card";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
-import { Nav } from "@/components/ui/Nav";
+import { Card, Input, Button, Nav } from "@openseat/design-system";
 import { useMockAuth } from "@/src/shared/auth/MockAuthContext";
 
 export function CandidateProfileForm() {

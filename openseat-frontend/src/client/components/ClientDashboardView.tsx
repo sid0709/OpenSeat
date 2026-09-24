@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useSyncExternalStore } from "react";
-import { Nav } from "@/components/ui/Nav";
-import { Button } from "@/components/ui/Button";
+import { Nav, Button } from "@openseat/design-system";
 import { ClientWorkspace } from "@/src/client/components/ClientWorkspace";
 import { ClientApplicationsManager } from "@/src/client/components/ClientApplicationsManager";
 import { JobRoomCard } from "@/src/shared/components/JobRoomCard";
