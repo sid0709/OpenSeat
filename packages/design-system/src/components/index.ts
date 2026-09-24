@@ -1,6 +1,7 @@
-// Astryx primitives and actions — original Astryx, OpenSeat-themed.
+// Astryx primitives, actions, and content — original Astryx, OpenSeat-themed.
 export * from "./Primitives";
 export * from "./Action";
+export * from "./Content";
 
 export { Input } from "./Input";
 export type { FieldProps, InputFieldProps, TextareaFieldProps, FieldSize, ControlSize } from "./Input";
@@ -11,14 +12,8 @@ export type { JobCardProps } from "./Card";
 export { Badge } from "./Badge";
 export type { BadgeProps, BadgeTone } from "./Badge";
 
-export { Avatar, AvatarStack } from "./Avatar";
-export type { AvatarProps, AvatarStackProps } from "./Avatar";
-
 export { Nav } from "./Nav";
 export type { NavProps, NavItem } from "./Nav";
-
-export { EmptyState } from "./EmptyState";
-export type { EmptyStateProps } from "./EmptyState";
 
 export { Toast } from "./Toast";
 export type { ToastProps, ToastTone } from "./Toast";
@@ -79,26 +74,6 @@ export type { RatingProps } from "./Rating";
 
 export { Banner, ProgressBar, Skeleton, Spinner, StatusDot } from "./Status";
 export type { BannerProps, ProgressBarProps, SkeletonProps, StatusTone } from "./Status";
-
-export {
-  Blockquote,
-  Citation,
-  Code,
-  CodeBlock,
-  Kbd,
-  Timestamp,
-  Token,
-  Thumbnail,
-  Markdown,
-} from "./Typography";
-export type {
-  BlockquoteProps,
-  CitationProps,
-  CodeBlockProps,
-  TimestampProps,
-  TokenProps,
-  ThumbnailProps,
-} from "./Typography";
 
 export {
   Field,

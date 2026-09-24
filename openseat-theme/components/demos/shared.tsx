@@ -60,3 +60,21 @@ export function Caption({ children }: { children: ReactNode }) {
 export function Examples({ children }: { children: ReactNode }) {
   return <Stack gap={5}>{children}</Stack>;
 }
+
+/** Local sample images from /public, so image demos never depend on a remote host. */
+export const SAMPLE_IMAGES = {
+  globe: "/globe.svg",
+  window: "/window.svg",
+  file: "/file.svg",
+  missing: "/missing-image.png",
+} as const;
+
+export const PEOPLE = [
+  { name: "Jordan Miles", role: "Room owner" },
+  { name: "Alex Rivera", role: "Designer" },
+  { name: "Dana Kim", role: "Copywriter" },
+  { name: "Riley Chen", role: "Engineer" },
+  { name: "Sam Okafor", role: "Producer" },
+  { name: "Priya Nair", role: "Strategist" },
+  { name: "Morgan Lee", role: "Illustrator" },
+];

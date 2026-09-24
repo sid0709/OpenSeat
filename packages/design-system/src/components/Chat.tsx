@@ -1,24 +1,24 @@
 "use client";
 
 import { ReactNode } from "react";
-import { Avatar } from "./Avatar";
+import { Avatar } from "./Content";
 import { IconButton } from "./Action";
 import { icons } from "./Glyph";
 import { Icon } from "./Primitives";
 import { Input } from "./Input";
 
 export interface ChatMessageProps {
+  /** Shown above the bubble; the avatar derives initials from it (a person glyph when absent). */
   author?: string;
-  initials?: string;
   body: ReactNode;
   own?: boolean;
   time?: string;
 }
 
-export function ChatMessage({ author, initials = "OS", body, own, time }: ChatMessageProps) {
+export function ChatMessage({ author, body, own, time }: ChatMessageProps) {
   return (
     <div className={"os-chat-msg" + (own ? " os-chat-msg-own" : "")}>
-      {!own && <Avatar initials={initials} size={24} />}
+      {!own && <Avatar name={author} size="sm" tooltip={false} />}
       <div>
         {!own && author && <p className="caption text-ink-muted" style={{ margin: "0 0 4px" }}>{author}</p>}
         <div className="body os-chat-bubble">{body}</div>

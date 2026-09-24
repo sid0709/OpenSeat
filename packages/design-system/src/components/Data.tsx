@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useState } from "react";
+import { Token } from "./Content";
 import { Tree, type TreeNode } from "./Tree";
 
 export function Collapsible({
@@ -93,9 +94,7 @@ export function OverflowList({ items, max = 3 }: { items: string[]; max?: number
   return (
     <div style={{ display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" }}>
       {shown.map((item) => (
-        <span key={item} className="body-sm os-token">
-          {item}
-        </span>
+        <Token key={item} label={item} size="sm" />
       ))}
       {rest > 0 && <span className="caption text-ink-muted">+{rest}</span>}
     </div>

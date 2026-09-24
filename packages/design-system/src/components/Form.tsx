@@ -1,6 +1,7 @@
 "use client";
 
 import { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, useId, useState, type ComponentProps } from "react";
+import { Token } from "./Content";
 import { Input, type ControlSize } from "./Input";
 
 export const Field = Input;
@@ -206,12 +207,7 @@ export function Tokenizer({ tokens, onRemove, value, onChange, onSubmit, placeho
   return (
     <div className="os-tokenizer">
       {tokens.map((t) => (
-        <span key={t} className="body-sm os-token">
-          {t}
-          <button type="button" className="os-token-remove" onClick={() => onRemove(t)} aria-label={`Remove ${t}`}>
-            ✕
-          </button>
-        </span>
+        <Token key={t} label={t} size="sm" onRemove={() => onRemove(t)} />
       ))}
       <input
         value={value}

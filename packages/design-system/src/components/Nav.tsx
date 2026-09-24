@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { Button } from "./Action";
-import { Avatar } from "./Avatar";
+import { Avatar } from "./Content";
 
 export interface NavItem {
   label: string;
@@ -15,7 +15,8 @@ export interface NavProps {
   items?: NavItem[];
   cta?: string;
   onCtaClick?: () => void;
-  initials?: string;
+  /** The signed-in person; the avatar derives initials from it. */
+  userName?: string;
   trailing?: ReactNode;
   showAvatar?: boolean;
 }
@@ -26,7 +27,7 @@ export function Nav({
   items = [],
   cta,
   onCtaClick,
-  initials = "JM",
+  userName = "Jordan Miles",
   trailing,
   showAvatar = false,
 }: NavProps) {
@@ -49,7 +50,7 @@ export function Nav({
           <Button label={cta} variant="primary" size="sm" onClick={onCtaClick} />
         )}
         {trailing}
-        {showAvatar && <Avatar initials={initials} size={24} />}
+        {showAvatar && <Avatar name={userName} size="sm" />}
       </div>
     </div>
   );

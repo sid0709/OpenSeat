@@ -5,7 +5,9 @@ import {
   JobCard,
   Badge,
   Avatar,
-  AvatarStack,
+  AvatarGroup,
+  AvatarGroupOverflow,
+  AvatarStatusDot,
   Nav,
   EmptyState,
   Toast,
@@ -140,18 +142,16 @@ export default function StyleGuidePage() {
 
       <Section title="Avatars">
         <div className="flex flex-wrap items-center gap-3">
-          <Avatar initials="JM" size={20} />
-          <Avatar initials="AR" size={24} />
-          <Avatar initials="DK" size={32} />
-          <Avatar initials="RS" size={32} status />
-          <AvatarStack
-            people={[
-              { initials: "JM", size: 24 },
-              { initials: "AR", size: 24 },
-              { initials: "DK", size: 24 },
-            ]}
-            overflow={3}
-          />
+          <Avatar name="Jordan Miles" size="xsm" />
+          <Avatar name="Alex Rivera" size="sm" />
+          <Avatar name="Dana Kim" size={32} />
+          <Avatar name="Riley Stone" size={32} status={<AvatarStatusDot variant="success" label="Online" />} />
+          <AvatarGroup size="sm">
+            <Avatar name="Jordan Miles" />
+            <Avatar name="Alex Rivera" />
+            <Avatar name="Dana Kim" />
+            <AvatarGroupOverflow count={3} />
+          </AvatarGroup>
         </div>
       </Section>
 
@@ -176,7 +176,7 @@ export default function StyleGuidePage() {
         <EmptyState
           title="No bids yet"
           description="Invited bidders can see this room and will show up here once they respond."
-          actionLabel="Invite a bidder"
+          actions={<Button label="Invite a bidder" variant="secondary" />}
         />
       </Section>
 

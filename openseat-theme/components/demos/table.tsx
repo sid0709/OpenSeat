@@ -26,7 +26,6 @@ type Room = {
   id: string;
   name: string;
   owner: string;
-  initials: string;
   bids: number;
   budget: number;
   status: Status;
@@ -41,14 +40,14 @@ const STATUS_TONE: Record<Status, BadgeTone> = {
 };
 
 const ROWS: Room[] = [
-  { id: "brand", name: "Brand refresh", owner: "Sam Ortiz", initials: "SO", bids: 6, budget: 2400, status: "Open", updated: "2h ago" },
-  { id: "landing", name: "Landing page", owner: "Jordan Mills", initials: "JM", bids: 2, budget: 1800, status: "Review", updated: "5h ago" },
-  { id: "motion", name: "Motion system", owner: "Alex Kim", initials: "AK", bids: 0, budget: 3200, status: "Draft", updated: "Yesterday" },
-  { id: "deck", name: "Pitch deck", owner: "Riley Chen", initials: "RC", bids: 11, budget: 950, status: "Awarded", updated: "Mon" },
-  { id: "icons", name: "Icon set", owner: "Sam Ortiz", initials: "SO", bids: 4, budget: 1200, status: "Open", updated: "Mon" },
-  { id: "onboard", name: "Onboarding flow", owner: "Jordan Mills", initials: "JM", bids: 8, budget: 4100, status: "Review", updated: "Sep 18" },
-  { id: "email", name: "Email templates", owner: "Alex Kim", initials: "AK", bids: 3, budget: 700, status: "Open", updated: "Sep 16" },
-  { id: "docs", name: "Docs site", owner: "Riley Chen", initials: "RC", bids: 5, budget: 2900, status: "Draft", updated: "Sep 12" },
+  { id: "brand", name: "Brand refresh", owner: "Sam Ortiz", bids: 6, budget: 2400, status: "Open", updated: "2h ago" },
+  { id: "landing", name: "Landing page", owner: "Jordan Mills", bids: 2, budget: 1800, status: "Review", updated: "5h ago" },
+  { id: "motion", name: "Motion system", owner: "Alex Kim", bids: 0, budget: 3200, status: "Draft", updated: "Yesterday" },
+  { id: "deck", name: "Pitch deck", owner: "Riley Chen", bids: 11, budget: 950, status: "Awarded", updated: "Mon" },
+  { id: "icons", name: "Icon set", owner: "Sam Ortiz", bids: 4, budget: 1200, status: "Open", updated: "Mon" },
+  { id: "onboard", name: "Onboarding flow", owner: "Jordan Mills", bids: 8, budget: 4100, status: "Review", updated: "Sep 18" },
+  { id: "email", name: "Email templates", owner: "Alex Kim", bids: 3, budget: 700, status: "Open", updated: "Sep 16" },
+  { id: "docs", name: "Docs site", owner: "Riley Chen", bids: 5, budget: 2900, status: "Draft", updated: "Sep 12" },
 ];
 
 const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
@@ -73,7 +72,7 @@ const RICH: TableColumn<Room>[] = [
     sortable: true,
     render: (row) => (
       <HStack gap={2} vAlign="center">
-        <Avatar initials={row.initials} size={24} />
+        <Avatar name={row.owner} size="sm" tooltip={false} />
         <span>{row.owner}</span>
       </HStack>
     ),
