@@ -16,7 +16,8 @@
     "format:check": "turbo run format:check",
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "e2e": "turbo run e2e"
   },
   "devDependencies": {
     "turbo": "^2.11.2"

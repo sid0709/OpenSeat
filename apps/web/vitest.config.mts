@@ -6,6 +6,8 @@ export default defineConfig({
     setupFiles: ["./vitest.setup.ts"],
     globals: true,
 
+    include: ["**/*.test.{ts,tsx}"],
+
     coverage: {
       provider: "v8",
       reporter: ["text", "html", "lcov"],
