@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
-import type { ControlSize } from "./Input";
+import type { ControlSize } from "./size";
 import {
   HOURS_PER_HALF,
   MINUTES_PER_HOUR,

@@ -112,7 +112,7 @@ export default function DropdownMenuDemo() {
             button={{
               label: "Status",
               icon: <Icon icon={icons.filter} />,
-              endContent: statuses.length ? <Badge label={String(statuses.length)} tone="primary" size="sm" /> : undefined,
+              endContent: statuses.length ? <Badge label={String(statuses.length)} variant="info" /> : undefined,
             }}
             items={STATUSES.map((status) => ({
               label: status,

@@ -1,18 +1,17 @@
 import type { ReactNode } from "react";
 import {
   Button,
-  Input,
   JobCard,
   Badge,
-  Avatar,
-  AvatarGroup,
-  AvatarGroupOverflow,
-  AvatarStatusDot,
   Nav,
   EmptyState,
-  Toast,
   TokenDemo,
 } from "@/components/ui";
+import { AvatarSamples } from "./_components/AvatarSamples";
+import { InputSamples } from "./_components/InputSamples";
+import { ToastSamples } from "./_components/ToastSamples";
+
+const CARD_WIDTH = 208;
 
 const SWATCHES = [
   "canvas",
@@ -124,42 +123,32 @@ export default function StyleGuidePage() {
 
       <Section title="Inputs">
         <div className="flex max-w-sm flex-col gap-4">
-          <Input label="When can you start" placeholder="e.g. Next Monday" />
-          <Input label="Your rate" defaultValue="0" error helper="Enter an amount greater than $0" />
+          <InputSamples />
         </div>
       </Section>
 
       <Section title="Badges">
         <div className="flex flex-wrap gap-2">
-          <Badge label="Invited" tone="neutral" />
-          <Badge label="Selected" tone="primary" />
-          <Badge label="Bid submitted" tone="success" />
-          <Badge label="Pending review" tone="warning" />
-          <Badge label="Revoked" tone="danger" />
-          <Badge label="Viewed" tone="outline" />
+          <Badge label="Invited" variant="neutral" />
+          <Badge label="Selected" variant="info" />
+          <Badge label="Bid submitted" variant="success" />
+          <Badge label="Pending review" variant="warning" />
+          <Badge label="Revoked" variant="error" />
+          <Badge label="Design" variant="purple" />
         </div>
       </Section>
 
       <Section title="Avatars">
         <div className="flex flex-wrap items-center gap-3">
-          <Avatar name="Jordan Miles" size="xsm" />
-          <Avatar name="Alex Rivera" size="sm" />
-          <Avatar name="Dana Kim" size={32} />
-          <Avatar name="Riley Stone" size={32} status={<AvatarStatusDot variant="success" label="Online" />} />
-          <AvatarGroup size="sm">
-            <Avatar name="Jordan Miles" />
-            <Avatar name="Alex Rivera" />
-            <Avatar name="Dana Kim" />
-            <AvatarGroupOverflow count={3} />
-          </AvatarGroup>
+          <AvatarSamples />
         </div>
       </Section>
 
       <Section title="Cards">
         <div className="flex flex-wrap gap-3">
-          <JobCard title="Brand refresh brief" meta="Fixed · $2,400" footer="Posted 2 days ago" className="w-52" />
-          <JobCard title="Landing page copy" meta="Hourly · $65/hr" interactive className="w-52" />
-          <JobCard title="Selected bid" meta="Chosen for this room" selected className="w-52" />
+          <JobCard title="Brand refresh brief" meta="Fixed · $2,400" footer="Posted 2 days ago" width={CARD_WIDTH} />
+          <JobCard title="Landing page copy" meta="Hourly · $65/hr" href="#landing" width={CARD_WIDTH} />
+          <JobCard title="Selected bid" meta="Chosen for this room" selected width={CARD_WIDTH} />
         </div>
       </Section>
 
@@ -181,10 +170,8 @@ export default function StyleGuidePage() {
       </Section>
 
       <Section title="Toasts">
-        <div className="flex flex-col items-start gap-2">
-          <Toast message="Invite sent to 2 bidders" tone="success" />
-          <Toast message="This invite expires in 24 hours" tone="warning" />
-          <Toast message="Failed to send — try again" tone="danger" />
+        <div className="flex flex-wrap items-center gap-2">
+          <ToastSamples />
         </div>
       </Section>
     </div>

@@ -7,7 +7,7 @@ import { CalendarAgenda } from "./CalendarAgenda";
 import { CalendarMonth } from "./CalendarMonth";
 import { CalendarSchedule } from "./CalendarSchedule";
 import { Glyph, icons } from "./Glyph";
-import type { ControlSize } from "./Input";
+import type { ControlSize } from "./size";
 import { VIEW_LABELS, type CalendarEvent, type CalendarView, type DateRange } from "./calendarTypes";
 import {
   DAYS_PER_WEEK,

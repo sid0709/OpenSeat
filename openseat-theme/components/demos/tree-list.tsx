@@ -11,8 +11,8 @@ const ROOMS: TreeNode[] = [
     leading: <span className="os-tree-leading">R</span>,
     meta: "3",
     children: [
-      { id: "brand", label: "Brand refresh", description: "Fixed · $2,400", meta: <Badge label="Open" tone="success" size="sm" /> },
-      { id: "landing", label: "Landing page", description: "Hourly · $65/hr", meta: <Badge label="Review" tone="warning" size="sm" /> },
+      { id: "brand", label: "Brand refresh", description: "Fixed · $2,400", meta: <Badge label="Open" variant="success" /> },
+      { id: "landing", label: "Landing page", description: "Hourly · $65/hr", meta: <Badge label="Review" variant="warning" /> },
       { id: "archive", label: "Old pitch", description: "Closed", disabled: true },
     ],
   },
@@ -123,9 +123,9 @@ export default function TreeListDemo() {
           <TextInput
             label="Find a file"
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={setQuery}
             placeholder="tsx"
-            start={<Icon icon={icons.search} size="sm" />}
+            startIcon={<Icon icon={icons.search} />}
             hasClear
           />
           {filtered.length > 0 ? (

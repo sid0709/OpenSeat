@@ -5,7 +5,7 @@ import { Avatar } from "./Content";
 import { IconButton } from "./Action";
 import { icons } from "./Glyph";
 import { Icon } from "./Primitives";
-import { Input } from "./Input";
+import { TextInput } from "./DataInput";
 
 export interface ChatMessageProps {
   /** Shown above the bubble; the avatar derives initials from it (a person glyph when absent). */
@@ -42,17 +42,7 @@ export function ChatComposer({
   return (
     <div className="os-chat-composer">
       <div style={{ flex: 1 }}>
-        <Input
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              onSend?.();
-            }
-          }}
-        />
+        <TextInput label={placeholder} isLabelHidden value={value} onChange={onChange} placeholder={placeholder} onEnter={onSend} />
       </div>
       <IconButton label="Send" variant="primary" icon={<Icon icon={icons.send} />} onClick={onSend} />
     </div>

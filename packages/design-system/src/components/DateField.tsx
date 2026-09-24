@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "./Action";
 import { Calendar, type CalendarProps } from "./Calendar";
-import type { ControlSize } from "./Input";
+import type { ControlSize } from "./size";
 import { PickerShell } from "./PickerShell";
 import { NumberSegment, SegmentDivider } from "./Segment";
 import { MONTHS_PER_YEAR, daysInMonth, startOfDay } from "./date";

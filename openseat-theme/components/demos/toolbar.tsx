@@ -40,7 +40,7 @@ const PEOPLE: Person[] = [
 const COLUMNS: TableColumn<Person>[] = [
   { key: "name", header: "Name", sortable: true },
   { key: "role", header: "Role", sortable: true },
-  { key: "status", header: "Status", render: (row) => <Badge label={row.status} tone={row.status === "Active" ? "success" : "neutral"} size="sm" /> },
+  { key: "status", header: "Status", render: (row) => <Badge label={row.status} variant={row.status === "Active" ? "success" : "neutral"} /> },
 ];
 
 export default function ToolbarDemo() {
@@ -117,11 +117,12 @@ export default function ToolbarDemo() {
                 <Stack width={220}>
                   <TextInput
                     size="sm"
+                    label="Search people"
+                    isLabelHidden
                     placeholder="Search people"
-                    aria-label="Search people"
                     value={query}
-                    onChange={(event) => setQuery(event.target.value)}
-                    start={<Icon icon={icons.search} size="sm" />}
+                    onChange={setQuery}
+                    startIcon={<Icon icon={icons.search} />}
                     hasClear
                   />
                 </Stack>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type KeyboardEvent } from "react";
-import type { ControlSize } from "./Input";
+import type { ControlSize } from "./size";
 import {
   HOURS_PER_HALF,
   MERIDIEMS,

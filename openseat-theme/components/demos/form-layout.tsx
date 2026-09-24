@@ -9,7 +9,7 @@ import {
   GridSystem,
   ResponsiveFrame,
   ResponsiveStack,
-  Select,
+  Selector,
   Stack,
   Text,
   TextArea,
@@ -34,9 +34,10 @@ const INITIAL: Fields = {
 
 export default function FormLayoutDemo() {
   const [f, setF] = useState(INITIAL);
+  const [visibility, setVisibility] = useState("sealed");
   const bind = (key: keyof Fields) => ({
     value: f[key],
-    onChange: (event: { target: { value: string } }) => setF((c) => ({ ...c, [key]: event.target.value })),
+    onChange: (value: string) => setF((c) => ({ ...c, [key]: value })),
   });
 
   return (
@@ -45,12 +46,17 @@ export default function FormLayoutDemo() {
         <Stack maxWidth={420}>
           <FormLayout>
             <TextInput label="Room title" {...bind("title")} />
-            <TextInput label="Budget" start="$" {...bind("budget")} helper="Bidders see this as a ceiling." />
+            <TextInput label="Budget" {...bind("budget")} description="Bidders see this as a ceiling." />
             <TextArea label="Brief" placeholder="What does great look like?" {...bind("brief")} />
-            <Select label="Visibility" defaultValue="sealed">
-              <option value="sealed">Sealed — invited bidders only</option>
-              <option value="open">Open — anyone with the link</option>
-            </Select>
+            <Selector
+              label="Visibility"
+              value={visibility}
+              onChange={setVisibility}
+              options={[
+                { value: "sealed", label: "Sealed — invited bidders only" },
+                { value: "open", label: "Open — anyone with the link" },
+              ]}
+            />
           </FormLayout>
         </Stack>
       </Preview>

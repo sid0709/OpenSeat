@@ -167,7 +167,7 @@ export default function AppShellDemo() {
       <Preview label="With a banner" description="A shell-wide message sits above everything.">
         <Frame>
           <AppShell
-            banner={<Banner tone="warning" title="Scheduled maintenance tonight" description="Bidding pauses from 1–2 AM." />}
+            banner={<Banner status="warning" title="Scheduled maintenance tonight" description="Bidding pauses from 1–2 AM." />}
             topNav={<Top />}
             sideNav={<Side page={page} onPage={setPage} />}
             contentPadding={4}

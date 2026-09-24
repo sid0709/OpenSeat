@@ -1,6 +1,6 @@
 "use client";
 
-import type { ControlSize } from "./Input";
+import type { ControlSize } from "./size";
 import { useNow } from "./hooks";
 import {
   HOURS_PER_HALF,

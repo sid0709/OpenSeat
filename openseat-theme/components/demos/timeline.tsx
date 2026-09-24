@@ -48,7 +48,7 @@ const ACTIVITY: TimelineItem[] = [
     tone: "warning",
     meta: "“Type scale feels tight on mobile — try one step up for body.”",
   },
-  { id: "s", group: "Yesterday", title: "Preview shipped", time: "16:10", marker: <Icon icon={icons.check} size="sm" />, tone: "success", meta: <Badge label="v0.3" tone="success" size="sm" /> },
+  { id: "s", group: "Yesterday", title: "Preview shipped", time: "16:10", marker: <Icon icon={icons.check} size="sm" />, tone: "success", meta: <Badge label="v0.3" variant="success" /> },
   { id: "p", group: "Yesterday", title: "Payment held in escrow", time: "11:30", marker: "$", tone: "neutral" },
 ];
 

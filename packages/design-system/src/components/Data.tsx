@@ -1,33 +1,8 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import type { ReactNode } from "react";
 import { Token } from "./Content";
 import { Tree, type TreeNode } from "./Tree";
-
-export function Collapsible({
-  title,
-  children,
-  defaultOpen = false,
-}: {
-  title: string;
-  children: ReactNode;
-  defaultOpen?: boolean;
-}) {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <div className="os-collapse">
-      <button type="button" className="h3 os-collapse-trigger" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-        <span>{title}</span>
-        <span className="os-sidenav-chevron">{open ? "▾" : "▸"}</span>
-      </button>
-      {open && <div className="body os-collapse-body">{children}</div>}
-    </div>
-  );
-}
-
-export function CollapsibleGroup({ children }: { children: ReactNode }) {
-  return <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>{children}</div>;
-}
 
 export interface ListItemDef {
   title: string;

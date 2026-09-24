@@ -4,7 +4,7 @@ import { useCallback, useLayoutEffect, useRef, useState, type CSSProperties, typ
 import { IconButton } from "./Action";
 import { icons, type GlyphName } from "./Glyph";
 import { Icon } from "./Primitives";
-import type { ControlSize } from "./Input";
+import type { ControlSize } from "./size";
 import { useDismiss } from "./hooks";
 
 export interface PickerShellProps {

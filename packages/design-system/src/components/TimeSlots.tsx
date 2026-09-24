@@ -1,6 +1,6 @@
 "use client";
 
-import type { ControlSize } from "./Input";
+import type { ControlSize } from "./size";
 import { displayTime, fromMinutes, minutesOf, range, type HourCycle } from "./time";
 
 /** Where the day splits when `grouped` is on, in minutes since midnight. */

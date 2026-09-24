@@ -49,8 +49,8 @@ export default function ButtonDemo() {
 
       <Preview align="start" label="End content" description="Counts, shortcuts, and chevrons sit after the label and inherit its color.">
         <Row>
-          <Button label="Bids" endContent={<Badge label="6" tone="primary" size="sm" />} />
-          <Button label="Inbox" variant="ghost" icon={<Icon icon={icons.mail} />} endContent={<Badge label="12" size="sm" />} />
+          <Button label="Bids" endContent={<Badge label="6" variant="info" />} />
+          <Button label="Inbox" variant="ghost" icon={<Icon icon={icons.mail} />} endContent={<Badge label="12" />} />
           <Button label="Search" variant="secondary" icon={<Icon icon={icons.search} />} endContent={<Text type="supporting" color="secondary">⌘K</Text>} />
           <Button label="Continue" variant="primary" endContent={<Icon icon={icons.arrowRight} />} />
         </Row>

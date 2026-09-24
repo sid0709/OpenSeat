@@ -1,7 +1,7 @@
 "use client";
 
 import { useId } from "react";
-import type { FieldSize } from "./Input";
+import type { FieldSize } from "./size";
 import { TimeColumns } from "./TimeColumns";
 import { TimeDial } from "./TimeDial";
 import { TimeField, type TimePicker } from "./TimeField";

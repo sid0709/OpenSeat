@@ -14,7 +14,7 @@ import {
   Text,
   TextInput,
   icons,
-  type BadgeTone,
+  type BadgeVariant,
   type TableColumn,
   type TableDensity,
 } from "@openseat/design-system";
@@ -32,11 +32,11 @@ type Room = {
   updated: string;
 };
 
-const STATUS_TONE: Record<Status, BadgeTone> = {
+const STATUS_TONE: Record<Status, BadgeVariant> = {
   Open: "success",
   Review: "warning",
   Draft: "neutral",
-  Awarded: "primary",
+  Awarded: "info",
 };
 
 const ROWS: Room[] = [
@@ -77,7 +77,7 @@ const RICH: TableColumn<Room>[] = [
       </HStack>
     ),
   },
-  { key: "status", header: "Status", sortable: true, render: (row) => <Badge label={row.status} tone={STATUS_TONE[row.status]} size="sm" /> },
+  { key: "status", header: "Status", sortable: true, render: (row) => <Badge label={row.status} variant={STATUS_TONE[row.status]} /> },
   { key: "bids", header: "Bids", align: "end", sortable: true },
   { key: "budget", header: "Budget", align: "end", sortable: true, render: (row) => money.format(row.budget) },
 ];
@@ -137,12 +137,13 @@ export default function TableDemo() {
                 <Stack width={220}>
                   <TextInput
                     size="sm"
+                    label="Search rooms"
+                    isLabelHidden
                     placeholder="Search rooms or owners"
                     value={query}
-                    onChange={(event) => setQuery(event.target.value)}
-                    start={<Icon icon={icons.search} size="sm" />}
+                    onChange={setQuery}
+                    startIcon={<Icon icon={icons.search} />}
                     hasClear
-                    aria-label="Search rooms"
                   />
                 </Stack>
                 <SegmentedControl label="Status" size="sm" value={status} onChange={(value) => setStatus(value as typeof status)}>

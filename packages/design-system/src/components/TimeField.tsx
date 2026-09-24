@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "./Action";
-import type { ControlSize } from "./Input";
+import type { ControlSize } from "./size";
 import { PickerShell } from "./PickerShell";
 import { ChoiceSegment, NumberSegment, SegmentDivider } from "./Segment";
 import { TimeColumns } from "./TimeColumns";
