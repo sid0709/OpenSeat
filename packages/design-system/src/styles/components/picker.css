@@ -43,26 +43,7 @@
 }
 .os-picker-control { padding-right: var(--spacing-1); cursor: text; }
 .os-picker-control-open { border-color: var(--color-accent); }
-.os-picker-trigger {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border: 0;
-  border-radius: var(--radius-inner);
-  background: transparent;
-  color: var(--color-icon-secondary);
-  cursor: pointer;
-  transition: background-color var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
-}
-.os-picker-trigger .os-glyph { width: 18px; height: 18px; }
-.os-control-sm .os-picker-trigger { width: 24px; height: 24px; }
-.os-control-sm .os-picker-trigger .os-glyph { width: 16px; height: 16px; }
-.os-picker-trigger:hover { background: var(--color-overlay-hover); color: var(--color-text-primary); }
-.os-picker-trigger[aria-expanded="true"] { background: var(--color-accent-muted); color: var(--color-text-accent); }
-.os-picker-trigger:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 1px; }
-.os-picker-trigger:disabled { cursor: default; background: transparent; }
+.os-picker-trigger { flex: none; }
 
 .os-picker-panel {
   position: fixed;

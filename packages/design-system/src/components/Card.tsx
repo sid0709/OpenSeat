@@ -2,7 +2,7 @@
 
 import { HTMLAttributes, ReactNode } from "react";
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+export interface JobCardProps extends HTMLAttributes<HTMLDivElement> {
   title?: string;
   meta?: string;
   footer?: ReactNode;
@@ -14,7 +14,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   raised?: boolean;
 }
 
-export function Card({
+export function JobCard({
   title,
   meta,
   footer,
@@ -24,7 +24,7 @@ export function Card({
   className = "",
   children,
   ...props
-}: CardProps) {
+}: JobCardProps) {
   const classes = [
     "os-card",
     interactive && "os-card-hover",

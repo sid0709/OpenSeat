@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { Glyph } from "./Glyph";
+import { Button, IconButton } from "./Action";
+import { Glyph, icons } from "./Glyph";
+import { Icon } from "./Primitives";
 import { useControllable } from "./hooks";
 
 export type SortDirection = "asc" | "desc";
@@ -274,30 +276,34 @@ export function Table<T extends Record<string, unknown>>({
           </span>
           {pageSize && pageCount > 1 && (
             <div className="os-dt-pager">
-              <button type="button" className="os-dt-page-btn" aria-label="Previous page" disabled={current === 0} onClick={() => setPage(current - 1)}>
-                <Glyph name="chevronLeft" />
-              </button>
+              <IconButton
+                label="Previous page"
+                variant="ghost"
+                size="sm"
+                icon={<Icon icon={icons.chevronLeft} />}
+                isDisabled={current === 0}
+                onClick={() => setPage(current - 1)}
+              />
               {Array.from({ length: pageCount }, (_, i) => (
-                <button
+                <Button
                   key={i}
-                  type="button"
-                  className="os-dt-page-btn"
-                  aria-label={`Page ${i + 1}`}
+                  label={`Page ${i + 1}`}
+                  variant={i === current ? "secondary" : "ghost"}
+                  size="sm"
                   aria-current={i === current ? "page" : undefined}
                   onClick={() => setPage(i)}
                 >
                   {i + 1}
-                </button>
+                </Button>
               ))}
-              <button
-                type="button"
-                className="os-dt-page-btn"
-                aria-label="Next page"
-                disabled={current === pageCount - 1}
+              <IconButton
+                label="Next page"
+                variant="ghost"
+                size="sm"
+                icon={<Icon icon={icons.chevronRight} />}
+                isDisabled={current === pageCount - 1}
                 onClick={() => setPage(current + 1)}
-              >
-                <Glyph name="chevronRight" />
-              </button>
+              />
             </div>
           )}
         </div>

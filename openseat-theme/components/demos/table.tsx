@@ -5,16 +5,19 @@ import {
   Avatar,
   Badge,
   Button,
-  Glyph,
+  HStack,
+  Icon,
   SegmentedControl,
+  SegmentedControlItem,
+  Stack,
   Table,
+  Text,
   TextInput,
+  icons,
   type BadgeTone,
   type TableColumn,
   type TableDensity,
 } from "@openseat/design-system";
-import { HStack, Stack } from "@astryxdesign/core/Stack";
-import { Text } from "@astryxdesign/core/Text";
 import { Caption, Examples, Preview } from "./shared";
 
 type Status = "Open" | "Review" | "Draft" | "Awarded";
@@ -126,9 +129,7 @@ export default function TableDemo() {
           empty={
             <Stack gap={2} hAlign="center">
               <Text weight="medium">No rooms match</Text>
-              <Button variant="secondary" size="sm" onClick={() => { setQuery(""); setStatus("All"); }}>
-                Clear filters
-              </Button>
+              <Button label="Clear filters" variant="secondary" size="sm" onClick={() => { setQuery(""); setStatus("All"); }} />
             </Stack>
           }
           header={
@@ -140,20 +141,18 @@ export default function TableDemo() {
                     placeholder="Search rooms or owners"
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
-                    start={<Glyph name="search" />}
+                    start={<Icon icon={icons.search} size="sm" />}
                     hasClear
                     aria-label="Search rooms"
                   />
                 </Stack>
-                <SegmentedControl
-                  options={STATUS_FILTERS.map((s) => ({ value: s, label: s }))}
-                  value={status}
-                  onChange={(value) => setStatus(value as typeof status)}
-                />
+                <SegmentedControl label="Status" size="sm" value={status} onChange={(value) => setStatus(value as typeof status)}>
+                  {STATUS_FILTERS.map((s) => (
+                    <SegmentedControlItem key={s} value={s} label={s} />
+                  ))}
+                </SegmentedControl>
               </HStack>
-              <Button variant="primary" size="sm" disabled={picked.length === 0}>
-                Archive {picked.length > 0 ? picked.length : ""}
-              </Button>
+              <Button label={picked.length > 0 ? `Archive ${picked.length}` : "Archive"} variant="primary" size="sm" isDisabled={picked.length === 0} />
             </>
           }
         />
@@ -168,7 +167,11 @@ export default function TableDemo() {
 
       <Preview label="Density, stripes, and lined columns">
         <Stack gap={3} hAlign="start">
-          <SegmentedControl options={DENSITIES} value={density} onChange={(value) => setDensity(value as TableDensity)} />
+          <SegmentedControl label="Density" size="sm" value={density} onChange={(value) => setDensity(value as TableDensity)}>
+            {DENSITIES.map((d) => (
+              <SegmentedControlItem key={d.value} value={d.value} label={d.label} />
+            ))}
+          </SegmentedControl>
           <Table columns={SIMPLE} rows={ROWS.slice(0, 5)} rowKey={(row) => row.id} density={density} striped variant="lined" />
         </Stack>
       </Preview>
@@ -179,9 +182,7 @@ export default function TableDemo() {
 
       <Preview label="Loading and empty">
         <Stack gap={4} hAlign="start">
-          <Button variant="secondary" size="sm" onClick={() => setLoading(!loading)}>
-            {loading ? "Show data" : "Show loading"}
-          </Button>
+          <Button label={loading ? "Show data" : "Show loading"} variant="secondary" size="sm" onClick={() => setLoading(!loading)} />
           <Table columns={SIMPLE} rows={ROWS.slice(0, 3)} rowKey={(row) => row.id} loading={loading} />
           <Table columns={SIMPLE} rows={[]} variant="plain" empty="No rooms match this filter." />
         </Stack>

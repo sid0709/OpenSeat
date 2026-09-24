@@ -1,8 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Calendar, DateField, type CalendarEvent, type ControlSize, type DateRange } from "@openseat/design-system";
-import { HStack, Stack } from "@astryxdesign/core/Stack";
+import { Calendar, DateField, HStack, Stack, type CalendarEvent, type ControlSize, type DateRange } from "@openseat/design-system";
 import { Caption, Examples, Preview } from "./shared";
 
 const SIZES: ControlSize[] = ["sm", "md", "lg"];

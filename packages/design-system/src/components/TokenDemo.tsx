@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type CSSProperties } from "react";
-import { Button } from "./Button";
+import { Button } from "./Action";
 
 type Theme = "dark" | "light";
 
@@ -125,12 +125,8 @@ export function TokenDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
         </label>
         {open && (
           <div role="group" aria-label="Theme">
-            <Button size="sm" variant={theme === "dark" ? "secondary" : "ghost"} onClick={() => switchTheme("dark")}>
-              Dark
-            </Button>
-            <Button size="sm" variant={theme === "light" ? "secondary" : "ghost"} onClick={() => switchTheme("light")}>
-              Light
-            </Button>
+            <Button label="Dark" size="sm" variant={theme === "dark" ? "secondary" : "ghost"} onClick={() => switchTheme("dark")} />
+            <Button label="Light" size="sm" variant={theme === "light" ? "secondary" : "ghost"} onClick={() => switchTheme("light")} />
           </div>
         )}
       </div>
@@ -239,9 +235,7 @@ export function TokenDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
             <p className="body-sm text-ink-muted" style={{ marginBottom: 12 }}>
               Each row pairs a duration with an easing. Press play to run them all.
             </p>
-            <Button size="sm" variant="secondary" onClick={() => setMotionKey((k) => k + 1)}>
-              Play
-            </Button>
+            <Button label="Play" size="sm" variant="secondary" onClick={() => setMotionKey((k) => k + 1)} />
             <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
               {DURATIONS.map((d, i) => {
                 const e = EASINGS[i];

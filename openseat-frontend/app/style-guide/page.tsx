@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import {
   Button,
   Input,
-  Card,
+  JobCard,
   Badge,
   Avatar,
   AvatarStack,
@@ -112,13 +112,11 @@ export default function StyleGuidePage() {
 
       <Section title="Buttons" description="32px by default, 28px in dense rows, 40px for a hero CTA.">
         <div className="flex flex-wrap items-center gap-3">
-          <Button variant="primary">Post a sealed job</Button>
-          <Button variant="secondary">Save as draft</Button>
-          <Button variant="ghost">Cancel</Button>
-          <Button variant="danger">Close this room</Button>
-          <Button variant="primary" disabled>
-            Disabled
-          </Button>
+          <Button label="Post a sealed job" variant="primary" />
+          <Button label="Save as draft" variant="secondary" />
+          <Button label="Cancel" variant="ghost" />
+          <Button label="Close this room" variant="destructive" />
+          <Button label="Disabled" variant="primary" isDisabled />
         </div>
       </Section>
 
@@ -159,9 +157,9 @@ export default function StyleGuidePage() {
 
       <Section title="Cards">
         <div className="flex flex-wrap gap-3">
-          <Card title="Brand refresh brief" meta="Fixed · $2,400" footer="Posted 2 days ago" className="w-52" />
-          <Card title="Landing page copy" meta="Hourly · $65/hr" interactive className="w-52" />
-          <Card title="Selected bid" meta="Chosen for this room" selected className="w-52" />
+          <JobCard title="Brand refresh brief" meta="Fixed · $2,400" footer="Posted 2 days ago" className="w-52" />
+          <JobCard title="Landing page copy" meta="Hourly · $65/hr" interactive className="w-52" />
+          <JobCard title="Selected bid" meta="Chosen for this room" selected className="w-52" />
         </div>
       </Section>
 

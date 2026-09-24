@@ -6,12 +6,10 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "theme:build": "astryx theme build lib/theme.ts -o theme/theme.css"
+    "lint": "eslint"
   },
   "dependencies": {
     "@openseat/design-system": "workspace:*",
-    "@astryxdesign/cli": "^0.6.2",
     "@astryxdesign/core": "^0.6.2",
     "@astryxdesign/theme-neutral": "^0.6.2",
     "@stylexjs/stylex": "^0.19.1",

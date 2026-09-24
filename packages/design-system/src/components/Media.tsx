@@ -2,6 +2,8 @@
 
 import { useState, type ReactNode } from "react";
 import { IconButton } from "./Action";
+import { icons } from "./Glyph";
+import { Icon } from "./Primitives";
 import type { ControlSize } from "./Input";
 
 export interface CarouselProps {
@@ -21,20 +23,22 @@ export function Carousel({ slides, size = "md", label = "Slides" }: CarouselProp
           </div>
         ))}
       </div>
-      <IconButton label="Previous slide" className="os-carousel-nav" shape="pill" variant="secondary" onClick={() => setI((n) => Math.max(0, n - 1))} style={{ left: 8 }} disabled={i === 0}>
-        ‹
-      </IconButton>
+      <IconButton
+        label="Previous slide"
+        className="os-carousel-nav os-carousel-nav-prev"
+        variant="secondary"
+        icon={<Icon icon={icons.chevronLeft} />}
+        onClick={() => setI((n) => Math.max(0, n - 1))}
+        isDisabled={i === 0}
+      />
       <IconButton
         label="Next slide"
-        className="os-carousel-nav"
-        shape="pill"
+        className="os-carousel-nav os-carousel-nav-next"
         variant="secondary"
+        icon={<Icon icon={icons.chevronRight} />}
         onClick={() => setI((n) => Math.min(slides.length - 1, n + 1))}
-        style={{ right: 8 }}
-        disabled={i === slides.length - 1}
-      >
-        ›
-      </IconButton>
+        isDisabled={i === slides.length - 1}
+      />
       <div className="os-carousel-dots">
         {slides.map((_, idx) => (
           <button key={idx} type="button" className={idx === i ? "os-carousel-dot os-carousel-dot-on" : "os-carousel-dot"} aria-label={`Slide ${idx + 1}`} onClick={() => setI(idx)} />

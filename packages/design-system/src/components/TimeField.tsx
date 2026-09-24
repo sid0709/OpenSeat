@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "./Button";
+import { Button } from "./Action";
 import type { ControlSize } from "./Input";
 import { PickerShell } from "./PickerShell";
 import { ChoiceSegment, NumberSegment, SegmentDivider } from "./Segment";
@@ -118,12 +118,8 @@ export function TimeField({
         )}
         {picker !== "slots" && (
           <div className="os-picker-footer">
-            <Button variant="ghost" size="sm" onClick={setNow}>
-              Now
-            </Button>
-            <Button variant="primary" size="sm" onClick={() => setOpen(false)}>
-              Done
-            </Button>
+            <Button label="Now" variant="ghost" size="sm" onClick={setNow} />
+            <Button label="Done" variant="primary" size="sm" onClick={() => setOpen(false)} />
           </div>
         )}
       </div>

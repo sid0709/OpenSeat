@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "./Button";
+import { Button } from "./Action";
 
 export interface EmptyStateProps {
   title?: string;
@@ -41,9 +41,7 @@ export function EmptyState({
         <p className="h3 os-empty-title">{title}</p>
         {description && <p className="body os-empty-desc">{description}</p>}
         {actionLabel && (
-          <Button variant="secondary" onClick={onAction}>
-            {actionLabel}
-          </Button>
+          <Button label={actionLabel} variant="secondary" onClick={onAction} />
         )}
       </div>
     </div>

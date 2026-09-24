@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { SegmentedControl } from "./Action";
+import { Button, IconButton, SegmentedControl, SegmentedControlItem } from "./Action";
+import { Icon } from "./Primitives";
 import { CalendarAgenda } from "./CalendarAgenda";
 import { CalendarMonth } from "./CalendarMonth";
 import { CalendarSchedule } from "./CalendarSchedule";
-import { Glyph } from "./Glyph";
+import { Glyph, icons } from "./Glyph";
 import type { ControlSize } from "./Input";
 import { VIEW_LABELS, type CalendarEvent, type CalendarView, type DateRange } from "./calendarTypes";
 import {
@@ -59,13 +60,9 @@ function MonthYearPicker({ cursor, onPick }: { cursor: Date; onPick: (date: Date
   return (
     <div className="os-cal-jump">
       <div className="os-cal-jump-year">
-        <button type="button" className="os-cal-icon" aria-label="Previous year" onClick={() => setYear(year - 1)}>
-          <Glyph name="chevronLeft" />
-        </button>
+        <IconButton label="Previous year" variant="ghost" size="sm" icon={<Icon icon={icons.chevronLeft} />} onClick={() => setYear(year - 1)} />
         <span className="os-cal-jump-label">{year}</span>
-        <button type="button" className="os-cal-icon" aria-label="Next year" onClick={() => setYear(year + 1)}>
-          <Glyph name="chevronRight" />
-        </button>
+        <IconButton label="Next year" variant="ghost" size="sm" icon={<Icon icon={icons.chevronRight} />} onClick={() => setYear(year + 1)} />
       </div>
       <div className="os-cal-jump-months">
         {monthNames("short").map((name, month) => (
@@ -162,25 +159,24 @@ export function Calendar({
         <div className="os-cal-actions">
           {views && views.length > 1 && (
             <SegmentedControl
-              options={views.map((v) => ({ value: v, label: VIEW_LABELS[v] }))}
+              label="Calendar view"
+              size="sm"
               value={view}
               onChange={(next) => {
                 setJumping(false);
                 setView(next as CalendarView);
               }}
-            />
+            >
+              {views.map((v) => (
+                <SegmentedControlItem key={v} value={v} label={VIEW_LABELS[v]} />
+              ))}
+            </SegmentedControl>
           )}
           {size !== "sm" && today && (
-            <button type="button" className="os-cal-today" onClick={() => setCursor(today)}>
-              Today
-            </button>
+            <Button label="Today" variant="secondary" size="sm" onClick={() => setCursor(today)} />
           )}
-          <button type="button" className="os-cal-icon" aria-label={`Previous ${unit}`} onClick={() => shift(-1)}>
-            <Glyph name="chevronLeft" />
-          </button>
-          <button type="button" className="os-cal-icon" aria-label={`Next ${unit}`} onClick={() => shift(1)}>
-            <Glyph name="chevronRight" />
-          </button>
+          <IconButton label={`Previous ${unit}`} variant="ghost" size="sm" icon={<Icon icon={icons.chevronLeft} />} onClick={() => shift(-1)} />
+          <IconButton label={`Next ${unit}`} variant="ghost" size="sm" icon={<Icon icon={icons.chevronRight} />} onClick={() => shift(1)} />
         </div>
       </div>
 

@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, TimeInput, displayTime, type FieldSize } from "@openseat/design-system";
-import { HStack, Stack } from "@astryxdesign/core/Stack";
+import { Clock, HStack, Stack, TimeInput, displayTime, type FieldSize } from "@openseat/design-system";
 import { Caption, Examples, Preview } from "./shared";
 
 const SIZES: FieldSize[] = ["sm", "md", "lg"];

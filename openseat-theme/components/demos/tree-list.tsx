@@ -1,9 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Badge, Glyph, TextInput, Tree, type TreeNode } from "@openseat/design-system";
-import { HStack, Stack } from "@astryxdesign/core/Stack";
-import { Text } from "@astryxdesign/core/Text";
+import { Badge, HStack, Icon, Stack, Text, TextInput, Tree, icons, type TreeNode } from "@openseat/design-system";
 import { Caption, Examples, Preview } from "./shared";
 
 const ROOMS: TreeNode[] = [
@@ -127,7 +125,7 @@ export default function TreeListDemo() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="tsx"
-            start={<Glyph name="search" />}
+            start={<Icon icon={icons.search} size="sm" />}
             hasClear
           />
           {filtered.length > 0 ? (

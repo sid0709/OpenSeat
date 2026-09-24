@@ -1,9 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Card } from "@astryxdesign/core/Card";
-import { Stack, HStack } from "@astryxdesign/core/Stack";
-import { Text } from "@astryxdesign/core/Text";
+import { Card, HStack, Stack, Text } from "@openseat/design-system";
 
 export const SEARCH_ITEMS = [
   { id: "button", label: "Button" },
@@ -20,13 +18,31 @@ export function Row({ children }: { children: ReactNode }) {
   );
 }
 
-export function Preview({ label, children }: { label: string; children: ReactNode }) {
+export function Preview({
+  label,
+  description,
+  align = "stretch",
+  children,
+}: {
+  label: string;
+  description?: string;
+  /** start keeps controls at their natural width; stretch lets tables, toolbars, and cards fill. */
+  align?: "start" | "stretch";
+  children: ReactNode;
+}) {
   return (
     <Card>
-      <Stack gap={3}>
-        <Text type="label" color="secondary">
-          {label}
-        </Text>
+      <Stack gap={3} hAlign={align}>
+        <Stack gap={0.5}>
+          <Text type="label" color="secondary">
+            {label}
+          </Text>
+          {description && (
+            <Text type="supporting" color="secondary">
+              {description}
+            </Text>
+          )}
+        </Stack>
         {children}
       </Stack>
     </Card>

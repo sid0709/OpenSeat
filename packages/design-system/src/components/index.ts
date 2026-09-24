@@ -1,11 +1,12 @@
-export { Button } from "./Button";
-export type { ButtonProps, ButtonVariant, ButtonSize, ButtonShape } from "./Button";
+// Astryx primitives and actions — original Astryx, OpenSeat-themed.
+export * from "./Primitives";
+export * from "./Action";
 
 export { Input } from "./Input";
 export type { FieldProps, InputFieldProps, TextareaFieldProps, FieldSize, ControlSize } from "./Input";
 
-export { Card } from "./Card";
-export type { CardProps } from "./Card";
+export { JobCard } from "./Card";
+export type { JobCardProps } from "./Card";
 
 export { Badge } from "./Badge";
 export type { BadgeProps, BadgeTone } from "./Badge";
@@ -13,8 +14,8 @@ export type { BadgeProps, BadgeTone } from "./Badge";
 export { Avatar, AvatarStack } from "./Avatar";
 export type { AvatarProps, AvatarStackProps } from "./Avatar";
 
-export { Nav, TopNav } from "./Nav";
-export type { NavProps, NavItem, TopNavProps } from "./Nav";
+export { Nav } from "./Nav";
+export type { NavProps, NavItem } from "./Nav";
 
 export { EmptyState } from "./EmptyState";
 export type { EmptyStateProps } from "./EmptyState";
@@ -24,47 +25,27 @@ export type { ToastProps, ToastTone } from "./Toast";
 
 export { TokenDemo } from "./TokenDemo";
 
-export {
-  ButtonGroup,
-  IconButton,
-  Link,
-  SegmentedControl,
-  ToggleButton,
-  ToggleButtonGroup,
-  Toolbar,
-  ToolbarDivider,
-} from "./Action";
-export type {
-  IconButtonProps,
-  LinkProps,
-  SegmentedControlProps,
-  ToggleButtonProps,
-  ToggleButtonGroupProps,
-} from "./Action";
-
 export { Modal, Dialog } from "./Modal";
 export type { ModalProps, DialogProps } from "./Modal";
 
-export { Menu, DropdownMenu, TopNavMenu, MoreMenu, ContextMenu } from "./Menu";
-export type { MenuProps, MenuItemDef, DropdownMenuProps, TopNavMenuProps, MoreMenuProps } from "./Menu";
+export { Menu, ContextMenu } from "./Menu";
+export type { MenuProps, MenuItemDef } from "./Menu";
 
-export {
-  Layout,
-  Stack,
-  Grid,
-  Section,
-  AspectRatio,
-  Divider,
-  FormLayout,
-  AppShell,
-  ScrollableArea,
-  ResizeHandle,
-} from "./Layout";
-export type { LayoutProps, StackProps, GridProps, SectionProps, AspectRatioProps, AppShellProps, ResizeHandleProps } from "./Layout";
-export { GridSystem, GridColumn, GRID_COLUMNS } from "./Layout";
-export type { GridSystemProps, GridColumnProps } from "./Layout";
+export * from "./LayoutPrimitives";
 
-export { Glyph } from "./Glyph";
+// Responsive layer — OpenSeat composites on Astryx breakpoints.
+export { GridSystem, GridColumn, GRID_COLUMNS } from "./GridSystem";
+export type { GridSystemProps, GridColumnProps, GridSpanValue, Responsive } from "./GridSystem";
+export { ResponsiveStack, ResponsiveContainer, Show, Hide, useElementWidth, useContainerBreakpoint, useViewportBreakpoint } from "./Responsive";
+export type { ResponsiveStackProps, ResponsiveContainerProps, ShowProps } from "./Responsive";
+export { ResponsiveFrame, FRAME_PRESETS } from "./ResponsiveFrame";
+export type { ResponsiveFrameProps, FramePreset } from "./ResponsiveFrame";
+export { Tile } from "./Tile";
+export type { TileProps } from "./Tile";
+export { TIERS, VIEWPORT_TIERS, CONTAINER_TIERS, tierFor } from "./breakpoints";
+export type { Tier, TierOrBase, ResponsiveTo } from "./breakpoints";
+
+export { Glyph, icons } from "./Glyph";
 export type { GlyphName, GlyphProps } from "./Glyph";
 
 export { Timeline } from "./Timeline";
@@ -100,8 +81,6 @@ export { Banner, ProgressBar, Skeleton, Spinner, StatusDot } from "./Status";
 export type { BannerProps, ProgressBarProps, SkeletonProps, StatusTone } from "./Status";
 
 export {
-  Heading,
-  Text,
   Blockquote,
   Citation,
   Code,
@@ -110,19 +89,15 @@ export {
   Timestamp,
   Token,
   Thumbnail,
-  Icon,
   Markdown,
 } from "./Typography";
 export type {
-  HeadingProps,
-  TextProps,
   BlockquoteProps,
   CitationProps,
   CodeBlockProps,
   TimestampProps,
   TokenProps,
   ThumbnailProps,
-  IconProps,
 } from "./Typography";
 
 export {
@@ -170,15 +145,12 @@ export {
   TabList,
   Pagination,
   Stepper,
-  SideNav,
   Outline,
 } from "./Navigation";
 export type {
   BreadcrumbItem,
   TabItem,
   StepDef,
-  SideNavEntry,
-  SideNavChild,
 } from "./Navigation";
 
 export {

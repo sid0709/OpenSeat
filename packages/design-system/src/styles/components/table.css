@@ -162,25 +162,6 @@ th.os-dt-align-end .os-dt-sort { flex-direction: row-reverse; }
 }
 .os-dt-plain .os-dt-footer { border-top: 0; padding-left: 0; }
 .os-dt-pager { display: flex; align-items: center; gap: 2px; }
-.os-dt-page-btn {
-  display: grid;
-  place-items: center;
-  min-width: 28px;
-  height: 28px;
-  padding: 0 var(--spacing-1-5, 6px);
-  border: 0;
-  border-radius: var(--radius-inner);
-  background: transparent;
-  color: var(--color-text-secondary);
-  font: inherit;
-  font-variant-numeric: tabular-nums;
-  cursor: pointer;
-  transition: background-color var(--duration-fast) var(--ease-standard);
-}
-.os-dt-page-btn .os-glyph { width: 16px; height: 16px; }
-.os-dt-page-btn:hover { background: var(--color-overlay-hover); color: var(--color-text-primary); }
-.os-dt-page-btn[aria-current="page"] { background: var(--color-neutral); color: var(--color-text-primary); font-weight: var(--font-weight-semibold, 600); }
-.os-dt-page-btn:disabled { opacity: 0.35; cursor: default; background: transparent; }
 
 @media (prefers-reduced-motion: reduce) {
   .os-dt-skeleton { animation: none; }

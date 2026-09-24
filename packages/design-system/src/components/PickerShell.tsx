@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { Glyph, type GlyphName } from "./Glyph";
+import { IconButton } from "./Action";
+import { icons, type GlyphName } from "./Glyph";
+import { Icon } from "./Primitives";
 import type { ControlSize } from "./Input";
 import { useDismiss } from "./hooks";
 
@@ -88,17 +90,17 @@ export function PickerShell({
           {segments}
         </div>
         {panel && (
-          <button
-            type="button"
+          <IconButton
             className="os-picker-trigger"
-            aria-label={open ? `Close ${label.toLowerCase()} picker` : `Open ${label.toLowerCase()} picker`}
+            label={open ? `Close ${label.toLowerCase()} picker` : `Open ${label.toLowerCase()} picker`}
             aria-expanded={open}
             aria-haspopup="dialog"
-            disabled={disabled}
+            variant="ghost"
+            size="sm"
+            isDisabled={disabled}
+            icon={<Icon icon={icons[icon]} />}
             onClick={() => onOpenChange(!open)}
-          >
-            <Glyph name={icon} />
-          </button>
+          />
         )}
       </div>
       {panel && open && (

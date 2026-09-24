@@ -71,34 +71,6 @@ export function Menu({ trigger, items, align = "start" }: MenuProps) {
   );
 }
 
-/** Aliases — OpenSeat splits this anatomy into DropdownMenu and TopNavMenu by trigger context; same component. */
-export const DropdownMenu = Menu;
-export type DropdownMenuProps = MenuProps;
-export const TopNavMenu = Menu;
-export type TopNavMenuProps = MenuProps;
-
-export interface MoreMenuProps extends Omit<MenuProps, "trigger"> {
-  label?: string;
-}
-
-/** The overflow "···" trigger variant of Menu. */
-export function MoreMenu({ label = "More options", ...props }: MoreMenuProps) {
-  return (
-    <Menu
-      {...props}
-      trigger={
-        <button type="button" className="os-icon-btn" aria-label={label} title={label}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <circle cx="5" cy="12" r="2" />
-            <circle cx="12" cy="12" r="2" />
-            <circle cx="19" cy="12" r="2" />
-          </svg>
-        </button>
-      }
-    />
-  );
-}
-
 export function ContextMenu({ items, children }: { items: MenuItemDef[]; children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState({ x: 0, y: 0 });

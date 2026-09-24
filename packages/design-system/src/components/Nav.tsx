@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { Button } from "./Button";
+import { Button } from "./Action";
 import { Avatar } from "./Avatar";
 
 export interface NavItem {
@@ -46,9 +46,7 @@ export function Nav({
       </div>
       <div className="os-nav-right">
         {cta && (
-          <Button variant="primary" size="sm" onClick={onCtaClick}>
-            {cta}
-          </Button>
+          <Button label={cta} variant="primary" size="sm" onClick={onCtaClick} />
         )}
         {trailing}
         {showAvatar && <Avatar initials={initials} size={24} />}
@@ -57,5 +55,3 @@ export function Nav({
   );
 }
 
-export const TopNav = Nav;
-export type TopNavProps = NavProps;

@@ -1,8 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Badge, Glyph, SegmentedControl, Timeline, type TimelineItem, type TimelineVariant } from "@openseat/design-system";
-import { Stack } from "@astryxdesign/core/Stack";
+import {
+  Badge,
+  Icon,
+  SegmentedControl,
+  SegmentedControlItem,
+  Stack,
+  Timeline,
+  icons,
+  type TimelineItem,
+  type TimelineVariant,
+} from "@openseat/design-system";
 import { Examples, Preview } from "./shared";
 
 const HIRING: TimelineItem[] = [
@@ -39,7 +48,7 @@ const ACTIVITY: TimelineItem[] = [
     tone: "warning",
     meta: "“Type scale feels tight on mobile — try one step up for body.”",
   },
-  { id: "s", group: "Yesterday", title: "Preview shipped", time: "16:10", marker: <Glyph name="check" />, tone: "success", meta: <Badge label="v0.3" tone="success" size="sm" /> },
+  { id: "s", group: "Yesterday", title: "Preview shipped", time: "16:10", marker: <Icon icon={icons.check} size="sm" />, tone: "success", meta: <Badge label="v0.3" tone="success" size="sm" /> },
   { id: "p", group: "Yesterday", title: "Payment held in escrow", time: "11:30", marker: "$", tone: "neutral" },
 ];
 
@@ -65,7 +74,11 @@ export default function TimelineDemo() {
     <Examples>
       <Preview label="One dataset, every layout — progress fills the rail">
         <Stack gap={4} hAlign="start">
-          <SegmentedControl options={VARIANTS} value={variant} onChange={(v) => setVariant(v as TimelineVariant)} />
+          <SegmentedControl label="Timeline layout" size="sm" value={variant} onChange={(v) => setVariant(v as TimelineVariant)}>
+            {VARIANTS.map((v) => (
+              <SegmentedControlItem key={v.value} value={v.value} label={v.label} />
+            ))}
+          </SegmentedControl>
           <Timeline items={HIRING} variant={variant} label="Hiring progress" />
         </Stack>
       </Preview>

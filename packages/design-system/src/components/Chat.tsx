@@ -3,6 +3,8 @@
 import { ReactNode } from "react";
 import { Avatar } from "./Avatar";
 import { IconButton } from "./Action";
+import { icons } from "./Glyph";
+import { Icon } from "./Primitives";
 import { Input } from "./Input";
 
 export interface ChatMessageProps {
@@ -52,9 +54,7 @@ export function ChatComposer({
           }}
         />
       </div>
-      <IconButton label="Send" onClick={onSend}>
-        ➤
-      </IconButton>
+      <IconButton label="Send" variant="primary" icon={<Icon icon={icons.send} />} onClick={onSend} />
     </div>
   );
 }

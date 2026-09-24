@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "./Button";
+import { Button } from "./Action";
 import { Calendar, type CalendarProps } from "./Calendar";
 import type { ControlSize } from "./Input";
 import { PickerShell } from "./PickerShell";
@@ -95,19 +95,16 @@ export function DateField({
               }}
               footer={
                 <div className="os-picker-footer">
-                  <Button variant="ghost" size="sm" onClick={() => onChange?.(null)}>
-                    Clear
-                  </Button>
+                  <Button label="Clear" variant="ghost" size="sm" onClick={() => onChange?.(null)} />
                   <Button
+                    label="Today"
                     variant="secondary"
                     size="sm"
                     onClick={() => {
                       onChange?.(startOfDay(new Date()));
                       setOpen(false);
                     }}
-                  >
-                    Today
-                  </Button>
+                  />
                 </div>
               }
             />
