@@ -1,1 +1,25 @@
+# Dependencies
+node_modules/
+
+# Turborepo
+.turbo/
+
+# Build output
+dist/
+build/
+
+# Coverage
+coverage/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
 .DS_Store
+Thumbs.db
