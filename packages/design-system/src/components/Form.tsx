@@ -7,7 +7,7 @@ export const Field = Input;
 export const TextInput = Input;
 
 export function TextArea(props: Omit<ComponentProps<typeof Input>, "multiline">) {
-  return <Input multiline {...props} />;
+  return <Input multiline {...(props as any)} />;
 }
 
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
@@ -120,19 +120,19 @@ export function Select({ label, helper, error, className = "", id, children, ...
 export const Selector = Select;
 
 export function NumberInput(props: Omit<ComponentProps<typeof Input>, "type" | "multiline">) {
-  return <Input type="number" {...props} />;
+  return <Input type="number" {...(props as any)} />;
 }
 
 export function DateInput(props: Omit<ComponentProps<typeof Input>, "type" | "multiline">) {
-  return <Input type="date" {...props} />;
+  return <Input type="date" {...(props as any)} />;
 }
 
 export function TimeInput(props: Omit<ComponentProps<typeof Input>, "type" | "multiline">) {
-  return <Input type="time" {...props} />;
+  return <Input type="time" {...(props as any)} />;
 }
 
 export function DateTimeInput(props: Omit<ComponentProps<typeof Input>, "type" | "multiline">) {
-  return <Input type="datetime-local" {...props} />;
+  return <Input type="datetime-local" {...(props as any)} />;
 }
 
 export interface FileInputProps {
