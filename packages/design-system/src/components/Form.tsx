@@ -1,7 +1,7 @@
 "use client";
 
-import { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, useId, type ComponentProps } from "react";
-import { Input } from "./Input";
+import { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, useId, useState, type ComponentProps } from "react";
+import { Input, type ControlSize } from "./Input";
 
 export const Field = Input;
 export const TextInput = Input;
@@ -10,30 +10,32 @@ export function TextArea(props: Omit<ComponentProps<typeof Input>, "multiline">)
   return <Input multiline {...props} />;
 }
 
-export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
   label?: ReactNode;
+  size?: ControlSize;
 }
 
-export function Checkbox({ label, id, className = "", ...props }: CheckboxProps) {
+export function Checkbox({ label, id, className = "", size = "md", ...props }: CheckboxProps) {
   const autoId = useId();
   const inputId = id ?? autoId;
   return (
-    <label className={["body os-check", className].filter(Boolean).join(" ")} htmlFor={inputId}>
+    <label className={["body os-check", `os-check-${size}`, className].filter(Boolean).join(" ")} htmlFor={inputId}>
       <input id={inputId} type="checkbox" {...props} />
       {label}
     </label>
   );
 }
 
-export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
   label?: ReactNode;
+  size?: ControlSize;
 }
 
-export function Radio({ label, id, className = "", ...props }: RadioProps) {
+export function Radio({ label, id, className = "", size = "md", ...props }: RadioProps) {
   const autoId = useId();
   const inputId = id ?? autoId;
   return (
-    <label className={["body os-radio", className].filter(Boolean).join(" ")} htmlFor={inputId}>
+    <label className={["body os-radio", `os-check-${size}`, className].filter(Boolean).join(" ")} htmlFor={inputId}>
       <input id={inputId} type="radio" {...props} />
       {label}
     </label>
@@ -45,9 +47,10 @@ export interface RadioListProps {
   options: { label: string; value: string }[];
   value: string;
   onChange: (value: string) => void;
+  size?: ControlSize;
 }
 
-export function RadioList({ name, options, value, onChange }: RadioListProps) {
+export function RadioList({ name, options, value, onChange, size = "md" }: RadioListProps) {
   return (
     <div role="radiogroup" style={{ display: "flex", flexDirection: "column", gap: 8 }}>
       {options.map((o) => (
@@ -57,6 +60,7 @@ export function RadioList({ name, options, value, onChange }: RadioListProps) {
           label={o.label}
           value={o.value}
           checked={value === o.value}
+          size={size}
           onChange={() => onChange(o.value)}
         />
       ))}
@@ -64,16 +68,17 @@ export function RadioList({ name, options, value, onChange }: RadioListProps) {
   );
 }
 
-export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
   label?: ReactNode;
+  size?: ControlSize;
 }
 
-export function Switch({ label, id, ...props }: SwitchProps) {
+export function Switch({ label, id, size = "md", ...props }: SwitchProps) {
   const autoId = useId();
   const inputId = id ?? autoId;
   return (
-    <label className="body os-check" htmlFor={inputId}>
-      <span className="os-switch">
+    <label className={`body os-check os-check-${size}`} htmlFor={inputId}>
+      <span className={`os-switch os-switch-${size}`}>
         <input id={inputId} type="checkbox" role="switch" {...props} />
         <span className="os-switch-track" />
       </span>
@@ -82,34 +87,36 @@ export function Switch({ label, id, ...props }: SwitchProps) {
   );
 }
 
-export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
   label?: string;
+  size?: ControlSize;
 }
 
-export function Slider({ label, id, ...props }: SliderProps) {
+export function Slider({ label, id, size = "md", ...props }: SliderProps) {
   const autoId = useId();
   const inputId = id ?? autoId;
   return (
-    <div className="os-field-group">
+    <div className={`os-field-group os-slider-${size}`}>
       {label && <label className="label" htmlFor={inputId}>{label}</label>}
       <input id={inputId} type="range" className="os-slider" {...props} />
     </div>
   );
 }
 
-export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   label?: string;
   helper?: string;
   error?: boolean;
+  size?: ControlSize;
 }
 
-export function Select({ label, helper, error, className = "", id, children, ...props }: SelectProps) {
+export function Select({ label, helper, error, className = "", id, size = "md", children, ...props }: SelectProps) {
   const autoId = useId();
   const inputId = id ?? autoId;
   return (
     <div className="os-field-group">
       {label && <label className="label" htmlFor={inputId}>{label}</label>}
-      <select id={inputId} className={["os-field", error && "os-field-error", className].filter(Boolean).join(" ")} {...props}>
+      <select id={inputId} className={["os-field", `os-field-${size}`, error && "os-field-error", className].filter(Boolean).join(" ")} {...props}>
         {children}
       </select>
       {helper && <span className={"body-sm " + (error ? "os-field-helper-error" : "os-field-helper")}>{helper}</span>}
@@ -127,9 +134,8 @@ export function DateInput(props: Omit<ComponentProps<typeof Input>, "type" | "mu
   return <Input type="date" {...props} />;
 }
 
-export function TimeInput(props: Omit<ComponentProps<typeof Input>, "type" | "multiline">) {
-  return <Input type="time" {...props} />;
-}
+export { TimeInput } from "./TimeInput";
+export type { TimeInputProps, TimeInputVariant, HourCycle, MinuteStep } from "./TimeInput";
 
 export function DateTimeInput(props: Omit<ComponentProps<typeof Input>, "type" | "multiline">) {
   return <Input type="datetime-local" {...props} />;
@@ -138,14 +144,43 @@ export function DateTimeInput(props: Omit<ComponentProps<typeof Input>, "type" |
 export interface FileInputProps {
   label?: string;
   accept?: string;
+  size?: ControlSize;
   onChange?: (files: FileList | null) => void;
 }
 
-export function FileInput({ label = "Drop a file or click to browse", accept, onChange }: FileInputProps) {
+export function FileInput({ label = "Drop a file or click to browse", accept, size = "md", onChange }: FileInputProps) {
+  const [name, setName] = useState<string | null>(null);
+  const [over, setOver] = useState(false);
+
   return (
-    <label className="body-sm os-file">
-      <input type="file" accept={accept} onChange={(e) => onChange?.(e.target.files)} />
-      <span>{label}</span>
+    <label
+      className={["os-file", `os-file-${size}`, over && "os-file-over", name && "os-file-filled"].filter(Boolean).join(" ")}
+      onDragOver={(event) => {
+        event.preventDefault();
+        setOver(true);
+      }}
+      onDragLeave={() => setOver(false)}
+      onDrop={(event) => {
+        event.preventDefault();
+        setOver(false);
+        const files = event.dataTransfer.files;
+        setName(files?.[0]?.name ?? null);
+        onChange?.(files);
+      }}
+    >
+      <input
+        type="file"
+        accept={accept}
+        onChange={(event) => {
+          setName(event.target.files?.[0]?.name ?? null);
+          onChange?.(event.target.files);
+        }}
+      />
+      <span className="os-file-mark" aria-hidden>
+        ↑
+      </span>
+      <span className="os-file-title">{name ?? label}</span>
+      <span className="os-file-hint">{name ? "Click to replace" : "or click to browse"}</span>
     </label>
   );
 }

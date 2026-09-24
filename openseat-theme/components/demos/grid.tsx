@@ -1,41 +1,55 @@
 "use client";
 
-import { Card } from "@astryxdesign/core/Card";
-import { Grid } from "@astryxdesign/core/Grid";
-import { Text } from "@astryxdesign/core/Text";
+import { GridColumn, GridSystem } from "@openseat/design-system";
 import { Examples, Preview } from "./shared";
 
 export default function GridDemo() {
   return (
     <Examples>
-      <Preview label="Three columns">
-        <Grid columns={3} gap={3}>
-          <Card>
-            <Text>A</Text>
-          </Card>
-          <Card>
-            <Text>B</Text>
-          </Card>
-          <Card>
-            <Text>C</Text>
-          </Card>
-        </Grid>
+      <Preview label="Responsive — 12, then 6, then 4">
+        <GridSystem gap={3}>
+          <GridColumn span={12} md={6} lg={4}>
+            Rooms
+          </GridColumn>
+          <GridColumn span={12} md={6} lg={4}>
+            Holds
+          </GridColumn>
+          <GridColumn span={12} md={12} lg={4}>
+            Release
+          </GridColumn>
+        </GridSystem>
       </Preview>
-      <Preview label="Fluid">
-        <Grid columns={{ minWidth: 120 }} gap={3}>
-          <Card>
-            <Text>One</Text>
-          </Card>
-          <Card>
-            <Text>Two</Text>
-          </Card>
-          <Card>
-            <Text>Three</Text>
-          </Card>
-          <Card>
-            <Text>Four</Text>
-          </Card>
-        </Grid>
+      <Preview label="Narrow container stays stacked">
+        <div style={{ maxWidth: "18rem" }}>
+          <GridSystem gap={2}>
+            <GridColumn span={12} md={6}>
+              A
+            </GridColumn>
+            <GridColumn span={12} md={6}>
+              B
+            </GridColumn>
+          </GridSystem>
+        </div>
+      </Preview>
+      <Preview label="Sidebar and content">
+        <GridSystem gap={4}>
+          <GridColumn span={12} md={4}>
+            Nav · 4
+          </GridColumn>
+          <GridColumn span={12} md={8}>
+            Content · 8
+          </GridColumn>
+        </GridSystem>
+      </Preview>
+      <Preview label="Offset">
+        <GridSystem gap={3}>
+          <GridColumn span={5} start={4}>
+            Centered 5, starting at track 4
+          </GridColumn>
+          <GridColumn span={4} start={9}>
+            4 from track 9
+          </GridColumn>
+        </GridSystem>
       </Preview>
     </Examples>
   );

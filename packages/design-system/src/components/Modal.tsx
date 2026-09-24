@@ -6,6 +6,9 @@ export interface ModalProps {
   open: boolean;
   onClose: () => void;
   title?: string;
+  description?: string;
+  /** When false, clicking the overlay does not dismiss. Escape still closes. */
+  dismissOnOverlay?: boolean;
   children: ReactNode;
   footer?: ReactNode;
 }
@@ -14,7 +17,15 @@ export interface ModalProps {
  * A focused, blocking overlay for a single decision or short task. Always
  * give it a way out: the X, Escape, or a footer action.
  */
-export function Modal({ open, onClose, title, children, footer }: ModalProps) {
+export function Modal({
+  open,
+  onClose,
+  title,
+  description,
+  dismissOnOverlay = true,
+  children,
+  footer,
+}: ModalProps) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -27,7 +38,7 @@ export function Modal({ open, onClose, title, children, footer }: ModalProps) {
   if (!open) return null;
 
   return (
-    <div className="os-modal-overlay" onClick={onClose}>
+    <div className="os-modal-overlay" onClick={dismissOnOverlay ? onClose : undefined}>
       <div
         className="os-modal"
         role="dialog"
@@ -43,6 +54,7 @@ export function Modal({ open, onClose, title, children, footer }: ModalProps) {
             </button>
           </div>
         )}
+        {description && <p className="os-modal-desc">{description}</p>}
         <div className="os-modal-body">{children}</div>
         {footer && <div className="os-modal-footer">{footer}</div>}
       </div>

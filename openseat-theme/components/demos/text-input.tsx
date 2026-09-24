@@ -1,44 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { TextInput } from "@astryxdesign/core/TextInput";
+import { TextInput, type FieldSize } from "@openseat/design-system";
 import { Stack } from "@astryxdesign/core/Stack";
 import { Examples, Preview } from "./shared";
 
+const SIZES: FieldSize[] = ["sm", "md", "lg"];
+
 export default function TextInputDemo() {
-  const [rate, setRate] = useState("");
-  const [search, setSearch] = useState("Button");
+  const [values, setValues] = useState<Record<FieldSize, string>>({
+    sm: "",
+    md: "",
+    lg: "",
+  });
 
   return (
     <Examples>
-      <Preview label="Default">
-        <TextInput width={240} label="Your rate" value={rate} onChange={setRate} placeholder="0" />
-      </Preview>
-      <Preview label="With icon and clear">
-        <TextInput
-          width={240}
-          label="Search"
-          value={search}
-          onChange={setSearch}
-          startIcon="search"
-          hasClear
-        />
+      <Preview label="Sizes — md is the default">
+        <Stack gap={3} width={320}>
+          {SIZES.map((size) => (
+            <TextInput
+              key={size}
+              size={size}
+              label={size}
+              value={values[size]}
+              onChange={(event) => setValues((current) => ({ ...current, [size]: event.target.value }))}
+              placeholder="Your rate"
+            />
+          ))}
+        </Stack>
       </Preview>
       <Preview label="States">
-        <Stack gap={3} width={240}>
-          <TextInput label="Disabled" value="Jordan" onChange={() => undefined} isDisabled />
-          <TextInput
-            label="Email"
-            value="not-an-email"
-            onChange={() => undefined}
-            status={{ type: "error", message: "Enter a valid email." }}
-          />
-          <TextInput
-            label="Name"
-            value="Jordan"
-            onChange={() => undefined}
-            status={{ type: "success", message: "Looks good." }}
-          />
+        <Stack gap={3} width={320}>
+          <TextInput label="Disabled" value="Jordan" onChange={() => undefined} disabled />
+          <TextInput label="Email" value="not-an-email" onChange={() => undefined} error helper="Enter a valid email." />
         </Stack>
       </Preview>
     </Examples>

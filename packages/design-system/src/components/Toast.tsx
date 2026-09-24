@@ -6,7 +6,9 @@ export type ToastTone = "neutral" | "success" | "warning" | "danger";
 
 export interface ToastProps {
   message: string;
+  title?: string;
   tone?: ToastTone;
+  action?: { label: string; onClick: () => void };
   onClose?: () => void;
 }
 
@@ -37,11 +39,19 @@ const ICONS: Record<ToastTone, ReactNode> = {
 };
 
 /** A brief confirmation of an action just taken — never for a decision. */
-export function Toast({ message, tone = "neutral", onClose }: ToastProps) {
+export function Toast({ message, title, tone = "neutral", action, onClose }: ToastProps) {
   return (
-    <div className={`os-toast os-toast-tone-${tone}`}>
+    <div className={`os-toast os-toast-tone-${tone}`} role="status">
       {ICONS[tone]}
-      <span className="body os-toast-msg">{message}</span>
+      <span className="os-toast-copy">
+        {title && <span className="os-toast-title">{title}</span>}
+        <span className="os-toast-msg">{message}</span>
+      </span>
+      {action && (
+        <button type="button" className="os-toast-action" onClick={action.onClick}>
+          {action.label}
+        </button>
+      )}
       {onClose && (
         <button type="button" className="os-toast-close" onClick={onClose} aria-label="Dismiss">
           ✕

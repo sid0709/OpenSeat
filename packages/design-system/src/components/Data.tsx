@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useState } from "react";
+import { Tree, type TreeNode } from "./Tree";
 
 export function Collapsible({
   title,
@@ -25,45 +26,6 @@ export function Collapsible({
 
 export function CollapsibleGroup({ children }: { children: ReactNode }) {
   return <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>{children}</div>;
-}
-
-export interface TableColumn<T> {
-  key: keyof T | string;
-  header: string;
-  render?: (row: T) => ReactNode;
-}
-
-export function Table<T extends Record<string, unknown>>({
-  columns,
-  rows,
-}: {
-  columns: TableColumn<T>[];
-  rows: T[];
-}) {
-  return (
-    <div className="os-table-wrap">
-      <table className="os-table">
-        <thead>
-          <tr>
-            {columns.map((c) => (
-              <th key={String(c.key)}>{c.header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
-            <tr key={i}>
-              {columns.map((c) => (
-                <td key={String(c.key)} className="body-sm">
-                  {c.render ? c.render(row) : String(row[c.key as keyof T] ?? "")}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
 }
 
 export interface ListItemDef {
@@ -111,29 +73,18 @@ export function MetadataList({ items }: { items: { label: string; value: ReactNo
   );
 }
 
+/** The two-level shorthand for Tree — every branch starts open. */
 export function TreeList({
   items,
 }: {
   items: { label: string; children?: { label: string }[] }[];
 }) {
-  return (
-    <div>
-      {items.map((item) => (
-        <div key={item.label}>
-          <div className="body-sm os-tree-item">{item.label}</div>
-          {item.children && (
-            <div className="os-tree-nested">
-              {item.children.map((c) => (
-                <div key={c.label} className="body-sm os-tree-item">
-                  {c.label}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
-  );
+  const nodes: TreeNode[] = items.map((item) => ({
+    id: item.label,
+    label: item.label,
+    children: item.children?.map((child) => ({ id: `${item.label}/${child.label}`, label: child.label })),
+  }));
+  return <Tree nodes={nodes} variant="guides" defaultExpanded={nodes.map((node) => node.id)} />;
 }
 
 export function OverflowList({ items, max = 3 }: { items: string[]; max?: number }) {

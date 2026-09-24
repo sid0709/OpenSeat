@@ -1,16 +1,19 @@
 "use client";
 
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonShape, ButtonSize, ButtonVariant } from "./Button";
 
-/** Groups related Buttons into one visually joined cluster. */
-export function ButtonGroup({ children }: { children: ReactNode }) {
-  return <div className="os-button-group">{children}</div>;
+/** Groups related Buttons into one visually joined cluster. `pill` rounds the ends fully. */
+export function ButtonGroup({ children, shape = "default" }: { children: ReactNode; shape?: "default" | "pill" }) {
+  return <div className={shape === "pill" ? "os-button-group os-button-group-pill" : "os-button-group"}>{children}</div>;
 }
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** required — the accessible name, since there is no visible label */
   label: string;
-  size?: "sm" | "md" | "lg";
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  shape?: ButtonShape;
 }
 
 const ICON_SIZE_CLASS: Record<NonNullable<IconButtonProps["size"]>, string> = {
@@ -19,14 +22,33 @@ const ICON_SIZE_CLASS: Record<NonNullable<IconButtonProps["size"]>, string> = {
   lg: "os-icon-btn-lg",
 };
 
+const ICON_VARIANT: Record<ButtonVariant, string> = {
+  primary: "os-icon-btn-primary",
+  secondary: "os-icon-btn-secondary",
+  ghost: "",
+  danger: "os-icon-btn-danger",
+  destructive: "os-icon-btn-danger",
+  outline: "os-icon-btn-outline",
+};
+
 /** A button whose only content is an icon. Always pass `label`. */
-export function IconButton({ label, size = "md", className = "", children, ...props }: IconButtonProps) {
+export function IconButton({
+  label,
+  size = "md",
+  variant = "ghost",
+  shape = "default",
+  className = "",
+  children,
+  ...props
+}: IconButtonProps) {
   return (
     <button
       type="button"
       aria-label={label}
       title={label}
-      className={["os-icon-btn", ICON_SIZE_CLASS[size], className].filter(Boolean).join(" ")}
+      className={["os-icon-btn", ICON_SIZE_CLASS[size], ICON_VARIANT[variant], shape === "pill" ? "os-icon-btn-pill" : "", className]
+        .filter(Boolean)
+        .join(" ")}
       {...props}
     >
       {children}

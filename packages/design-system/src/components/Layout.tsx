@@ -69,6 +69,66 @@ export function Grid({ columns = 2, gap = 12, children }: GridProps) {
   );
 }
 
+/** Page grid. Twelve tracks, gutters from the spacing scale. */
+export const GRID_COLUMNS = 12;
+
+export interface GridSystemProps {
+  children: ReactNode;
+  /** Gutter on the spacing scale: 2 = 8px, 3 = 12px, 4 = 16px. */
+  gap?: 2 | 3 | 4 | 6;
+}
+
+export function GridSystem({ children, gap = 4 }: GridSystemProps) {
+  return (
+    <div className="os-grid" style={{ gap: `var(--spacing-${gap})` }}>
+      {children}
+    </div>
+  );
+}
+
+export interface GridColumnProps {
+  /** Tracks on a narrow container. Defaults to 12 so columns stack. */
+  span?: number;
+  /** Tracks once the grid is at least 28rem wide. */
+  md?: number;
+  /** Tracks once the grid is at least 44rem wide. */
+  lg?: number;
+  /** 1-based track where the column starts. Not responsive. */
+  start?: number;
+  children: ReactNode;
+}
+
+function tracks(span: number) {
+  return Math.min(GRID_COLUMNS, Math.max(1, span));
+}
+
+export function GridColumn({ span = GRID_COLUMNS, md, lg, start, children }: GridColumnProps) {
+  const base = tracks(span);
+  if (start) {
+    return (
+      <div className="os-grid-col" style={{ gridColumn: `${start} / span ${base}` }}>
+        {children}
+      </div>
+    );
+  }
+  return (
+    <div
+      className="os-grid-col"
+      data-md={md != null ? "" : undefined}
+      data-lg={lg != null ? "" : undefined}
+      style={
+        {
+          "--os-span": base,
+          "--os-span-md": md != null ? tracks(md) : undefined,
+          "--os-span-lg": lg != null ? tracks(lg) : undefined,
+        } as CSSProperties
+      }
+    >
+      {children}
+    </div>
+  );
+}
+
 export interface SectionProps {
   title: string;
   description?: string;

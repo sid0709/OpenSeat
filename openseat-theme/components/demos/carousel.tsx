@@ -1,29 +1,31 @@
 "use client";
 
-import { Card } from "@astryxdesign/core/Card";
-import { Carousel } from "@astryxdesign/core/Carousel";
-import { Text } from "@astryxdesign/core/Text";
-import { Stack } from "@astryxdesign/core/Stack";
+import { Carousel, type ControlSize } from "@openseat/design-system";
 import { Examples, Preview } from "./shared";
+
+const SIZES: ControlSize[] = ["sm", "md", "lg"];
+const SLIDES = [
+  { title: "Morning rooms", color: "var(--color-accent)" },
+  { title: "Afternoon holds", color: "var(--color-success)" },
+  { title: "Evening release", color: "var(--color-warning)" },
+];
 
 export default function CarouselDemo() {
   return (
     <Examples>
-      <Preview label="Slides">
-        <Stack width={280}>
-          <Carousel aria-label="Slides">
-            <Card>
-              <Text>1:1</Text>
-            </Card>
-            <Card>
-              <Text>4:3</Text>
-            </Card>
-            <Card>
-              <Text>16:9</Text>
-            </Card>
-          </Carousel>
-        </Stack>
-      </Preview>
+      {SIZES.map((size) => (
+        <Preview key={size} label={size}>
+          <Carousel
+            size={size}
+            label={`${size} slides`}
+            slides={SLIDES.map((slide) => (
+              <div key={slide.title} className="os-carousel-card" style={{ background: slide.color }}>
+                {slide.title}
+              </div>
+            ))}
+          />
+        </Preview>
+      ))}
     </Examples>
   );
 }

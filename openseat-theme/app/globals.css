@@ -1,5 +1,7 @@
 @import "@astryxdesign/core/reset.css";
 @import "@astryxdesign/core/astryx.css";
+@import "../theme/theme.css";
+@import "@openseat/design-system/styles/components.css";
 
 html,
 body {
