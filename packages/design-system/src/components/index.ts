@@ -64,6 +64,16 @@ export type { CalendarProps, CalendarEvent, CalendarView, CalendarTone, DateRang
 export { DateField } from "./DateField";
 export type { DateFieldProps } from "./DateField";
 
+// Drawer — a side or edge panel on Astryx Dialog.
+export { Drawer } from "./Drawer";
+export type { DrawerProps, DrawerSide, DrawerSize } from "./Drawer";
+
+// Kanban / scrum board — drag and drop or keyboard, columns and lanes.
+export { KanbanBoard } from "./KanbanBoard";
+export type { KanbanBoardProps, KanbanItemState } from "./KanbanBoard";
+export { moveKanbanItem, cellItems, slotOf } from "./kanban";
+export type { KanbanColumn, KanbanLane, KanbanItemBase, KanbanSlot, KanbanMove } from "./kanban";
+
 // Drag-and-drop uploads, built from Astryx parts.
 export { FileUploader } from "./FileUploader";
 export type { FileUploaderProps, UploadItem, UploadStatus, UploadHandler } from "./FileUploader";
