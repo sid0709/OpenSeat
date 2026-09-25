@@ -32,7 +32,18 @@ const PANELS: Record<string, string> = {
   files: "",
   settings: "Visibility, deadline, and who can bid.",
 };
-const MANY = ["Overview", "Activity", "Bids", "Questions", "Files", "Invoices", "Contracts", "Reviews", "Settings", "Audit log"];
+const MANY = [
+  "Overview",
+  "Activity",
+  "Bids",
+  "Questions",
+  "Files",
+  "Invoices",
+  "Contracts",
+  "Reviews",
+  "Settings",
+  "Audit log",
+];
 
 export default function TabListDemo() {
   const [room, setRoom] = useState("bids");
@@ -47,7 +58,12 @@ export default function TabListDemo() {
       <Preview label="Sizes">
         <Stack gap={4}>
           {SIZES.map((size) => (
-            <TabList key={size} size={size} value={sizes[size]} onChange={(v) => setSizes((c) => ({ ...c, [size]: v }))}>
+            <TabList
+              key={size}
+              size={size}
+              value={sizes[size]}
+              onChange={(v) => setSizes((c) => ({ ...c, [size]: v }))}
+            >
               <Tab value="a" label={`Size ${size}`} />
               <Tab value="b" label="Second" />
               <Tab value="c" label="Third" />
@@ -56,7 +72,10 @@ export default function TabListDemo() {
         </Stack>
       </Preview>
 
-      <Preview label="Icons, counts, and panels" description="The classic detail page — icons, counts in end content, and the panel below.">
+      <Preview
+        label="Icons, counts, and panels"
+        description="The classic detail page — icons, counts in end content, and the panel below."
+      >
         <Card>
           <Stack gap={4}>
             <TabList value={room} onChange={setRoom} hasDivider>
@@ -66,16 +85,31 @@ export default function TabListDemo() {
                   value={t.value}
                   label={t.label}
                   icon={<Icon icon={t.icon} size="sm" />}
-                  endContent={t.count ? <Badge label={t.count} variant={room === t.value ? "info" : "neutral"} /> : undefined}
+                  endContent={
+                    t.count ? (
+                      <Badge label={t.count} variant={room === t.value ? "info" : "neutral"} />
+                    ) : undefined
+                  }
                 />
               ))}
             </TabList>
-            {PANELS[room] ? <Text>{PANELS[room]}</Text> : <EmptyState isCompact title="No files yet" description="Drop files in the Files tab to share them." />}
+            {PANELS[room] ? (
+              <Text>{PANELS[room]}</Text>
+            ) : (
+              <EmptyState
+                isCompact
+                title="No files yet"
+                description="Drop files in the Files tab to share them."
+              />
+            )}
           </Stack>
         </Card>
       </Preview>
 
-      <Preview label="Fill the width" description="layout=&quot;fill&quot; stretches tabs evenly — good for two to four peers on mobile.">
+      <Preview
+        label="Fill the width"
+        description='layout="fill" stretches tabs evenly — good for two to four peers on mobile.'
+      >
         <Stack maxWidth={420}>
           <TabList value={fill} onChange={setFill} layout="fill" hasDivider>
             <Tab value="day" label="Day" />
@@ -85,15 +119,26 @@ export default function TabListDemo() {
         </Stack>
       </Preview>
 
-      <Preview label="Icon-only" description="isLabelHidden keeps the label as the accessible name and tooltip.">
+      <Preview
+        label="Icon-only"
+        description="isLabelHidden keeps the label as the accessible name and tooltip."
+      >
         <TabList value={icon} onChange={setIcon}>
           <Tab value="grid" label="Grid view" isLabelHidden icon={<Icon icon={icons.grid} />} />
           <Tab value="list" label="List view" isLabelHidden icon={<Icon icon={icons.list} />} />
-          <Tab value="calendar" label="Calendar view" isLabelHidden icon={<Icon icon="calendar" />} />
+          <Tab
+            value="calendar"
+            label="Calendar view"
+            isLabelHidden
+            icon={<Icon icon="calendar" />}
+          />
         </TabList>
       </Preview>
 
-      <Preview label="Overflow" description="Many tabs scroll, or collapse the rest into a More menu automatically.">
+      <Preview
+        label="Overflow"
+        description="Many tabs scroll, or collapse the rest into a More menu automatically."
+      >
         <Stack gap={4}>
           <Card maxWidth={420}>
             <TabList value={many} onChange={setMany} overflow="auto">

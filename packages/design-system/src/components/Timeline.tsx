@@ -1,11 +1,18 @@
 import { Fragment, type ReactNode } from "react";
+
 import { Glyph } from "./Glyph";
 
+/**
+ *
+ */
 export type TimelineTone = "neutral" | "accent" | "success" | "warning" | "danger";
 
 /** done fills the marker and the rail behind it; current glows; upcoming stays hollow. */
 export type TimelineStatus = "done" | "current" | "upcoming";
 
+/**
+ *
+ */
 export interface TimelineItem {
   id: string;
   title: string;
@@ -28,8 +35,12 @@ export interface TimelineItem {
  * horizontal — a left-to-right track, like milestones.
  * activity   — larger markers for people and icons, feed-style.
  */
-export type TimelineVariant = "rail" | "compact" | "cards" | "alternate" | "horizontal" | "activity";
+export type TimelineVariant =
+  "rail" | "compact" | "cards" | "alternate" | "horizontal" | "activity";
 
+/**
+ *
+ */
 export interface TimelineProps {
   items: TimelineItem[];
   variant?: TimelineVariant;
@@ -64,7 +75,8 @@ export function Timeline({ items, variant = "rail", label = "Timeline" }: Timeli
   return (
     <ol className={`os-tl os-tl-${variant}`} aria-label={label}>
       {items.map((item, index) => {
-        const heading = grouped && item.group && item.group !== items[index - 1]?.group ? item.group : null;
+        const heading =
+          grouped && item.group && item.group !== items[index - 1]?.group ? item.group : null;
         const nextStatus = items[index + 1]?.status;
         return (
           <Fragment key={item.id}>
@@ -83,14 +95,18 @@ export function Timeline({ items, variant = "rail", label = "Timeline" }: Timeli
                 .join(" ")}
               aria-current={item.status === "current" ? "step" : undefined}
             >
-              {variant === "compact" && item.time && <time className="os-tl-time os-tl-time-lead">{item.time}</time>}
+              {variant === "compact" && item.time && (
+                <time className="os-tl-time os-tl-time-lead">{item.time}</time>
+              )}
               <span className="os-tl-track">
                 <Marker item={item} />
               </span>
               <div className="os-tl-body">
                 <div className="os-tl-head">
                   <p className="os-tl-title">{item.title}</p>
-                  {variant !== "compact" && item.time && <time className="os-tl-time">{item.time}</time>}
+                  {variant !== "compact" && item.time && (
+                    <time className="os-tl-time">{item.time}</time>
+                  )}
                 </div>
                 {item.description && <p className="os-tl-desc">{item.description}</p>}
                 {item.meta && <div className="os-tl-meta">{item.meta}</div>}

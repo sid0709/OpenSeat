@@ -8,16 +8,25 @@ export const ACCENT_DARK = "#2E89FF";
 
 /** Soft Meta blue surfaces — light / dark */
 export const ACCENT_MUTED_LIGHT = "#E7F3FF";
-export const ACCENT_MUTED_DARK = "#253C5A";
+export /**
+ *
+ */
+const ACCENT_MUTED_DARK = "#253C5A";
 
 /** Text / icon on blue series — light / dark */
 export const ACCENT_INK_LIGHT = "#003978";
-export const ACCENT_INK_DARK = "#A1CAFF";
-export const ACCENT_ICON_DARK = "#88BCFF";
+export /**
+ *
+ */
+const ACCENT_INK_DARK = "#A1CAFF";
+export /**
+ *
+ */
+const ACCENT_ICON_DARK = "#88BCFF";
 
 /** Platform system UI stack (no webfont). */
 export const FONT_FAMILY_SYSTEM =
-  "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif";
+  'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
 
 /**
  * OpenSeat theme: Neutral structure with Meta blue primary and system fonts.

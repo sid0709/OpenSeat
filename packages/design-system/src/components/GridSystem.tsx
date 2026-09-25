@@ -1,9 +1,19 @@
 "use client";
 
-import { createContext, useContext, type CSSProperties, type ElementType, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  type CSSProperties,
+  type ElementType,
+  type ReactNode,
+} from "react";
+
 import { TIERS, spacing, type ResponsiveTo, type SpacingStep, type Tier } from "./breakpoints";
 
-export const GRID_COLUMNS = 12;
+export /**
+ *
+ */
+const GRID_COLUMNS = 12;
 
 /** A number of tracks, the full row, or hidden at this tier. */
 export type GridSpanValue = number | "full" | "hidden";
@@ -11,6 +21,9 @@ export type GridSpanValue = number | "full" | "hidden";
 /** One value, or a value per tier. Unset tiers inherit from the tier below. */
 export type Responsive<T> = T | ({ base?: T } & Partial<Record<Tier, T>>);
 
+/**
+ *
+ */
 export interface GridSystemProps {
   children: ReactNode;
   /** Track count. */
@@ -27,6 +40,9 @@ export interface GridSystemProps {
   as?: ElementType;
 }
 
+/**
+ *
+ */
 export interface GridColumnProps extends Partial<Record<Tier, GridSpanValue>> {
   children?: ReactNode;
   /** Span below the first tier. */
@@ -45,7 +61,7 @@ const ColumnsContext = createContext(GRID_COLUMNS);
 
 function perTier<T>(value: Responsive<T> | undefined): Partial<Record<"base" | Tier, T>> {
   if (value == null) return {};
-  if (typeof value === "object") return value as Partial<Record<"base" | Tier, T>>;
+  if (typeof value === "object") return value;
   return { base: value };
 }
 
@@ -83,7 +99,16 @@ export function GridSystem({
 }
 
 /** One cell. `span`, then `sm` → `xl` override it as the grid widens. */
-export function GridColumn({ children, span, start, order, rowSpan, as: Tag = "div", className, ...tiers }: GridColumnProps) {
+export function GridColumn({
+  children,
+  span,
+  start,
+  order,
+  rowSpan,
+  as: Tag = "div",
+  className,
+  ...tiers
+}: GridColumnProps) {
   const columns = useContext(ColumnsContext);
   const vars: Record<string, string | number> = {};
 
@@ -94,15 +119,21 @@ export function GridColumn({ children, span, start, order, rowSpan, as: Tag = "d
     if (value === "hidden") vars[`--os-gs-display${suffix}`] = "none";
     else {
       vars[`--os-gs-display${suffix}`] = "block";
-      vars[`--os-gs-span${suffix}`] = value === "full" ? columns : Math.min(columns, Math.max(1, value as number));
+      vars[`--os-gs-span${suffix}`] =
+        value === "full" ? columns : Math.min(columns, Math.max(1, value));
     }
   }
-  for (const [tier, value] of Object.entries(perTier(start))) vars[`--os-gs-start${tier === "base" ? "" : `-${tier}`}`] = value!;
-  for (const [tier, value] of Object.entries(perTier(order))) vars[`--os-gs-order${tier === "base" ? "" : `-${tier}`}`] = value!;
+  for (const [tier, value] of Object.entries(perTier(start)))
+    vars[`--os-gs-start${tier === "base" ? "" : `-${tier}`}`] = value!;
+  for (const [tier, value] of Object.entries(perTier(order)))
+    vars[`--os-gs-order${tier === "base" ? "" : `-${tier}`}`] = value!;
   if (rowSpan) vars["--os-gs-rows"] = rowSpan;
 
   return (
-    <Tag className={["os-gs-col", className].filter(Boolean).join(" ")} style={vars as CSSProperties}>
+    <Tag
+      className={["os-gs-col", className].filter(Boolean).join(" ")}
+      style={vars as CSSProperties}
+    >
       {children}
     </Tag>
   );

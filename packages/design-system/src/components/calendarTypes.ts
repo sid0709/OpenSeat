@@ -1,6 +1,15 @@
+/**
+ *
+ */
 export type CalendarView = "month" | "week" | "day" | "agenda";
+/**
+ *
+ */
 export type CalendarTone = "accent" | "success" | "warning" | "danger" | "neutral";
 
+/**
+ *
+ */
 export interface CalendarEvent {
   id: string;
   date: Date;
@@ -12,13 +21,19 @@ export interface CalendarEvent {
   location?: string;
 }
 
+/**
+ *
+ */
 export interface DateRange {
   start: Date;
   /** null while the second date is still being picked. */
   end: Date | null;
 }
 
-export const VIEW_LABELS: Record<CalendarView, string> = {
+export /**
+ *
+ */
+const VIEW_LABELS: Record<CalendarView, string> = {
   month: "Month",
   week: "Week",
   day: "Day",

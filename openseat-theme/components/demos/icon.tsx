@@ -46,14 +46,27 @@ const REGISTRY: IconName[] = [
   "microphone",
 ];
 const SIZES: IconSize[] = ["xsm", "sm", "md", "lg"];
-const COLORS: IconColor[] = ["primary", "secondary", "tertiary", "disabled", "accent", "success", "warning", "error"];
+const COLORS: IconColor[] = [
+  "primary",
+  "secondary",
+  "tertiary",
+  "disabled",
+  "accent",
+  "success",
+  "warning",
+  "error",
+];
 const PALETTE: IconColor[] = ["blue", "cyan", "green", "red", "gray"];
 const GLYPHS = Object.keys(icons) as GlyphName[];
 
 export default function IconDemo() {
   return (
     <Examples>
-      <Preview align="start" label="Astryx registry" description="Pass a semantic name; the theme decides the glyph.">
+      <Preview
+        align="start"
+        label="Astryx registry"
+        description="Pass a semantic name; the theme decides the glyph."
+      >
         <HStack gap={4} wrap="wrap">
           {REGISTRY.map((name) => (
             <Stack key={name} gap={1} hAlign="center" width={88}>
@@ -64,7 +77,11 @@ export default function IconDemo() {
         </HStack>
       </Preview>
 
-      <Preview align="start" label="OpenSeat set" description="icons.* covers product actions and is drawn to match Astryx.">
+      <Preview
+        align="start"
+        label="OpenSeat set"
+        description="icons.* covers product actions and is drawn to match Astryx."
+      >
         <HStack gap={4} wrap="wrap">
           {GLYPHS.map((name) => (
             <Stack key={name} gap={1} hAlign="center" width={88}>
@@ -89,7 +106,11 @@ export default function IconDemo() {
         </Stack>
       </Preview>
 
-      <Preview align="start" label="Semantic colors" description="Text-like colors for chrome; status colors pair with a word.">
+      <Preview
+        align="start"
+        label="Semantic colors"
+        description="Text-like colors for chrome; status colors pair with a word."
+      >
         <Row>
           {COLORS.map((color) => (
             <Stack key={color} gap={1} hAlign="center" width={72}>
@@ -100,7 +121,11 @@ export default function IconDemo() {
         </Row>
       </Preview>
 
-      <Preview align="start" label="Palette colors" description="For categories and illustrations, not status.">
+      <Preview
+        align="start"
+        label="Palette colors"
+        description="For categories and illustrations, not status."
+      >
         <Row>
           {PALETTE.map((color) => (
             <Stack key={color} gap={1} hAlign="center" width={72}>
@@ -111,7 +136,11 @@ export default function IconDemo() {
         </Row>
       </Preview>
 
-      <Preview align="start" label="Inherit" description="color=&quot;inherit&quot; follows the text around it.">
+      <Preview
+        align="start"
+        label="Inherit"
+        description='color="inherit" follows the text around it.'
+      >
         <Stack gap={2}>
           <Text color="accent">
             <HStack gap={1} vAlign="center">
@@ -128,7 +157,11 @@ export default function IconDemo() {
         </Stack>
       </Preview>
 
-      <Preview align="start" label="Status with a word" description="Never color alone — each icon sits next to the state it names.">
+      <Preview
+        align="start"
+        label="Status with a word"
+        description="Never color alone — each icon sits next to the state it names."
+      >
         <Stack gap={2}>
           <HStack gap={2} vAlign="center">
             <Icon icon="success" color="success" />
@@ -149,7 +182,11 @@ export default function IconDemo() {
         </Stack>
       </Preview>
 
-      <Preview align="start" label="Meaningful vs decorative" description="Add label when the icon is the only thing carrying meaning; leave it off beside text.">
+      <Preview
+        align="start"
+        label="Meaningful vs decorative"
+        description="Add label when the icon is the only thing carrying meaning; leave it off beside text."
+      >
         <Row>
           <Icon icon={icons.lock} label="Sealed room" />
           <Text>
@@ -161,7 +198,11 @@ export default function IconDemo() {
         </Row>
       </Preview>
 
-      <Preview align="start" label="In controls" description="The same Icon fills every icon slot — buttons, icon buttons, and more.">
+      <Preview
+        align="start"
+        label="In controls"
+        description="The same Icon fills every icon slot — buttons, icon buttons, and more."
+      >
         <Row>
           <Button label="Share" icon={<Icon icon={icons.share} />} />
           <Button label="Next" variant="primary" endContent={<Icon icon={icons.arrowRight} />} />

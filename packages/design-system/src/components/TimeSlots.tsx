@@ -1,7 +1,8 @@
 "use client";
 
-import type { ControlSize } from "./size";
 import { displayTime, fromMinutes, minutesOf, range, type HourCycle } from "./time";
+
+import type { ControlSize } from "./size";
 
 /** Where the day splits when `grouped` is on, in minutes since midnight. */
 const DAY_PARTS = [
@@ -10,6 +11,9 @@ const DAY_PARTS = [
   { label: "Evening", from: 17 * 60 },
 ] as const;
 
+/**
+ *
+ */
 export interface TimeSlotsProps {
   value: string;
   onChange?: (value: string) => void;

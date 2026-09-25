@@ -1,13 +1,10 @@
 "use client";
 
 import { useState } from "react";
+
 import { Button } from "./Action";
-import type { ControlSize } from "./size";
 import { PickerShell } from "./PickerShell";
 import { ChoiceSegment, NumberSegment, SegmentDivider } from "./Segment";
-import { TimeColumns } from "./TimeColumns";
-import { TimeDial } from "./TimeDial";
-import { TimeSlots, type TimeSlotsProps } from "./TimeSlots";
 import {
   HOURS_PER_HALF,
   MERIDIEMS,
@@ -21,9 +18,20 @@ import {
   type Meridiem,
   type MinuteStep,
 } from "./time";
+import { TimeColumns } from "./TimeColumns";
+import { TimeDial } from "./TimeDial";
+import { TimeSlots, type TimeSlotsProps } from "./TimeSlots";
 
+import type { ControlSize } from "./size";
+
+/**
+ *
+ */
 export type TimePicker = "columns" | "dial" | "slots" | "none";
 
+/**
+ *
+ */
 export interface TimeFieldProps {
   value: string;
   onChange?: (value: string) => void;
@@ -95,7 +103,9 @@ export function TimeField({
 
   function setNow() {
     const now = new Date();
-    onChange?.(formatTime({ h: now.getHours(), m: now.getMinutes(), s: now.getSeconds() }, withSeconds));
+    onChange?.(
+      formatTime({ h: now.getHours(), m: now.getMinutes(), s: now.getSeconds() }, withSeconds),
+    );
   }
 
   const panelProps = { value, onChange, hourCycle, withSeconds, minuteStep, size, disabled };
@@ -119,7 +129,14 @@ export function TimeField({
         {picker !== "slots" && (
           <div className="os-picker-footer">
             <Button label="Now" variant="ghost" size="sm" onClick={setNow} />
-            <Button label="Done" variant="primary" size="sm" onClick={() => setOpen(false)} />
+            <Button
+              label="Done"
+              variant="primary"
+              size="sm"
+              onClick={() => {
+                setOpen(false);
+              }}
+            />
           </div>
         )}
       </div>
@@ -147,7 +164,9 @@ export function TimeField({
             placeholder="--"
             disabled={disabled}
             format={twelve ? String : pad2}
-            onChange={(hour) => update({ hour })}
+            onChange={(hour) => {
+              update({ hour });
+            }}
           />
           <SegmentDivider>:</SegmentDivider>
           <NumberSegment
@@ -158,7 +177,9 @@ export function TimeField({
             digits={2}
             placeholder="--"
             disabled={disabled}
-            onChange={(minute) => update({ minute })}
+            onChange={(minute) => {
+              update({ minute });
+            }}
           />
           {withSeconds && (
             <>
@@ -171,7 +192,9 @@ export function TimeField({
                 digits={2}
                 placeholder="--"
                 disabled={disabled}
-                onChange={(second) => update({ second })}
+                onChange={(second) => {
+                  update({ second });
+                }}
               />
             </>
           )}
@@ -182,7 +205,9 @@ export function TimeField({
               options={MERIDIEMS}
               placeholder="AM"
               disabled={disabled}
-              onChange={(meridiem) => update({ meridiem })}
+              onChange={(meridiem) => {
+                update({ meridiem });
+              }}
             />
           )}
         </>

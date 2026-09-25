@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
-import type { CalendarEvent, DateRange } from "./calendarTypes";
+
 import {
   DAYS_PER_WEEK,
   DEFAULT_LOCALE,
@@ -17,9 +17,14 @@ import {
   type WeekStart,
 } from "./date";
 
+import type { CalendarEvent, DateRange } from "./calendarTypes";
+
 const MAX_CHIPS = 2;
 const MAX_DOTS = 3;
 
+/**
+ *
+ */
 export interface CalendarMonthProps {
   cursor: Date;
   onCursorChange: (date: Date) => void;
@@ -35,7 +40,11 @@ export interface CalendarMonthProps {
 }
 
 function isoWeek(date: Date) {
-  const target = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 4 - (date.getDay() || DAYS_PER_WEEK));
+  const target = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate() + 4 - (date.getDay() || DAYS_PER_WEEK),
+  );
   const yearStart = new Date(target.getFullYear(), 0, 1);
   return Math.ceil(((target.getTime() - yearStart.getTime()) / MS_PER_DAY + 1) / DAYS_PER_WEEK);
 }
@@ -91,14 +100,24 @@ export function CalendarMonth({
   return (
     <div
       ref={gridRef}
-      className={["os-cal-month", eventDisplay === "chips" && "os-cal-month-chips", showWeekNumbers && "os-cal-month-weeks"].filter(Boolean).join(" ")}
+      className={[
+        "os-cal-month",
+        eventDisplay === "chips" && "os-cal-month-chips",
+        showWeekNumbers && "os-cal-month-weeks",
+      ]
+        .filter(Boolean)
+        .join(" ")}
       role="grid"
       aria-label={cursor.toLocaleDateString(DEFAULT_LOCALE, { month: "long", year: "numeric" })}
       onKeyDown={onKeyDown}
-      onPointerLeave={() => setHover(null)}
+      onPointerLeave={() => {
+        setHover(null);
+      }}
     >
       <div className="os-cal-row os-cal-dows" role="row">
-        {showWeekNumbers && <span className="os-cal-weekno" role="columnheader" aria-label="Week" />}
+        {showWeekNumbers && (
+          <span className="os-cal-weekno" role="columnheader" aria-label="Week" />
+        )}
         {weekdayNames(weekStartsOn, "short").map((name) => (
           <span key={name} className="os-cal-dow" role="columnheader" aria-label={name}>
             {eventDisplay === "chips" ? name : name.slice(0, 2)}
@@ -118,7 +137,9 @@ export function CalendarMonth({
             const disabled = isDisabled(day);
             const isStart = sameDay(range?.start, day);
             const isEnd = sameDay(rangeEnd, day);
-            const inRange = Boolean(range?.start && rangeEnd && isBetween(day, range.start, rangeEnd));
+            const inRange = Boolean(
+              range?.start && rangeEnd && isBetween(day, range.start, rangeEnd),
+            );
             const selected = sameDay(value, day) || isStart || isEnd;
             const reversed = Boolean(range?.start && rangeEnd && rangeEnd < range.start);
             return (
@@ -129,8 +150,16 @@ export function CalendarMonth({
                 className={[
                   "os-cal-cell",
                   inRange && "os-cal-in-range",
-                  range?.start && rangeEnd && !sameDay(range.start, rangeEnd) && (reversed ? isEnd : isStart) && "os-cal-range-start",
-                  range?.start && rangeEnd && !sameDay(range.start, rangeEnd) && (reversed ? isStart : isEnd) && "os-cal-range-end",
+                  range?.start &&
+                    rangeEnd &&
+                    !sameDay(range.start, rangeEnd) &&
+                    (reversed ? isEnd : isStart) &&
+                    "os-cal-range-start",
+                  range?.start &&
+                    rangeEnd &&
+                    !sameDay(range.start, rangeEnd) &&
+                    (reversed ? isStart : isEnd) &&
+                    "os-cal-range-end",
                 ]
                   .filter(Boolean)
                   .join(" ")}
@@ -139,7 +168,12 @@ export function CalendarMonth({
                   type="button"
                   tabIndex={sameDay(day, cursor) ? 0 : -1}
                   disabled={disabled}
-                  aria-label={day.toLocaleDateString(DEFAULT_LOCALE, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+                  aria-label={day.toLocaleDateString(DEFAULT_LOCALE, {
+                    weekday: "long",
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
                   aria-current={sameDay(day, today) ? "date" : undefined}
                   className={[
                     "os-cal-day",
@@ -159,7 +193,10 @@ export function CalendarMonth({
                   {eventDisplay === "dots" && dayEvents.length > 0 && (
                     <span className="os-cal-dots" aria-hidden>
                       {dayEvents.slice(0, MAX_DOTS).map((event) => (
-                        <span key={event.id} className={`os-cal-dot os-cal-tone-${event.tone ?? "accent"}`} />
+                        <span
+                          key={event.id}
+                          className={`os-cal-dot os-cal-tone-${event.tone ?? "accent"}`}
+                        />
                       ))}
                     </span>
                   )}
@@ -167,12 +204,18 @@ export function CalendarMonth({
                 {eventDisplay === "chips" && dayEvents.length > 0 && (
                   <div className="os-cal-chips">
                     {dayEvents.slice(0, MAX_CHIPS).map((event) => (
-                      <span key={event.id} className={`os-cal-chip os-cal-tone-${event.tone ?? "accent"}`} title={event.title}>
+                      <span
+                        key={event.id}
+                        className={`os-cal-chip os-cal-tone-${event.tone ?? "accent"}`}
+                        title={event.title}
+                      >
                         {event.start && <span className="os-cal-chip-time">{event.start}</span>}
                         {event.title}
                       </span>
                     ))}
-                    {dayEvents.length > MAX_CHIPS && <span className="os-cal-more">+{dayEvents.length - MAX_CHIPS} more</span>}
+                    {dayEvents.length > MAX_CHIPS && (
+                      <span className="os-cal-more">+{dayEvents.length - MAX_CHIPS} more</span>
+                    )}
                   </div>
                 )}
               </div>

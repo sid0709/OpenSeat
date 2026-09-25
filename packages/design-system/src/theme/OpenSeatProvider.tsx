@@ -1,15 +1,24 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { Theme, type ThemeMode } from "@astryxdesign/core/theme";
-import { LinkProvider, type LinkComponentType } from "@astryxdesign/core/Link";
 import { LayerProvider } from "@astryxdesign/core/Layer";
+import { LinkProvider, type LinkComponentType } from "@astryxdesign/core/Link";
+import { Theme, type ThemeMode } from "@astryxdesign/core/theme";
 import { ToastViewport, type ToastPosition } from "@astryxdesign/core/Toast";
+
 import { NotificationViewport } from "../components/NotificationTrigger";
+
 import { openseatTheme } from "./openseat";
 
+import type { ReactNode } from "react";
+
+/**
+ *
+ */
 export type ColorMode = ThemeMode;
 
+/**
+ *
+ */
 export interface OpenSeatProviderProps {
   children: ReactNode;
   /** light, dark, or system. */
@@ -26,7 +35,12 @@ export interface OpenSeatProviderProps {
  * toast viewport behind useToast.
  * Pair it with `@openseat/design-system/styles/openseat.css`.
  */
-export function OpenSeatProvider({ children, mode = "system", linkComponent, toastPosition = "bottomEnd" }: OpenSeatProviderProps) {
+export function OpenSeatProvider({
+  children,
+  mode = "system",
+  linkComponent,
+  toastPosition = "bottomEnd",
+}: OpenSeatProviderProps) {
   const layered = (
     <LayerProvider>
       <ToastViewport position={toastPosition}>

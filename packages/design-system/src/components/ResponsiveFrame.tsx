@@ -1,18 +1,25 @@
 "use client";
 
 import { useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
+
 import { SegmentedControl, SegmentedControlItem } from "./Action";
-import { Text } from "./Primitives";
 import { tierFor } from "./breakpoints";
+import { Text } from "./Primitives";
 import { useElementWidth } from "./Responsive";
 
+/**
+ *
+ */
 export interface FramePreset {
   label: string;
   /** px, or "fill" for the full available width. */
   width: number | "fill";
 }
 
-export const FRAME_PRESETS: FramePreset[] = [
+export /**
+ *
+ */
+const FRAME_PRESETS: FramePreset[] = [
   { label: "Phone", width: 360 },
   { label: "Tablet", width: 640 },
   { label: "Laptop", width: 880 },
@@ -22,6 +29,9 @@ export const FRAME_PRESETS: FramePreset[] = [
 const MIN_FRAME_WIDTH = 280;
 const KEY_STEP = 16;
 
+/**
+ *
+ */
 export interface ResponsiveFrameProps {
   children: ReactNode;
   presets?: FramePreset[];
@@ -36,7 +46,12 @@ export interface ResponsiveFrameProps {
  * everything inside measures this frame as its container, so GridSystem,
  * ResponsiveStack, Show/Hide, and Astryx Grid all reflow live.
  */
-export function ResponsiveFrame({ children, presets = FRAME_PRESETS, defaultPreset = "Fill", label = "Responsive preview" }: ResponsiveFrameProps) {
+export function ResponsiveFrame({
+  children,
+  presets = FRAME_PRESETS,
+  defaultPreset = "Fill",
+  label = "Responsive preview",
+}: ResponsiveFrameProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   /** What children actually get — presets size the content box, not the chrome. */
   const actual = useElementWidth(contentRef);
@@ -73,7 +88,9 @@ export function ResponsiveFrame({ children, presets = FRAME_PRESETS, defaultPres
           label="Preview width"
           size="sm"
           value={active}
-          onChange={(value) => setWidth(presets.find((p) => p.label === value)?.width ?? "fill")}
+          onChange={(value) => {
+            setWidth(presets.find((p) => p.label === value)?.width ?? "fill");
+          }}
         >
           {presets.map((preset) => (
             <SegmentedControlItem key={preset.label} value={preset.label} label={preset.label} />
@@ -86,7 +103,9 @@ export function ResponsiveFrame({ children, presets = FRAME_PRESETS, defaultPres
       <div className="os-rframe-stage">
         <div
           className={width === "fill" ? "os-rframe-viewport os-rframe-fill" : "os-rframe-viewport"}
-          style={width === "fill" ? undefined : { width: `calc(${width}px + 2 * var(--os-rframe-pad))` }}
+          style={
+            width === "fill" ? undefined : { width: `calc(${width}px + 2 * var(--os-rframe-pad))` }
+          }
           role="group"
           aria-label={label}
         >

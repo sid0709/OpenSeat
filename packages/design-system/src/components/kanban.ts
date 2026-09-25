@@ -1,5 +1,8 @@
 /** Board data and the pure move logic behind KanbanBoard — usable on a server too. */
 
+/**
+ *
+ */
 export interface KanbanColumn {
   id: string;
   title: string;
@@ -9,6 +12,9 @@ export interface KanbanColumn {
   isLocked?: boolean;
 }
 
+/**
+ *
+ */
 export interface KanbanLane {
   id: string;
   title: string;
@@ -22,6 +28,9 @@ export interface KanbanItemBase {
   laneId?: string;
 }
 
+/**
+ *
+ */
 export interface KanbanSlot {
   columnId: string;
   laneId?: string;
@@ -29,16 +38,25 @@ export interface KanbanSlot {
   index: number;
 }
 
+/**
+ *
+ */
 export interface KanbanMove {
   itemId: string;
   from: KanbanSlot;
   to: KanbanSlot;
 }
 
+/**
+ *
+ */
 export function inCell<T extends KanbanItemBase>(item: T, columnId: string, laneId?: string) {
   return item.columnId === columnId && (laneId === undefined || item.laneId === laneId);
 }
 
+/**
+ *
+ */
 export function cellItems<T extends KanbanItemBase>(items: T[], columnId: string, laneId?: string) {
   return items.filter((item) => inCell(item, columnId, laneId));
 }
@@ -55,7 +73,11 @@ export function slotOf<T extends KanbanItemBase>(items: T[], itemId: string): Ka
  * Moves one item to a column (and lane) at an index among that cell's other
  * items. Returns a new array; everything else keeps its order.
  */
-export function moveKanbanItem<T extends KanbanItemBase>(items: T[], itemId: string, to: KanbanSlot): T[] {
+export function moveKanbanItem<T extends KanbanItemBase>(
+  items: T[],
+  itemId: string,
+  to: KanbanSlot,
+): T[] {
   const moving = items.find((i) => i.id === itemId);
   if (!moving) return items;
   const rest = items.filter((i) => i.id !== itemId);

@@ -1,24 +1,32 @@
 "use client";
 
 import { useState } from "react";
+
 import { Button } from "./Action";
 import { Calendar, type CalendarProps } from "./Calendar";
-import type { ControlSize } from "./size";
+import { MONTHS_PER_YEAR, daysInMonth, startOfDay } from "./date";
 import { PickerShell } from "./PickerShell";
 import { NumberSegment, SegmentDivider } from "./Segment";
-import { MONTHS_PER_YEAR, daysInMonth, startOfDay } from "./date";
+
+import type { ControlSize } from "./size";
 
 const MIN_YEAR = 1;
 const MAX_YEAR = 9999;
 const LEAP_YEAR = 2024;
 
+/**
+ *
+ */
 export interface DateFieldProps {
   value: Date | null;
   onChange?: (value: Date | null) => void;
   /** Type-only when false. */
   withCalendar?: boolean;
   /** Passed to the dropdown calendar — events, disabled days, week start. */
-  calendar?: Pick<CalendarProps, "events" | "min" | "max" | "isDateDisabled" | "weekStartsOn" | "showWeekNumbers">;
+  calendar?: Pick<
+    CalendarProps,
+    "events" | "min" | "max" | "isDateDisabled" | "weekStartsOn" | "showWeekNumbers"
+  >;
   size?: ControlSize;
   disabled?: boolean;
   error?: boolean;
@@ -95,7 +103,12 @@ export function DateField({
               }}
               footer={
                 <div className="os-picker-footer">
-                  <Button label="Clear" variant="ghost" size="sm" onClick={() => onChange?.(null)} />
+                  <Button
+                    label="Clear"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => onChange?.(null)}
+                  />
                   <Button
                     label="Today"
                     variant="secondary"
@@ -121,7 +134,9 @@ export function DateField({
             digits={2}
             placeholder="MM"
             disabled={disabled}
-            onChange={(month) => update({ month })}
+            onChange={(month) => {
+              update({ month });
+            }}
           />
           <SegmentDivider>/</SegmentDivider>
           <NumberSegment
@@ -132,7 +147,9 @@ export function DateField({
             digits={2}
             placeholder="DD"
             disabled={disabled}
-            onChange={(day) => update({ day })}
+            onChange={(day) => {
+              update({ day });
+            }}
           />
           <SegmentDivider>/</SegmentDivider>
           <NumberSegment
@@ -143,7 +160,9 @@ export function DateField({
             digits={4}
             placeholder="YYYY"
             disabled={disabled}
-            onChange={(year) => update({ year })}
+            onChange={(year) => {
+              update({ year });
+            }}
           />
         </>
       }
