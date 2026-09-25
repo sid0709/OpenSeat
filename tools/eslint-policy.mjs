@@ -10,6 +10,28 @@ function workspaceFor(filename) {
   }
 }
 
+function hasPublicSubpath(workspaceDirectory, packageName, subpath) {
+  let directory = workspaceDirectory;
+  while (directory !== path.dirname(directory)) {
+    const manifestPath = path.join(directory, "node_modules", packageName, "package.json");
+    if (existsSync(manifestPath)) {
+      const { exports = {} } = JSON.parse(readFileSync(manifestPath, "utf8"));
+      return Object.keys(exports).some((entry) => {
+        if (entry === subpath) return true;
+        if (!entry.includes("*")) return false;
+        const pattern = new RegExp(`^${entry.split("*").map(escapeRegExp).join(".*")}$`);
+        return pattern.test(subpath);
+      });
+    }
+    directory = path.dirname(directory);
+  }
+  return false;
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 const policy = {
   rules: {
     "package-boundaries": {
@@ -32,8 +54,11 @@ const policy = {
           }
           if (source.startsWith("@openseat/")) {
             const name = source.split("/").slice(0, 2).join("/");
+            const subpath = source.slice(name.length).replace(/^\//, "./");
+            const isPublicEntry =
+              source === name || hasPublicSubpath(owner.directory, name, subpath);
             if (
-              source !== name ||
+              !isPublicEntry ||
               name === owner.name ||
               !{ ...owner.dependencies, ...owner.devDependencies, ...owner.peerDependencies }[name]
             )

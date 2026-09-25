@@ -11,7 +11,10 @@ import UnitReporter from "./vitest-no-skips.mjs";
 const tester = new RuleTester();
 const filename = path.resolve("apps/web/components/ui/BoundaryProbe.tsx");
 tester.run("workspace public boundaries", policy.rules["package-boundaries"], {
-  valid: [{ filename, code: 'import { Badge } from "./Badge";' }],
+  valid: [
+    { filename, code: 'import { Badge } from "./Badge";' },
+    { filename, code: 'import { OpenSeatProvider } from "@openseat/design-system/theme";' },
+  ],
   invalid: [
     {
       filename,

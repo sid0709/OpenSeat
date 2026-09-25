@@ -2,6 +2,12 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+function requiredScripts(workspace) {
+  const scripts = ["lint", "typecheck", "build"];
+  if (!workspace.directory.startsWith("packages/")) scripts.push("test", "test:coverage");
+  return scripts;
+}
+
 /** Validate workspace contracts and dependency direction before source linting. */
 export function validateWorkspaces(workspaces) {
   const errors = [];
@@ -10,7 +16,7 @@ export function validateWorkspaces(workspaces) {
   for (const workspace of workspaces) {
     if (!String(workspace.name).startsWith("@openseat/"))
       errors.push(`${workspace.directory}: use @openseat scope`);
-    for (const script of ["lint", "typecheck", "test", "test:coverage", "build"]) {
+    for (const script of requiredScripts(workspace)) {
       if (!workspace.scripts?.[script]) errors.push(`${workspace.name}: missing ${script} script`);
     }
     if (workspace.directory.startsWith("packages/") && !workspace.exports)

@@ -6,7 +6,8 @@
   "workspaces": [
     "apps/*",
     "packages/*",
-    "tools/*"
+    "tools/*",
+    "openseat-theme"
   ],
   "scripts": {
     "lint": "node tools/check-workspaces.mjs && eslint . --max-warnings=0",

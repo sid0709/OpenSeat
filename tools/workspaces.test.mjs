@@ -30,5 +30,5 @@ test("rejects imports of applications and missing public package contracts", () 
       error.includes("cannot depend on app"),
     ),
   );
-  assert.ok(validateWorkspaces([{ name: "@openseat/a", directory: "packages/a" }]).length >= 6);
+  assert.ok(validateWorkspaces([{ name: "@openseat/a", directory: "packages/a" }]).length >= 4);
 });

@@ -1,3 +1,4 @@
+import { OpenSeatProvider } from "@openseat/design-system/theme";
 import { Inter } from "next/font/google";
 
 import type { Metadata } from "next";
@@ -23,7 +24,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <OpenSeatProvider mode="dark">{children}</OpenSeatProvider>
+      </body>
     </html>
   );
 }
