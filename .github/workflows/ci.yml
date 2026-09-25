@@ -231,4 +231,4 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: printf '%s\n' "$PR_TITLE" | npm run commitlint -- --strict
       - name: Validate changeset configuration
-        run: npm run changeset -- status
+        run: npm run changeset -- status --since=origin/main
