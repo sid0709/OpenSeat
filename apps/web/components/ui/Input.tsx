@@ -10,16 +10,19 @@ interface BaseFieldProps {
   error?: boolean;
 }
 
+/** Public InputFieldProps contract for the Input component. */
 export interface InputFieldProps
   extends BaseFieldProps, Omit<InputHTMLAttributes<HTMLInputElement>, "className"> {
   multiline?: false;
 }
 
+/** Public TextareaFieldProps contract for the Input component. */
 export interface TextareaFieldProps
   extends BaseFieldProps, Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "className"> {
   multiline: true;
 }
 
+/** Public FieldProps contract for the Input component. */
 export type FieldProps = InputFieldProps | TextareaFieldProps;
 
 /** The default text field — label above, never floating inside the box. */

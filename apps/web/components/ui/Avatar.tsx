@@ -1,3 +1,4 @@
+/** Public AvatarProps contract for the Avatar component. */
 export interface AvatarProps {
   initials: string;
   size?: 20 | 24 | 32;
@@ -29,6 +30,7 @@ export function Avatar({ initials, size = 24, status }: AvatarProps) {
   );
 }
 
+/** Public AvatarStackProps contract for the Avatar component. */
 export interface AvatarStackProps {
   people: AvatarProps[];
   overflow?: number;

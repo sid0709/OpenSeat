@@ -28,3 +28,4 @@ Thumbs.db
 playwright-report/
 test-results/
 blob-report/
+*.tsbuildinfo

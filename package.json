@@ -9,17 +9,50 @@
     "tools/*"
   ],
   "scripts": {
-    "lint": "turbo run lint",
-    "lint:fix": "turbo run lint:fix",
+    "lint": "node tools/check-workspaces.mjs && eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix --max-warnings=0",
     "typecheck": "turbo run typecheck",
-    "format": "turbo run format",
-    "format:check": "turbo run format:check",
-    "test": "turbo run test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run test:policy && turbo run test",
     "test:coverage": "turbo run test:coverage",
     "build": "turbo run build",
-    "e2e": "turbo run e2e"
+    "e2e": "turbo run e2e",
+    "prepare": "husky",
+    "commitlint": "commitlint",
+    "changeset": "changeset",
+    "version-packages": "changeset version && npm install --package-lock-only",
+    "test:policy": "node --test tools/*.test.mjs",
+    "github:check": "node tools/github-baseline.mjs check",
+    "github:apply": "node tools/github-baseline.mjs apply"
   },
   "devDependencies": {
-    "turbo": "^2.11.2"
+    "@changesets/cli": "^3.0.3",
+    "@vitest/eslint-plugin": "^1.6.27",
+    "eslint-plugin-jsdoc": "^64.5.4",
+    "turbo": "^2.11.2",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^3.10.1",
+    "eslint-plugin-import": "^2.32.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.1",
+    "prettier": "^3.9.8",
+    "typescript-eslint": "^8.70.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11 <12"
+  },
+  "lint-staged": {
+    "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ],
+    "*.{json,css,scss,md,mdx,yml,yaml}": "prettier --write"
   }
 }

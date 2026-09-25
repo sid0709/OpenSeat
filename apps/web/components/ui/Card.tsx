@@ -2,6 +2,7 @@
 
 import type { HTMLAttributes, ReactNode } from "react";
 
+/** Public CardProps contract for the Card component. */
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   title?: string;
   meta?: string;
@@ -14,6 +15,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   raised?: boolean;
 }
 
+/** Groups related content with optional metadata and footer actions. */
 export function Card({
   title,
   meta,

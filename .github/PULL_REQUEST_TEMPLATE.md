@@ -24,6 +24,9 @@ Closes #
 - [ ] `npm run typecheck` passes
 - [ ] `npm run format:check` passes
 - [ ] `npm run build` passes
+- [ ] `npm run test:coverage` and `npm run e2e` pass with no skipped tests
+- [ ] A changeset is included for user-facing changes
+- [ ] Required owner/senior reviews are requested (see docs/CONTRIBUTING.md)
 - [ ] Tests were added or updated where applicable
 
 ## Documentation
@@ -47,5 +50,5 @@ N/A
 - [ ] No commented-out code is included
 - [ ] TODO comments reference a tracked issue
 - [ ] No secrets or credentials are committed
-- [ ] Public APIs/types are documented where appropriate
+- [ ] All exported functions/types have JSDoc/TSDoc
 - [ ] Package boundaries are respected

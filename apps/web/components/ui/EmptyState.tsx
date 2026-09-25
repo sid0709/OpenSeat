@@ -2,6 +2,7 @@
 
 import { Button } from "./Button";
 
+/** Public EmptyStateProps contract for the EmptyState component. */
 export interface EmptyStateProps {
   title?: string;
   description?: string;

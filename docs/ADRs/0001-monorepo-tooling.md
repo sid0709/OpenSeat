@@ -1,44 +1,46 @@
-# ADR 0001: Monorepo Tooling
+# ADR 0001: npm workspaces and Turborepo
 
 - Status: Accepted
 - Date: 2026-09-22
-- Decision Owners: OpenSeat Engineering
 
 ## Context
 
-OpenSeat requires a repository structure that can support multiple
-applications, shared packages, development tools, and infrastructure
-configuration while maintaining consistent engineering standards.
-
-The repository must support:
-
-- multiple applications under `apps/`
-- reusable packages under `packages/`
-- repository tooling under `tools/`
-- infrastructure configuration under `infra/`
-- shared linting, formatting, type-checking, testing, and build commands
-- deterministic dependency installation
-- dependency-aware task execution
-- local and CI caching
-- clear package boundaries
-- incremental growth without requiring contributors to understand
-  repository-specific tribal knowledge
-
-The initial OpenSeat codebase consisted of a single Next.js application.
-The architecture must allow the repository to grow without requiring a
-future migration away from a single-project layout.
+OpenSeat starts with one Next.js application and needs shared packages without
+independent lockfiles or inconsistent build and test commands.
 
 ## Decision
 
-OpenSeat will use:
-
-1. npm workspaces for dependency and workspace management.
-2. Turborepo for task orchestration and caching.
-3. A single repository-level `package-lock.json`.
-4. A standard workspace layout:
+Use npm workspaces with one root lockfile and Turborepo for dependency-aware tasks
+and caching. npm ships with Node and minimizes onboarding requirements. Turborepo
+adds incremental execution without imposing a framework or code generator.
 
 ```text
-apps/
-packages/
-tools/
-infra/
+apps/*       deployable applications
+packages/*   reusable libraries with public entry points
+ tools/*     repository tooling (workspace packages or root scripts)
+infra/*      deployment and infrastructure configuration
+```
+
+Use Node 24 and npm 11.13.0. `npm ci` is the reproducible installation command.
+All packages extend `tsconfig.base.json` and use the root ESLint and Prettier policy.
+Each workspace supplies lint, typecheck, test, test:coverage, and build scripts.
+Only apps with browser behavior need e2e. Root commands orchestrate workspace tasks.
+
+Libraries declare public `exports` and dependencies explicitly. Import another
+workspace only by its package name, never a relative filesystem path or private
+subpath. Libraries cannot depend on apps; apps cannot depend on other apps.
+The lint pipeline checks the manifest graph for cycles and validates the script
+contract; ESLint checks source cycles and import boundaries.
+
+Turborepo hashes root policy/configuration along with package inputs. CI caches
+`.turbo` per job; build outputs include `.next` and `dist`. E2E is never cached.
+
+## Alternatives and consequences
+
+pnpm offers efficient shared storage but introduces another required installation.
+Yarn also works but offers no needed advantage for this initial repository. Nx has
+useful generators and graph tooling but adds conventions beyond current needs.
+npm plus Turbo keeps familiar package scripts and leaves migration possible.
+
+Maintainers must add owners, public exports, scripts, tests, and TypeScript config
+when creating a workspace. The graph validator makes omissions fail in CI.

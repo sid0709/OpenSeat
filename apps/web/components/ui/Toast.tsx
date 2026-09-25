@@ -2,8 +2,10 @@
 
 import type { ReactNode } from "react";
 
+/** Public ToastTone contract for the Toast component. */
 export type ToastTone = "neutral" | "success" | "warning" | "danger";
 
+/** Public ToastProps contract for the Toast component. */
 export interface ToastProps {
   message: string;
   tone?: ToastTone;

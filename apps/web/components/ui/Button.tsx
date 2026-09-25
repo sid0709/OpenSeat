@@ -4,9 +4,12 @@ import { forwardRef } from "react";
 
 import type { ButtonHTMLAttributes } from "react";
 
+/** Public ButtonVariant contract for the Button component. */
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
+/** Public ButtonSize contract for the Button component. */
 export type ButtonSize = "sm" | "md" | "lg";
 
+/** Public ButtonProps contract for the Button component. */
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;

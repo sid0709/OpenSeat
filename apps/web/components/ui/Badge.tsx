@@ -1,5 +1,7 @@
+/** Public BadgeTone contract for the Badge component. */
 export type BadgeTone = "neutral" | "primary" | "success" | "warning" | "danger" | "outline";
 
+/** Public BadgeProps contract for the Badge component. */
 export interface BadgeProps {
   label: string;
   tone?: BadgeTone;

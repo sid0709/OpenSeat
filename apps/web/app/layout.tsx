@@ -8,11 +8,13 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+/** Page metadata for browser titles and search previews. */
 export const metadata: Metadata = {
   title: "OpenSeat",
   description: "A permissioned help marketplace — sealed job rooms, invited bidders.",
 };
 
+/** Shared document shell and theme for every route. */
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html

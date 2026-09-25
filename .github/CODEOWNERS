@@ -1,31 +1,11 @@
-# OpenSeat CODEOWNERS
-#
-# Replace placeholder owners below with real GitHub usernames or teams
-# before merging this configuration.
-
-# Default repository ownership
-* odu-523
-
-# Web application
-/apps/web/ odu-523
-
-# Shared packages
-/packages/ odu-523
-
-# Repository tooling
-/tools/ odu-523
-
-# Infrastructure
-/infra/ odu-523
-
-# CI/CD and repository governance
-/.github/ odu-523
-
-# Architecture and engineering documentation
-/docs/ odu-523
-
-# Root monorepo configuration
-/package.json odu-523
-/package-lock.json odu-523
-/turbo.json odu-523
-/tsconfig.base.json odu-523
+# Existing owner retained; maintainers must verify write access and assign senior reviewers.
+* @odu-523
+/apps/ @odu-523
+/apps/web/ @odu-523
+/packages/ @odu-523
+/tools/ @odu-523
+/infra/ @odu-523
+/.github/ @odu-523
+/.husky/ @odu-523
+/.changeset/ @odu-523
+/docs/ @odu-523

@@ -58,10 +58,12 @@ function Section({
   );
 }
 
+/** Page metadata for browser titles and search previews. */
 export const metadata = {
   title: "Style guide — OpenSeat",
 };
 
+/** Reference gallery for consistent component usage. */
 export default function StyleGuidePage() {
   return (
     <div className="min-h-screen bg-canvas px-6 py-8 md:px-12">

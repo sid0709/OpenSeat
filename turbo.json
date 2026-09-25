@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["PAGES_BUILD"],
   "tasks": {
     "lint": {
       "outputs": []
@@ -9,7 +10,8 @@
       "outputs": []
     },
     "typecheck": {
-      "outputs": []
+      "outputs": [],
+      "dependsOn": ["^build"]
     },
     "format": {
       "cache": false,
@@ -19,25 +21,29 @@
       "outputs": []
     },
     "test": {
-      "outputs": []
+      "outputs": [],
+      "dependsOn": ["^build"]
     },
     "test:coverage": {
-      "outputs": ["coverage/**"]
+      "outputs": ["coverage/**"],
+      "dependsOn": ["^build"]
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [
-        ".next/**",
-        "!.next/cache/**",
-        "dist/**"
-      ]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "e2e": {
       "cache": false,
-      "outputs": [
-        "playwright-report/**",
-        "test-results/**"
-      ]
+      "outputs": ["playwright-report/**", "test-results/**"],
+      "passThroughEnv": ["PLAYWRIGHT_CHANNEL"]
     }
-  }
+  },
+  "globalDependencies": [
+    "tsconfig.base.json",
+    "eslint.config.mjs",
+    "tools/**",
+    ".prettierrc.json",
+    ".prettierignore",
+    "package-lock.json"
+  ]
 }

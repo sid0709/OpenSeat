@@ -1,12 +1,15 @@
 import Image from "next/image";
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+/** Application landing page with onboarding links. */
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
+          src={`${publicBasePath}/next.svg`}
           alt="Next.js logo"
           width={100}
           height={20}
@@ -47,7 +50,7 @@ export default function Home() {
           >
             <Image
               className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
+              src={`${publicBasePath}/vercel.svg`}
               alt="Vercel logomark"
               width={16}
               height={14}
@@ -64,7 +67,7 @@ export default function Home() {
           </a>
           <a
             className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="/style-guide#tokens"
+            href={`${publicBasePath}/style-guide#tokens`}
           >
             Design tokens
           </a>

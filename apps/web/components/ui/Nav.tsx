@@ -3,12 +3,14 @@
 import { Avatar } from "./Avatar";
 import { Button } from "./Button";
 
+/** Public NavItem contract for the Nav component. */
 export interface NavItem {
   label: string;
   active?: boolean;
   href?: string;
 }
 
+/** Public NavProps contract for the Nav component. */
 export interface NavProps {
   brand?: string;
   items?: NavItem[];
