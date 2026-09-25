@@ -83,6 +83,11 @@ export type { UseFileDropOptions, FileDropProps } from "./useFileDrop";
 export { Rating, RATING_MAX } from "./Rating";
 export type { RatingProps } from "./Rating";
 
+export { Notification, NotificationList } from "./Notification";
+export type { NotificationProps, NotificationListProps, NotificationTone } from "./Notification";
+export { NotificationViewport, useNotification } from "./NotificationTrigger";
+export type { NotificationPosition, ShowNotificationOptions, NotificationDismiss } from "./NotificationTrigger";
+
 // OpenSeat pickers — typed segments plus a dial, wheels, or slot list.
 export { TimeInput } from "./TimeInput";
 export type { TimeInputProps, TimeInputVariant, HourCycle, MinuteStep } from "./TimeInput";

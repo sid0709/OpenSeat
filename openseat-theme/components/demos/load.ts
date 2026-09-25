@@ -58,6 +58,7 @@ export const DEMO_LOADERS: Record<string, DemoLoader> = {
   typeahead: () => import("./typeahead"),
   badge: () => import("./badge"),
   banner: () => import("./banner"),
+  notification: () => import("./notification"),
   "progress-bar": () => import("./progress-bar"),
   skeleton: () => import("./skeleton"),
   spinner: () => import("./spinner"),

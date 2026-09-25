@@ -5,6 +5,7 @@ import { Theme, type ThemeMode } from "@astryxdesign/core/theme";
 import { LinkProvider, type LinkComponentType } from "@astryxdesign/core/Link";
 import { LayerProvider } from "@astryxdesign/core/Layer";
 import { ToastViewport, type ToastPosition } from "@astryxdesign/core/Toast";
+import { NotificationViewport } from "../components/NotificationTrigger";
 import { openseatTheme } from "./openseat";
 
 export type ColorMode = ThemeMode;
@@ -28,7 +29,9 @@ export interface OpenSeatProviderProps {
 export function OpenSeatProvider({ children, mode = "system", linkComponent, toastPosition = "bottomEnd" }: OpenSeatProviderProps) {
   const layered = (
     <LayerProvider>
-      <ToastViewport position={toastPosition}>{children}</ToastViewport>
+      <ToastViewport position={toastPosition}>
+        <NotificationViewport>{children}</NotificationViewport>
+      </ToastViewport>
     </LayerProvider>
   );
   return (

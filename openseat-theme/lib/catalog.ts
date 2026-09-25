@@ -115,6 +115,7 @@ export const CATALOG: CatalogGroup[] = [
     items: [
       { slug: "badge", title: "Badge", description: "Status and category labels — icons, counts, lifecycles, and list rows.", importName: "Badge" },
       { slug: "banner", title: "Banner", description: "Page and section messages — dismissable, actionable, collapsible, elevated.", importName: "Banner" },
+      { slug: "notification", title: "Notification", description: "An inbox row, plus useNotification to show a message at any corner.", importName: "Notification" },
       { slug: "progress-bar", title: "Progress Bar", description: "Values, variants, milestones, live uploads, and quota thresholds.", importName: "ProgressBar" },
       { slug: "skeleton", title: "Skeleton", description: "Loading shapes that match real layouts — cards, rows, and articles.", importName: "Skeleton" },
       { slug: "spinner", title: "Spinner", description: "Indeterminate waits — sizes, shades, labels, and loading regions.", importName: "Spinner" },

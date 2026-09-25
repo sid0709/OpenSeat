@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { Layout, LayoutContent, LayoutFooter } from "./LayoutPrimitives";
 import { Dialog, DialogHeader, type DialogPurpose } from "./Overlay";
 
@@ -10,6 +10,9 @@ export type DrawerSize = "sm" | "md" | "lg" | "full";
 /** Panel length along the drawer's axis: width for start/end, height for top/bottom. */
 const LENGTH: Record<Exclude<DrawerSize, "full">, number> = { sm: 360, md: 480, lg: 720 };
 const FULL = "100%";
+
+/** Flush to the viewport. A radius leaves a crescent of the scrim in each corner. */
+const FLUSH = { borderRadius: 0, "--_dialog-radius": "0px" } as CSSProperties;
 
 export interface DrawerProps {
   isOpen: boolean;
@@ -80,7 +83,11 @@ export function Drawer({
       position={position}
       width={horizontal ? length : FULL}
       maxHeight={horizontal ? FULL : length}
-      style={horizontal ? { height: FULL } : { height: length, width: FULL, maxWidth: FULL }}
+      style={
+        horizontal
+          ? { height: FULL, maxWidth: FULL, ...FLUSH }
+          : { height: length, width: FULL, maxWidth: FULL, ...FLUSH }
+      }
     >
       <Layout
         height="fill"
