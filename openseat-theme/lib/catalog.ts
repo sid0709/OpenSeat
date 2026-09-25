@@ -115,6 +115,7 @@ export const CATALOG: CatalogGroup[] = [
     items: [
       { slug: "badge", title: "Badge", description: "Status and category labels — icons, counts, lifecycles, and list rows.", importName: "Badge" },
       { slug: "banner", title: "Banner", description: "Page and section messages — dismissable, actionable, collapsible, elevated.", importName: "Banner" },
+      { slug: "notification", title: "Notification", description: "An inbox row, plus useNotification to show a message at any corner.", importName: "Notification" },
       { slug: "progress-bar", title: "Progress Bar", description: "Values, variants, milestones, live uploads, and quota thresholds.", importName: "ProgressBar" },
       { slug: "skeleton", title: "Skeleton", description: "Loading shapes that match real layouts — cards, rows, and articles.", importName: "Skeleton" },
       { slug: "spinner", title: "Spinner", description: "Indeterminate waits — sizes, shades, labels, and loading regions.", importName: "Spinner" },
@@ -142,6 +143,7 @@ export const CATALOG: CatalogGroup[] = [
       { slug: "command-palette", title: "Command Palette", description: "⌘K actions with shortcuts, a people finder, and an inline palette.", importName: "CommandPalette" },
       { slug: "context-menu", title: "Context Menu", description: "Right-click menus with icons, submenus, sections, and destructive actions.", importName: "ContextMenu" },
       { slug: "dialog", title: "Dialog", description: "Confirm, alert, form, info, fullscreen, and imperative dialogs.", importName: "Dialog" },
+      { slug: "drawer", title: "Drawer", description: "Edge panels for details, edits, and filters — any side, any size, with sticky actions.", importName: "Drawer" },
       { slug: "hover-card", title: "Hover Card", description: "Rich previews for people and rooms — placement and delays.", importName: "HoverCard" },
       { slug: "popover", title: "Popover", description: "Filter panels, controlled forms, profile menus, and info popovers.", importName: "Popover" },
       { slug: "tooltip", title: "Tooltip", description: "Labels, shortcuts, placement, delays, truncation, and disabled controls.", importName: "Tooltip" },
@@ -151,6 +153,7 @@ export const CATALOG: CatalogGroup[] = [
     category: "Table & list",
     icon: "viewColumns",
     items: [
+      { slug: "kanban", title: "Kanban Board", description: "Jira-style boards — drag cards across columns and swimlanes, WIP limits, keyboard moves.", importName: "KanbanBoard" },
       { slug: "list", title: "List", description: "Markers, density, rich rows, selection, links, checklists, and notifications.", importName: "List" },
       { slug: "metadata-list", title: "Metadata List", description: "Label and value pairs — top or start labels, columns, icons, and show more.", importName: "MetadataList" },
       { slug: "overflow-list", title: "Overflow List", description: "Fits what it can and counts the rest — badges, tokens, avatars, and actions.", importName: "OverflowList" },
