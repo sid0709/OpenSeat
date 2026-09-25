@@ -170,11 +170,32 @@ button.os-note-main:hover {
   outline-offset: 1px;
 }
 
-/* Triggered messages — a card at a viewport corner. */
+/* Triggered messages — a card at a viewport corner.
+   The layer is a manual popover so it paints above sticky chrome such as
+   the side nav search, the same way toasts do. */
+
+.os-note-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.os-note-layer:popover-open {
+  display: block;
+}
 
 .os-note-stack {
   position: fixed;
-  z-index: var(--z-toast);
+  z-index: 500;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);

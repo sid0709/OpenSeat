@@ -104,14 +104,27 @@ export function useNotification(): (options: ShowNotificationOptions) => Notific
 }
 
 function NotificationStacks({ items, onDismiss, onRemove }: { items: Notice[]; onDismiss: (id: number) => void; onRemove: (id: number) => void }) {
+  const layerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    const layer = layerRef.current;
+    if (!layer || typeof layer.showPopover !== "function") return;
+    const open = items.length > 0;
+    const isOpen = layer.matches(":popover-open");
+    if (open && !isOpen) layer.showPopover();
+    if (!open && isOpen) layer.hidePopover();
+  }, [items.length]);
+
   if (!mounted) return null;
 
   return createPortal(
-    POSITIONS.map((position) => (
-      <NotificationStack key={position} position={position} items={items.filter((item) => item.position === position)} onDismiss={onDismiss} onRemove={onRemove} />
-    )),
+    <div ref={layerRef} popover="manual" className="os-note-layer">
+      {POSITIONS.map((position) => (
+        <NotificationStack key={position} position={position} items={items.filter((item) => item.position === position)} onDismiss={onDismiss} onRemove={onRemove} />
+      ))}
+    </div>,
     document.body,
   );
 }
