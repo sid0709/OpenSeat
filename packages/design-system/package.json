@@ -15,15 +15,12 @@
     "./styles/tokens.css": "./src/styles/tokens.css",
     "./theme": "./src/theme/index.ts"
   },
-  "scripts": {
-    "lint": "eslint src --config eslint.config.mjs --max-warnings=0",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
-    "build": "tsc --noEmit -p tsconfig.json",
-    "theme:build": "astryx theme build src/theme/openseat.theme.ts -o src/theme/theme.css"
-  },
   "peerDependencies": {
     "react": ">=19",
     "react-dom": ">=19"
+  },
+  "scripts": {
+    "theme:build": "astryx theme build src/theme/openseat.theme.ts -o src/theme/theme.css"
   },
   "dependencies": {
     "@astryxdesign/core": "^0.6.2",

@@ -1,15 +1,7 @@
 "use client";
 
 import { useEffect, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
-
-import {
-  spacing,
-  tierFor,
-  type ResponsiveTo,
-  type SpacingStep,
-  type Tier,
-  type TierOrBase,
-} from "./breakpoints";
+import { spacing, tierFor, type ResponsiveTo, type SpacingStep, type Tier, type TierOrBase } from "./breakpoints";
 
 /** Live content-box width of an element; 0 until measured. */
 export function useElementWidth(ref: RefObject<HTMLElement | null>) {
@@ -17,13 +9,9 @@ export function useElementWidth(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new ResizeObserver(([entry]) => {
-      setWidth(Math.round(entry.contentRect.width));
-    });
+    const observer = new ResizeObserver(([entry]) => setWidth(Math.round(entry.contentRect.width)));
     observer.observe(el);
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [ref]);
   return width;
 }
@@ -37,21 +25,14 @@ export function useContainerBreakpoint(ref: RefObject<HTMLElement | null>): Tier
 export function useViewportBreakpoint(): TierOrBase {
   const [width, setWidth] = useState(0);
   useEffect(() => {
-    const update = () => {
-      setWidth(window.innerWidth);
-    };
+    const update = () => setWidth(window.innerWidth);
     update();
     window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("resize", update);
-    };
+    return () => window.removeEventListener("resize", update);
   }, []);
   return tierFor(width, "viewport");
 }
 
-/**
- *
- */
 export interface ResponsiveContainerProps {
   children: ReactNode;
   className?: string;
@@ -67,9 +48,6 @@ export function ResponsiveContainer({ children, className, style }: ResponsiveCo
   );
 }
 
-/**
- *
- */
 export interface ResponsiveStackProps {
   children: ReactNode;
   /** Tier where the stack turns from a column into a row. */
@@ -113,9 +91,6 @@ export function ResponsiveStack({
   );
 }
 
-/**
- *
- */
 export interface ShowProps {
   children: ReactNode;
   /** Visible at this tier and wider. */

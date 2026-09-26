@@ -1,19 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Card,
-  HStack,
-  Heading,
-  Icon,
-  MoreMenu,
-  Stack,
-  Table,
-  Text,
-  icons,
-  type DropdownMenuOption,
-  type TableColumn,
-} from "@openseat/design-system";
+import { Card, HStack, Heading, Icon, MoreMenu, Stack, Table, Text, icons, type DropdownMenuOption, type TableColumn } from "@openseat/design-system";
 import { Caption, Examples, Preview, Row } from "./shared";
 
 type Room = { id: string; name: string; bids: number };
@@ -44,24 +32,13 @@ export default function MoreMenuDemo() {
       header: "",
       align: "end",
       width: 48,
-      render: (row) => (
-        <MoreMenu
-          label={`Actions for ${row.name}`}
-          variant="ghost"
-          size="sm"
-          items={roomActions(row.name)}
-        />
-      ),
+      render: (row) => <MoreMenu label={`Actions for ${row.name}`} variant="ghost" size="sm" items={roomActions(row.name)} />,
     },
   ];
 
   return (
     <Examples>
-      <Preview
-        align="start"
-        label="Default"
-        description="The overflow trigger — three dots, never a labeled button."
-      >
+      <Preview align="start" label="Default" description="The overflow trigger — three dots, never a labeled button.">
         <Stack gap={2} hAlign="start">
           <Row>
             <MoreMenu items={roomActions("room")} />
@@ -82,21 +59,8 @@ export default function MoreMenuDemo() {
 
       <Preview align="start" label="Custom icon">
         <Row>
-          <MoreMenu
-            label="Settings"
-            icon={<Icon icon={icons.settings} />}
-            variant="ghost"
-            items={[{ label: "Preferences" }, { label: "Keyboard shortcuts" }]}
-          />
-          <MoreMenu
-            label="Share"
-            icon={<Icon icon={icons.share} />}
-            variant="ghost"
-            items={[
-              { label: "Copy link", icon: icons.link },
-              { label: "Email", icon: icons.mail },
-            ]}
-          />
+          <MoreMenu label="Settings" icon={<Icon icon={icons.settings} />} variant="ghost" items={[{ label: "Preferences" }, { label: "Keyboard shortcuts" }]} />
+          <MoreMenu label="Share" icon={<Icon icon={icons.share} />} variant="ghost" items={[{ label: "Copy link", icon: icons.link }, { label: "Email", icon: icons.mail }]} />
         </Row>
       </Preview>
 
@@ -115,14 +79,7 @@ export default function MoreMenuDemo() {
             {
               type: "section",
               title: "Danger zone",
-              items: [
-                {
-                  label: "Delete",
-                  icon: icons.trash,
-                  variant: "destructive",
-                  onClick: run("Delete"),
-                },
-              ],
+              items: [{ label: "Delete", icon: icons.trash, variant: "destructive", onClick: run("Delete") }],
             },
           ]}
         />
@@ -153,18 +110,8 @@ export default function MoreMenuDemo() {
             label="Project actions"
             presentation="bottom-sheet"
             items={[
-              {
-                label: "Rename project",
-                description: "Update the project title.",
-                icon: icons.edit,
-                onClick: run("Rename project"),
-              },
-              {
-                label: "Share project",
-                description: "Invite collaborators.",
-                icon: icons.share,
-                onClick: run("Share project"),
-              },
+              { label: "Rename project", description: "Update the project title.", icon: icons.edit, onClick: run("Rename project") },
+              { label: "Share project", description: "Invite collaborators.", icon: icons.share, onClick: run("Share project") },
             ]}
           />
         </Row>

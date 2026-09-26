@@ -2,9 +2,6 @@
 
 import { useCallback, useRef, useState, type ClipboardEvent, type DragEvent } from "react";
 
-/**
- *
- */
 export interface UseFileDropOptions {
   onFiles: (files: File[]) => void;
   isDisabled?: boolean;
@@ -12,9 +9,6 @@ export interface UseFileDropOptions {
   hasPaste?: boolean;
 }
 
-/**
- *
- */
 export interface FileDropProps {
   onDragEnter: (event: DragEvent<HTMLElement>) => void;
   onDragOver: (event: DragEvent<HTMLElement>) => void;

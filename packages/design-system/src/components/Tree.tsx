@@ -1,13 +1,9 @@
 "use client";
 
 import { useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
-
 import { Glyph } from "./Glyph";
 import { useControllable } from "./hooks";
 
-/**
- *
- */
 export interface TreeNode {
   id: string;
   label: string;
@@ -28,14 +24,8 @@ export interface TreeNode {
  * checkbox  — tri-state checks that roll up to parents.
  */
 export type TreeVariant = "guides" | "explorer" | "cards" | "selection" | "checkbox";
-/**
- *
- */
 export type TreeCheckState = "checked" | "unchecked" | "mixed";
 
-/**
- *
- */
 export interface TreeProps {
   nodes: TreeNode[];
   variant?: TreeVariant;
@@ -95,16 +85,8 @@ export function Tree({
   highlight,
   label = "Tree",
 }: TreeProps) {
-  const [expandedList, setExpandedList] = useControllable(
-    expandedProp,
-    defaultExpanded,
-    onExpandedChange,
-  );
-  const [checkedList, setCheckedList] = useControllable(
-    checkedProp,
-    defaultChecked,
-    onCheckedChange,
-  );
+  const [expandedList, setExpandedList] = useControllable(expandedProp, defaultExpanded, onExpandedChange);
+  const [checkedList, setCheckedList] = useControllable(checkedProp, defaultChecked, onCheckedChange);
   const expanded = useMemo(() => new Set(expandedList), [expandedList]);
   const checked = useMemo(() => new Set(checkedList), [checkedList]);
   const [focusedId, setFocusedId] = useState<string | null>(null);
@@ -122,9 +104,7 @@ export function Tree({
     return out;
   }, [nodes, expanded]);
 
-  const tabStop = visible.some((row) => row.node.id === focusedId)
-    ? focusedId
-    : visible[0]?.node.id;
+  const tabStop = visible.some((row) => row.node.id === focusedId) ? focusedId : visible[0]?.node.id;
 
   function focus(id: string | undefined) {
     if (!id) return;
@@ -167,44 +147,14 @@ export function Tree({
     const hasChildren = Boolean(node.children?.length);
     const open = expanded.has(node.id);
     const moves: Record<string, () => void> = {
-      ArrowDown: () => {
-        focus(visible[index + 1]?.node.id);
-      },
-      ArrowUp: () => {
-        focus(visible[index - 1]?.node.id);
-      },
-      Home: () => {
-        focus(visible[0]?.node.id);
-      },
-      End: () => {
-        focus(visible[visible.length - 1]?.node.id);
-      },
-      ArrowRight: () => {
-        if (!hasChildren) return;
-        if (!open) {
-          toggleOpen(node.id, true);
-          return;
-        }
-        const firstChild = node.children?.[0];
-        if (firstChild) focus(firstChild.id);
-      },
-      ArrowLeft: () => {
-        if (hasChildren && open) {
-          toggleOpen(node.id, false);
-        } else {
-          focus(row.parent ?? undefined);
-        }
-      },
-      Enter: () => {
-        activate(node);
-      },
-      " ": () => {
-        if (variant === "checkbox") {
-          if (!node.disabled) toggleCheck(node);
-          return;
-        }
-        activate(node);
-      },
+      ArrowDown: () => focus(visible[index + 1]?.node.id),
+      ArrowUp: () => focus(visible[index - 1]?.node.id),
+      Home: () => focus(visible[0]?.node.id),
+      End: () => focus(visible[visible.length - 1]?.node.id),
+      ArrowRight: () => (hasChildren && !open ? toggleOpen(node.id, true) : hasChildren && focus(node.children![0].id)),
+      ArrowLeft: () => (hasChildren && open ? toggleOpen(node.id, false) : focus(row.parent ?? undefined)),
+      Enter: () => activate(node),
+      " ": () => (variant === "checkbox" ? !node.disabled && toggleCheck(node) : activate(node)),
     };
     const move = moves[event.key];
     if (!move) return;
@@ -221,10 +171,7 @@ export function Tree({
       const selected = selectedId === node.id;
       const state = variant === "checkbox" ? checkState(node) : null;
       const icon =
-        node.leading ??
-        (variant === "explorer" ? (
-          <Glyph name={hasChildren ? (open ? "folderOpen" : "folder") : "file"} />
-        ) : null);
+        node.leading ?? (variant === "explorer" ? <Glyph name={hasChildren ? (open ? "folderOpen" : "folder") : "file"} /> : null);
 
       return (
         <li
@@ -242,22 +189,12 @@ export function Tree({
           aria-disabled={node.disabled || undefined}
           tabIndex={tabStop === node.id ? 0 : -1}
           onFocus={(event) => event.target === event.currentTarget && setFocusedId(node.id)}
-          onKeyDown={(event) => {
-            onKeyDown(event, row, index);
-          }}
+          onKeyDown={(event) => onKeyDown(event, row, index)}
         >
           <div
-            className={[
-              "os-tree-row",
-              selected && "os-tree-row-selected",
-              node.disabled && "os-tree-row-disabled",
-            ]
-              .filter(Boolean)
-              .join(" ")}
+            className={["os-tree-row", selected && "os-tree-row-selected", node.disabled && "os-tree-row-disabled"].filter(Boolean).join(" ")}
             style={{ ["--os-tree-depth" as string]: depth }}
-            onClick={() => {
-              activate(node);
-            }}
+            onClick={() => activate(node)}
           >
             {Array.from({ length: depth }, (_, i) => (
               <span key={i} className="os-tree-indent" aria-hidden />
@@ -280,17 +217,7 @@ export function Tree({
                 {state === "mixed" && <Glyph name="minus" />}
               </span>
             )}
-            {icon && (
-              <span
-                className={
-                  variant === "explorer" && !node.leading
-                    ? "os-tree-lead os-tree-icon"
-                    : "os-tree-lead"
-                }
-              >
-                {icon}
-              </span>
-            )}
+            {icon && <span className={variant === "explorer" && !node.leading ? "os-tree-lead os-tree-icon" : "os-tree-lead"}>{icon}</span>}
             <span className="os-tree-text">
               <span className="os-tree-label">
                 <Highlight text={node.label} query={highlight} />

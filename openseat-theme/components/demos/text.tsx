@@ -3,16 +3,7 @@
 import { HStack, Stack, Text, type TextColor, type TextType } from "@openseat/design-system";
 import { Caption, Examples, Preview } from "./shared";
 
-const TYPES: TextType[] = [
-  "display-1",
-  "display-2",
-  "display-3",
-  "large",
-  "body",
-  "label",
-  "supporting",
-  "code",
-];
+const TYPES: TextType[] = ["display-1", "display-2", "display-3", "large", "body", "label", "supporting", "code"];
 const SIZES = ["4xs", "3xs", "2xs", "xsm", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl"] as const;
 const WEIGHTS = ["normal", "medium", "semibold", "bold"] as const;
 const COLORS: TextColor[] = ["primary", "secondary", "accent", "placeholder", "disabled"];
@@ -24,10 +15,7 @@ const PRICES = ["$2,400.00", "$11,150.50", "$980.25", "$14,111.00"];
 export default function TextDemo() {
   return (
     <Examples>
-      <Preview
-        label="Types"
-        description="type sets size, weight, and line height together. Prefer it over size."
-      >
+      <Preview label="Types" description="type sets size, weight, and line height together. Prefer it over size.">
         <Stack gap={3}>
           {TYPES.map((type) => (
             <HStack key={type} gap={3} vAlign="center" wrap="wrap">
@@ -40,10 +28,7 @@ export default function TextDemo() {
         </Stack>
       </Preview>
 
-      <Preview
-        label="Size override"
-        description="size changes only the font size and keeps the type’s other traits."
-      >
+      <Preview label="Size override" description="size changes only the font size and keeps the type’s other traits.">
         <Stack gap={2}>
           {SIZES.map((size) => (
             <HStack key={size} gap={3} vAlign="center">
@@ -66,10 +51,7 @@ export default function TextDemo() {
         </Stack>
       </Preview>
 
-      <Preview
-        label="Colors"
-        description="primary for content, secondary for support, accent sparingly, placeholder and disabled for empty and inactive."
-      >
+      <Preview label="Colors" description="primary for content, secondary for support, accent sparingly, placeholder and disabled for empty and inactive.">
         <Stack gap={1}>
           {COLORS.map((color) => (
             <Text key={color} color={color} display="block">
@@ -79,10 +61,7 @@ export default function TextDemo() {
         </Stack>
       </Preview>
 
-      <Preview
-        label="Display"
-        description='Text is inline by default; display="block" puts it on its own line.'
-      >
+      <Preview label="Display" description="Text is inline by default; display=&quot;block&quot; puts it on its own line.">
         <Stack gap={2}>
           <div>
             <Text>Inline one.</Text> <Text color="secondary">Inline two.</Text>
@@ -96,10 +75,7 @@ export default function TextDemo() {
         </Stack>
       </Preview>
 
-      <Preview
-        label="Truncation"
-        description="maxLines clamps with an ellipsis; hasTruncateTooltip reveals the rest on hover."
-      >
+      <Preview label="Truncation" description="maxLines clamps with an ellipsis; hasTruncateTooltip reveals the rest on hover.">
         <Stack gap={3} maxWidth={NARROW}>
           <Text maxLines={1} hasTruncateTooltip display="block">
             {LONG}
@@ -113,10 +89,7 @@ export default function TextDemo() {
         </Stack>
       </Preview>
 
-      <Preview
-        label="Wrapping"
-        description="balance evens out short blocks; pretty avoids a lonely last word; nowrap keeps one line."
-      >
+      <Preview label="Wrapping" description="balance evens out short blocks; pretty avoids a lonely last word; nowrap keeps one line.">
         <Stack gap={3} maxWidth={NARROW}>
           <Text textWrap="balance" display="block">
             {LONG}
@@ -155,10 +128,7 @@ export default function TextDemo() {
         </Stack>
       </Preview>
 
-      <Preview
-        label="Tabular numbers"
-        description="hasTabularNumbers lines up digits in tables and totals."
-      >
+      <Preview label="Tabular numbers" description="hasTabularNumbers lines up digits in tables and totals.">
         <HStack gap={6}>
           <Stack gap={1} hAlign="end">
             <Caption>Default</Caption>
@@ -186,10 +156,7 @@ export default function TextDemo() {
         </HStack>
       </Preview>
 
-      <Preview
-        label="Semantic element"
-        description="as picks the tag — p for paragraphs, label for form captions — without changing the look."
-      >
+      <Preview label="Semantic element" description="as picks the tag — p for paragraphs, label for form captions — without changing the look.">
         <Stack gap={2}>
           <Text as="p">Rendered as a paragraph.</Text>
           <Text as="label" type="label">

@@ -1,14 +1,7 @@
 "use client";
 
-import { useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
-const subscribeToNothing = () => () => {
-  // Hydration state does not change after the browser mounts.
-};
-const getMountedSnapshot = () => true;
-const getServerSnapshot = () => false;
-
-/** Render browser-only children after hydration, with a server fallback. */
 export function ClientOnly({
   children,
   fallback = null,
@@ -16,7 +9,11 @@ export function ClientOnly({
   children: ReactNode;
   fallback?: ReactNode;
 }) {
-  const mounted = useSyncExternalStore(subscribeToNothing, getMountedSnapshot, getServerSnapshot);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (!mounted) return fallback;
   return children;

@@ -1,11 +1,1 @@
-# Existing owner retained; maintainers must verify write access and assign senior reviewers.
-* @odu-523
-/apps/ @odu-523
-/apps/web/ @odu-523
-/packages/ @odu-523
-/tools/ @odu-523
-/infra/ @odu-523
-/.github/ @odu-523
-/.husky/ @odu-523
-/.changeset/ @odu-523
-/docs/ @odu-523
+* @sid0709

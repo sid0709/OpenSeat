@@ -1,17 +1,10 @@
 "use client";
 
+import type { CSSProperties, ReactNode } from "react";
 import { Layout, LayoutContent, LayoutFooter } from "./LayoutPrimitives";
 import { Dialog, DialogHeader, type DialogPurpose } from "./Overlay";
 
-import type { CSSProperties, ReactNode } from "react";
-
-/**
- *
- */
 export type DrawerSide = "start" | "end" | "top" | "bottom";
-/**
- *
- */
 export type DrawerSize = "sm" | "md" | "lg" | "full";
 
 /** Panel length along the drawer's axis: width for start/end, height for top/bottom. */
@@ -21,9 +14,6 @@ const FULL = "100%";
 /** Flush to the viewport. A radius leaves a crescent of the scrim in each corner. */
 const FLUSH = { borderRadius: 0, "--_dialog-radius": "0px" } as CSSProperties;
 
-/**
- *
- */
 export interface DrawerProps {
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
@@ -101,16 +91,7 @@ export function Drawer({
     >
       <Layout
         height="fill"
-        header={
-          <DialogHeader
-            title={title}
-            subtitle={subtitle}
-            startContent={headerStart}
-            endContent={headerActions}
-            onOpenChange={onOpenChange}
-            hasDivider
-          />
-        }
+        header={<DialogHeader title={title} subtitle={subtitle} startContent={headerStart} endContent={headerActions} onOpenChange={onOpenChange} hasDivider />}
         content={<LayoutContent>{children}</LayoutContent>}
         footer={footer ? <LayoutFooter hasDivider>{footer}</LayoutFooter> : undefined}
       />

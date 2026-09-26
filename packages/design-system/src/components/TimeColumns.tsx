@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type KeyboardEvent } from "react";
-
+import type { ControlSize } from "./size";
 import {
   HOURS_PER_HALF,
   MERIDIEMS,
@@ -17,11 +17,6 @@ import {
   type MinuteStep,
 } from "./time";
 
-import type { ControlSize } from "./size";
-
-/**
- *
- */
 export interface TimeColumnsProps {
   value: string;
   onChange?: (value: string) => void;
@@ -41,24 +36,14 @@ interface ColumnProps<T extends string | number> {
   disabled?: boolean;
 }
 
-function Column<T extends string | number>({
-  label,
-  options,
-  selected,
-  render,
-  onSelect,
-  disabled,
-}: ColumnProps<T>) {
+function Column<T extends string | number>({ label, options, selected, render, onSelect, disabled }: ColumnProps<T>) {
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const list = listRef.current;
     const on = list?.querySelector<HTMLElement>("[aria-selected='true']");
     if (!list || !on) return;
-    list.scrollTo({
-      top: on.offsetTop - list.clientHeight / 2 + on.clientHeight / 2,
-      behavior: "smooth",
-    });
+    list.scrollTo({ top: on.offsetTop - list.clientHeight / 2 + on.clientHeight / 2, behavior: "smooth" });
   }, [selected]);
 
   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
@@ -87,9 +72,7 @@ function Column<T extends string | number>({
           aria-selected={option === selected}
           className="os-tcol-option"
           disabled={disabled}
-          onClick={() => {
-            onSelect(option);
-          }}
+          onClick={() => onSelect(option)}
         >
           {render(option)}
         </button>
@@ -125,9 +108,7 @@ export function TimeColumns({
         selected={h == null ? null : twelve ? to12(h) : h}
         render={twelve ? String : pad2}
         disabled={disabled}
-        onSelect={(hour) => {
-          commit({ h: twelve ? from12(hour, meridiemOf(base.h)) : hour });
-        }}
+        onSelect={(hour) => commit({ h: twelve ? from12(hour, meridiemOf(base.h)) : hour })}
       />
       <Column
         label="Minute"
@@ -135,9 +116,7 @@ export function TimeColumns({
         selected={parts?.m ?? null}
         render={pad2}
         disabled={disabled}
-        onSelect={(m) => {
-          commit({ m });
-        }}
+        onSelect={(m) => commit({ m })}
       />
       {withSeconds && (
         <Column
@@ -146,9 +125,7 @@ export function TimeColumns({
           selected={parts?.s ?? null}
           render={pad2}
           disabled={disabled}
-          onSelect={(s) => {
-            commit({ s });
-          }}
+          onSelect={(s) => commit({ s })}
         />
       )}
       {twelve && (
@@ -158,9 +135,7 @@ export function TimeColumns({
           selected={h == null ? null : meridiemOf(h)}
           render={String}
           disabled={disabled}
-          onSelect={(meridiem) => {
-            commit({ h: from12(to12(base.h), meridiem) });
-          }}
+          onSelect={(meridiem) => commit({ h: from12(to12(base.h), meridiem) })}
         />
       )}
     </div>

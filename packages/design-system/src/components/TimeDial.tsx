@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
-
+import type { ControlSize } from "./size";
 import {
   HOURS_PER_HALF,
   MINUTES_PER_HOUR,
@@ -17,8 +17,6 @@ import {
   type TimeUnit,
 } from "./time";
 
-import type { ControlSize } from "./size";
-
 /** Ring radii as a percent of the face. The 24-hour inner ring holds 00 and 13–23. */
 const OUTER_RING = 38;
 const INNER_RING = 25;
@@ -29,9 +27,6 @@ const QUARTER_TURN = 90;
 const HOUR_LABELS = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 const INNER_LABELS = [0, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
-/**
- *
- */
 export interface TimeDialProps {
   value: string;
   onChange?: (value: string) => void;
@@ -83,8 +78,7 @@ export function TimeDial({
 
     if (unit === "hour") {
       const slot = Math.round(turn / (FULL_TURN / HOURS_PER_HALF)) % HOURS_PER_HALF;
-      if (hourCycle === "24h")
-        commit({ h: distance < RING_SPLIT ? INNER_LABELS[slot] : slot === 0 ? 12 : slot });
+      if (hourCycle === "24h") commit({ h: distance < RING_SPLIT ? INNER_LABELS[slot] : slot === 0 ? 12 : slot });
       else commit({ h: from12(slot === 0 ? HOURS_PER_HALF : slot, meridiem) });
     } else {
       const snap = unit === "minute" ? minuteStep : 1;
@@ -139,10 +133,7 @@ export function TimeDial({
         className="os-dial-meridiem"
         aria-pressed={meridiem === option}
         disabled={disabled}
-        onClick={() =>
-          meridiem !== option &&
-          commit({ h: parts.h + (option === "PM" ? HOURS_PER_HALF : -HOURS_PER_HALF) })
-        }
+        onClick={() => meridiem !== option && commit({ h: parts.h + (option === "PM" ? HOURS_PER_HALF : -HOURS_PER_HALF) })}
       >
         {option}
       </button>
@@ -151,26 +142,14 @@ export function TimeDial({
 
   function unitButton(target: TimeUnit, text: string) {
     return (
-      <button
-        type="button"
-        className="os-dial-unit"
-        aria-pressed={unit === target}
-        disabled={disabled}
-        onClick={() => {
-          setUnit(target);
-        }}
-      >
+      <button type="button" className="os-dial-unit" aria-pressed={unit === target} disabled={disabled} onClick={() => setUnit(target)}>
         {text}
       </button>
     );
   }
 
   return (
-    <div
-      className={["os-dial", `os-dial-${size}`, disabled && "os-dial-disabled"]
-        .filter(Boolean)
-        .join(" ")}
-    >
+    <div className={["os-dial", `os-dial-${size}`, disabled && "os-dial-disabled"].filter(Boolean).join(" ")}>
       <div className="os-dial-readout">
         <div className="os-dial-digits">
           {unitButton("hour", hourText)}
@@ -183,9 +162,7 @@ export function TimeDial({
             </>
           )}
         </div>
-        {hourCycle === "12h" && (
-          <div className="os-dial-meridiems">{(["AM", "PM"] as const).map(meridiemButton)}</div>
-        )}
+        {hourCycle === "12h" && <div className="os-dial-meridiems">{(["AM", "PM"] as const).map(meridiemButton)}</div>}
       </div>
 
       <div
@@ -200,18 +177,14 @@ export function TimeDial({
         onPointerDown={onPointerDown}
         onPointerMove={(event) => dragging && pick(event.clientX, event.clientY)}
         onPointerUp={onPointerUp}
-        onPointerCancel={() => {
-          setDragging(false);
-        }}
+        onPointerCancel={() => setDragging(false)}
         onKeyDown={onKeyDown}
       >
         <svg className="os-dial-hand" viewBox="0 0 100 100" aria-hidden>
           <g style={{ transform: `rotate(${handTurn}deg)` }}>
             <line x1="50" y1="50" x2="50" y2={50 - handLength} />
             <circle className="os-dial-knob" cx="50" cy={50 - handLength} r="6.5" />
-            {onLabel && (
-              <circle className="os-dial-knob-dot" cx="50" cy={50 - handLength} r="1.3" />
-            )}
+            {onLabel && <circle className="os-dial-knob-dot" cx="50" cy={50 - handLength} r="1.3" />}
           </g>
           <circle className="os-dial-hub" cx="50" cy="50" r="1.8" />
         </svg>
@@ -221,11 +194,7 @@ export function TimeDial({
               const at = point(index, HOURS_PER_HALF, OUTER_RING);
               const on = hourCycle === "12h" ? to12(parts.h) === hour : !inner && parts.h === hour;
               return (
-                <span
-                  key={hour}
-                  className={on ? "os-dial-label os-dial-label-on" : "os-dial-label"}
-                  style={{ left: `${at.x}%`, top: `${at.y}%` }}
-                >
+                <span key={hour} className={on ? "os-dial-label os-dial-label-on" : "os-dial-label"} style={{ left: `${at.x}%`, top: `${at.y}%` }}>
                   {hourCycle === "24h" ? pad2(hour) : hour}
                 </span>
               );
@@ -234,11 +203,7 @@ export function TimeDial({
               const mark = index * LABEL_STEP;
               const at = point(index, HOURS_PER_HALF, OUTER_RING);
               return (
-                <span
-                  key={mark}
-                  className={active === mark ? "os-dial-label os-dial-label-on" : "os-dial-label"}
-                  style={{ left: `${at.x}%`, top: `${at.y}%` }}
-                >
+                <span key={mark} className={active === mark ? "os-dial-label os-dial-label-on" : "os-dial-label"} style={{ left: `${at.x}%`, top: `${at.y}%` }}>
                   {pad2(mark)}
                 </span>
               );
@@ -250,11 +215,7 @@ export function TimeDial({
             return (
               <span
                 key={hour}
-                className={
-                  parts.h === hour
-                    ? "os-dial-label os-dial-label-inner os-dial-label-on"
-                    : "os-dial-label os-dial-label-inner"
-                }
+                className={parts.h === hour ? "os-dial-label os-dial-label-inner os-dial-label-on" : "os-dial-label os-dial-label-inner"}
                 style={{ left: `${at.x}%`, top: `${at.y}%` }}
               >
                 {pad2(hour)}

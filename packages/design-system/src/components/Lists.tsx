@@ -6,11 +6,7 @@ export { List, ListItem } from "@astryxdesign/core/List";
 export type { ListProps, ListItemProps, ListDensity } from "@astryxdesign/core/List";
 
 export { MetadataList, MetadataListItem } from "@astryxdesign/core/MetadataList";
-export type {
-  MetadataListProps,
-  MetadataListItemProps,
-  MetadataListColumns,
-} from "@astryxdesign/core/MetadataList";
+export type { MetadataListProps, MetadataListItemProps, MetadataListColumns } from "@astryxdesign/core/MetadataList";
 
 export { OverflowList } from "@astryxdesign/core/OverflowList";
 export type { OverflowListProps, OverflowItem } from "@astryxdesign/core/OverflowList";

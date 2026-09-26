@@ -2,13 +2,7 @@ import { DEFAULT_WIDTH_BREAKPOINTS } from "@astryxdesign/core/theme";
 
 /** Responsive tiers, smallest first. `base` is everything below `sm`. */
 export const TIERS = ["sm", "md", "lg", "xl"] as const;
-/**
- *
- */
 export type Tier = (typeof TIERS)[number];
-/**
- *
- */
 export type TierOrBase = "base" | Tier;
 
 /** How a responsive component measures width. */
@@ -33,9 +27,6 @@ export const CONTAINER_TIERS: Record<Tier, number> = {
   xl: 1024,
 };
 
-/**
- *
- */
 export function tierFor(width: number, to: ResponsiveTo = "container"): TierOrBase {
   const table = to === "container" ? CONTAINER_TIERS : VIEWPORT_TIERS;
   let current: TierOrBase = "base";
@@ -46,9 +37,6 @@ export function tierFor(width: number, to: ResponsiveTo = "container"): TierOrBa
 /** Astryx spacing steps map to `--spacing-*` tokens; 1.5 becomes `--spacing-1-5`. */
 export type SpacingStep = 0 | 0.5 | 1 | 1.5 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12;
 
-/**
- *
- */
 export function spacing(step: SpacingStep) {
   return `var(--spacing-${String(step).replace(".", "-")})`;
 }

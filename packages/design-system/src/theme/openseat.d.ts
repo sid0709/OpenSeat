@@ -7,8 +7,5 @@
  */
 
 /// <reference path="./openseat.variants.d.ts" />
-import type { DefinedTheme } from "@astryxdesign/core/theme";
-export /**
- *
- */
-declare const openseatTheme: DefinedTheme;
+import type { DefinedTheme } from '@astryxdesign/core/theme';
+export declare const openseatTheme: DefinedTheme;

@@ -2,14 +2,8 @@
 
 import { useState } from "react";
 
-export /**
- *
- */
-const RATING_MAX = 5;
+export const RATING_MAX = 5;
 
-/**
- *
- */
 export interface RatingProps {
   value: number;
   onChange?: (value: number) => void;
@@ -43,9 +37,7 @@ export function Rating({
         className="os-rating-stars"
         role={interactive ? "radiogroup" : "img"}
         aria-label={interactive ? label : `${label}, ${value} of ${max}`}
-        onMouseLeave={() => {
-          setHover(null);
-        }}
+        onMouseLeave={() => setHover(null)}
       >
         {Array.from({ length: max }, (_, index) => {
           const star = index + 1;
@@ -65,15 +57,9 @@ export function Rating({
               aria-checked={value === star}
               aria-label={`${star} of ${max}`}
               className={filled ? "os-star os-star-on" : "os-star"}
-              onMouseEnter={() => {
-                setHover(star);
-              }}
-              onFocus={() => {
-                setHover(star);
-              }}
-              onBlur={() => {
-                setHover(null);
-              }}
+              onMouseEnter={() => setHover(star)}
+              onFocus={() => setHover(star)}
+              onBlur={() => setHover(null)}
               onClick={() => onChange?.(star)}
             >
               ★

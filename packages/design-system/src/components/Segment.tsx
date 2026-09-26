@@ -14,9 +14,6 @@ function focusSibling(from: HTMLElement, offset: 1 | -1) {
   list[list.indexOf(from) + offset]?.focus();
 }
 
-/**
- *
- */
 export interface NumberSegmentProps {
   value: number | null;
   min: number;
@@ -35,17 +32,7 @@ export interface NumberSegmentProps {
  * One typed part of a date or time. Digits fill it and hop to the next part;
  * arrows step and wrap; Backspace clears, then moves back.
  */
-export function NumberSegment({
-  value,
-  min,
-  max,
-  digits,
-  placeholder,
-  label,
-  onChange,
-  format,
-  disabled,
-}: NumberSegmentProps) {
+export function NumberSegment({ value, min, max, digits, placeholder, label, onChange, format, disabled }: NumberSegmentProps) {
   // State drives what is shown; the ref is what handlers read, so fast typing
   // and the blur that follows an auto-advance never see a stale buffer.
   const [buffer, setBufferState] = useState("");
@@ -58,7 +45,7 @@ export function NumberSegment({
   function step(delta: number) {
     const span = max - min + 1;
     const base = value ?? (delta > 0 ? min - 1 : max + 1);
-    onChange(((((base - min + delta + span) % span) + span) % span) + min);
+    onChange(((base - min + delta + span) % span + span) % span + min);
   }
 
   function onKeyDown(event: KeyboardEvent<HTMLSpanElement>) {
@@ -126,9 +113,6 @@ export function NumberSegment({
   );
 }
 
-/**
- *
- */
 export interface ChoiceSegmentProps<T extends string> {
   value: T | null;
   options: readonly T[];
@@ -139,14 +123,7 @@ export interface ChoiceSegmentProps<T extends string> {
 }
 
 /** A typed part with a closed set — AM/PM. Type its first letter or step with arrows. */
-export function ChoiceSegment<T extends string>({
-  value,
-  options,
-  placeholder,
-  label,
-  onChange,
-  disabled,
-}: ChoiceSegmentProps<T>) {
+export function ChoiceSegment<T extends string>({ value, options, placeholder, label, onChange, disabled }: ChoiceSegmentProps<T>) {
   function onKeyDown(event: KeyboardEvent<HTMLSpanElement>) {
     const el = event.currentTarget;
     const index = value == null ? -1 : options.indexOf(value);
@@ -161,9 +138,7 @@ export function ChoiceSegment<T extends string>({
       event.preventDefault();
       focusSibling(el, -1);
     } else {
-      const hit = options.find((option) =>
-        option.toLowerCase().startsWith(event.key.toLowerCase()),
-      );
+      const hit = options.find((option) => option.toLowerCase().startsWith(event.key.toLowerCase()));
       if (hit) {
         event.preventDefault();
         onChange(hit);
@@ -187,9 +162,6 @@ export function ChoiceSegment<T extends string>({
   );
 }
 
-/**
- *
- */
 export function SegmentDivider({ children }: { children: ReactNode }) {
   return (
     <span className="os-segment-divider" aria-hidden>

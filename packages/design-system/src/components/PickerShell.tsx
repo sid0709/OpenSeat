@@ -1,24 +1,12 @@
 "use client";
 
-import {
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type ReactNode,
-} from "react";
-
+import { useCallback, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { IconButton } from "./Action";
 import { icons, type GlyphName } from "./Glyph";
-import { useDismiss } from "./hooks";
 import { Icon } from "./Primitives";
-
 import type { ControlSize } from "./size";
+import { useDismiss } from "./hooks";
 
-/**
- *
- */
 export interface PickerShellProps {
   /** Typed segments rendered inside the control. */
   segments: ReactNode;
@@ -58,9 +46,7 @@ export function PickerShell({
   const controlRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState<CSSProperties | null>(null);
-  const close = useCallback(() => {
-    onOpenChange(false);
-  }, [onOpenChange]);
+  const close = useCallback(() => onOpenChange(false), [onOpenChange]);
   useDismiss(rootRef, open, close);
 
   // Fixed positioning escapes cards that clip overflow; flip above when below is short.
@@ -75,10 +61,7 @@ export function PickerShell({
       if (!field) return;
       const below = window.innerHeight - field.bottom - PANEL_GAP;
       const flip = height > below && field.top > below;
-      setPosition({
-        left: field.left,
-        top: flip ? field.top - PANEL_GAP - height : field.bottom + PANEL_GAP,
-      });
+      setPosition({ left: field.left, top: flip ? field.top - PANEL_GAP - height : field.bottom + PANEL_GAP });
     }
     place();
     window.addEventListener("scroll", place, true);
@@ -103,29 +86,20 @@ export function PickerShell({
   return (
     <div ref={rootRef} className="os-picker">
       <div ref={controlRef} className={shell}>
-        <div
-          className="os-segments"
-          role="group"
-          aria-label={labelledBy ? undefined : label}
-          aria-labelledby={labelledBy}
-        >
+        <div className="os-segments" role="group" aria-label={labelledBy ? undefined : label} aria-labelledby={labelledBy}>
           {segments}
         </div>
         {panel && (
           <IconButton
             className="os-picker-trigger"
-            label={
-              open ? `Close ${label.toLowerCase()} picker` : `Open ${label.toLowerCase()} picker`
-            }
+            label={open ? `Close ${label.toLowerCase()} picker` : `Open ${label.toLowerCase()} picker`}
             aria-expanded={open}
             aria-haspopup="dialog"
             variant="ghost"
             size="sm"
             isDisabled={disabled}
             icon={<Icon icon={icons[icon]} />}
-            onClick={() => {
-              onOpenChange(!open);
-            }}
+            onClick={() => onOpenChange(!open)}
           />
         )}
       </div>

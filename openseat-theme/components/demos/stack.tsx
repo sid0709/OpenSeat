@@ -23,10 +23,7 @@ const ALIGNS = ["start", "center", "end", "between"] as const;
 export default function StackDemo() {
   return (
     <Examples>
-      <Preview
-        label="Vertical and horizontal"
-        description="VStack and HStack are Stack with the direction preset."
-      >
+      <Preview label="Vertical and horizontal" description="VStack and HStack are Stack with the direction preset.">
         <HStack gap={6} vAlign="start">
           <VStack gap={2} width={160}>
             <Tile>One</Tile>
@@ -60,10 +57,7 @@ export default function StackDemo() {
         </Stack>
       </Preview>
 
-      <Preview
-        label="Main-axis alignment"
-        description="hAlign on an HStack distributes children along the row."
-      >
+      <Preview label="Main-axis alignment" description="hAlign on an HStack distributes children along the row.">
         <Stack gap={2}>
           {ALIGNS.map((align) => (
             <Card key={align} padding={2}>
@@ -77,10 +71,7 @@ export default function StackDemo() {
         </Stack>
       </Preview>
 
-      <Preview
-        label="Cross-axis alignment"
-        description="vAlign on an HStack lines children up by top, center, bottom, or stretch."
-      >
+      <Preview label="Cross-axis alignment" description="vAlign on an HStack lines children up by top, center, bottom, or stretch.">
         <HStack gap={4} wrap="wrap">
           {(["start", "center", "end", "stretch"] as const).map((align) => (
             <Card key={align} padding={2} width={180}>
@@ -95,10 +86,7 @@ export default function StackDemo() {
         </HStack>
       </Preview>
 
-      <Preview
-        label="Grow and fixed items"
-        description="StackItem size fill takes the leftover space; content hugs."
-      >
+      <Preview label="Grow and fixed items" description="StackItem size fill takes the leftover space; content hugs.">
         <Card padding={3}>
           <HStack gap={3} vAlign="center">
             <Icon icon={icons.search} />
@@ -110,23 +98,9 @@ export default function StackDemo() {
         </Card>
       </Preview>
 
-      <Preview
-        label="Wrapping"
-        description="wrap lets chips flow onto new lines instead of overflowing."
-      >
+      <Preview label="Wrapping" description="wrap lets chips flow onto new lines instead of overflowing.">
         <HStack gap={2} wrap="wrap">
-          {[
-            "Branding",
-            "Web",
-            "Motion",
-            "Illustration",
-            "Copywriting",
-            "3D",
-            "Research",
-            "Strategy",
-            "Video",
-            "Photography",
-          ].map((tag) => (
+          {["Branding", "Web", "Motion", "Illustration", "Copywriting", "3D", "Research", "Strategy", "Video", "Photography"].map((tag) => (
             <Tile key={tag} tone="neutral">
               {tag}
             </Tile>
@@ -153,10 +127,7 @@ export default function StackDemo() {
         </ResponsiveFrame>
       </Preview>
 
-      <Preview
-        label="Responsive media object"
-        description="Image beside copy on wide frames; image on top when narrow, via isReversedWhenStacked."
-      >
+      <Preview label="Responsive media object" description="Image beside copy on wide frames; image on top when narrow, via isReversedWhenStacked.">
         <ResponsiveFrame defaultPreset="Phone">
           <ResponsiveStack from="sm" gap={4} align="center" isReversedWhenStacked>
             <Stack gap={2}>
@@ -178,10 +149,7 @@ export default function StackDemo() {
         </ResponsiveFrame>
       </Preview>
 
-      <Preview
-        label="Responsive form actions"
-        description="Full-width buttons stacked on phones; a right-aligned row from sm."
-      >
+      <Preview label="Responsive form actions" description="Full-width buttons stacked on phones; a right-aligned row from sm.">
         <ResponsiveFrame defaultPreset="Phone">
           <ResponsiveStack from="sm" gap={2} isReversedWhenStacked>
             <Button label="Cancel" width="100%" />
@@ -196,13 +164,7 @@ export default function StackDemo() {
           <VStack gap={4}>
             <HStack hAlign="between" vAlign="center">
               <Text weight="semibold">Invite bidders</Text>
-              <Button
-                label="Close"
-                variant="ghost"
-                size="sm"
-                isIconOnly
-                icon={<Icon icon={icons.close} />}
-              />
+              <Button label="Close" variant="ghost" size="sm" isIconOnly icon={<Icon icon={icons.close} />} />
             </HStack>
             <VStack gap={2}>
               {["Jordan Mills", "Alex Kim", "Riley Chen"].map((name) => (

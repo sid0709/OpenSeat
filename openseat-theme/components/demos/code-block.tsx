@@ -37,10 +37,7 @@ export default function CodeBlockDemo() {
 
   return (
     <Examples>
-      <Preview
-        label="Default"
-        description="Fits the longest line, with syntax highlighting and a copy button."
-      >
+      <Preview label="Default" description="Fits the longest line, with syntax highlighting and a copy button.">
         <CodeBlock language="tsx" code={TSX} />
       </Preview>
 
@@ -52,79 +49,36 @@ export default function CodeBlockDemo() {
         </Stack>
       </Preview>
 
-      <Preview
-        label="Title and language label"
-        description="title names the file; hasLanguageLabel shows the language in the header."
-      >
+      <Preview label="Title and language label" description="title names the file; hasLanguageLabel shows the language in the header.">
         <Stack gap={3}>
           <CodeBlock language="tsx" title="SaveBar.tsx" width="100%" code={TSX} />
           <CodeBlock language="tsx" title="SaveBar.tsx" hasLanguageLabel width="100%" code={TSX} />
         </Stack>
       </Preview>
 
-      <Preview
-        label="Line numbers and highlights"
-        description="Point the reader at the lines that matter."
-      >
-        <CodeBlock
-          language="tsx"
-          title="SaveBar.tsx"
-          hasLineNumbers
-          highlightLines={[1, 4]}
-          width="100%"
-          code={TSX}
-        />
+      <Preview label="Line numbers and highlights" description="Point the reader at the lines that matter.">
+        <CodeBlock language="tsx" title="SaveBar.tsx" hasLineNumbers highlightLines={[1, 4]} width="100%" code={TSX} />
       </Preview>
 
-      <Preview
-        label="Copy"
-        description="The copy button is on by default. onCopy lets you confirm or log it."
-      >
+      <Preview label="Copy" description="The copy button is on by default. onCopy lets you confirm or log it.">
         <Stack gap={2}>
-          <CodeBlock
-            language="bash"
-            width="100%"
-            code={BASH}
-            onCopy={() => setCopies((n) => n + 1)}
-          />
-          <Caption>
-            {copies === 0 ? "Not copied yet." : `Copied ${copies} time${copies === 1 ? "" : "s"}.`}
-          </Caption>
+          <CodeBlock language="bash" width="100%" code={BASH} onCopy={() => setCopies((n) => n + 1)} />
+          <Caption>{copies === 0 ? "Not copied yet." : `Copied ${copies} time${copies === 1 ? "" : "s"}.`}</Caption>
           <CodeBlock language="bash" width="100%" hasCopyButton={false} code={BASH} />
         </Stack>
       </Preview>
 
-      <Preview
-        label="Wrapping"
-        description="Long lines scroll by default; isWrapped wraps them instead."
-      >
+      <Preview label="Wrapping" description="Long lines scroll by default; isWrapped wraps them instead.">
         <Stack gap={3}>
           <CodeBlock language="ts" title="Scrolls" width="100%" code={LONG_LINE} />
           <CodeBlock language="ts" title="Wraps" width="100%" isWrapped code={LONG_LINE} />
         </Stack>
       </Preview>
 
-      <Preview
-        label="Max height and collapsing"
-        description="maxHeight scrolls inside the block; isCollapsible folds long samples behind a toggle."
-      >
+      <Preview label="Max height and collapsing" description="maxHeight scrolls inside the block; isCollapsible folds long samples behind a toggle.">
         <Stack gap={3}>
-          <CodeBlock
-            language="ts"
-            title="maxHeight 160"
-            width="100%"
-            maxHeight={160}
-            hasLineNumbers
-            code={LONG}
-          />
-          <CodeBlock
-            language="ts"
-            title="Collapsible after 8 lines"
-            width="100%"
-            isCollapsible
-            collapsibleThreshold={8}
-            code={LONG}
-          />
+          <CodeBlock language="ts" title="maxHeight 160" width="100%" maxHeight={160} hasLineNumbers code={LONG} />
+          <CodeBlock language="ts" title="Collapsible after 8 lines" width="100%" isCollapsible collapsibleThreshold={8} code={LONG} />
         </Stack>
       </Preview>
 
@@ -143,10 +97,7 @@ export default function CodeBlockDemo() {
         </Stack>
       </Preview>
 
-      <Preview
-        label="Section container"
-        description='container="section" drops the border and background to blend into a card.'
-      >
+      <Preview label="Section container" description="container=&quot;section&quot; drops the border and background to blend into a card.">
         <Card>
           <Stack gap={2}>
             <Heading level={4}>Usage</Heading>
