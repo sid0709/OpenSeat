@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-bun
       - name: Lint shared design-system sources
         run: bun run lint
@@ -32,6 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-bun
       - name: Build frontend
         run: bunx turbo run build --filter=openseat-frontend
