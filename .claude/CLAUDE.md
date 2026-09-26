@@ -76,9 +76,7 @@ When the folder is a Next.js project, follow current App Router practice. Read t
 ```tsx
 // ❌ whole page is a client component
 "use client";
-export default function Page() {
-  /* fetch + form + layout */
-}
+export default function Page() { /* fetch + form + layout */ }
 
 // ✅ server page, tiny client island
 export default function Page() {
