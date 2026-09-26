@@ -2,9 +2,9 @@ name: CI
 
 on:
   pull_request:
-    branches: [main, Odu, "codex/**"]
+    branches: [main]
   push:
-    branches: [main, Odu, "codex/**"]
+    branches: [main]
 
 permissions:
   contents: read
