@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, Odu, "codex/**"]
+  push:
+    branches: [main, Odu, "codex/**"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-format:
+    name: Lint and format
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: ./.github/actions/setup-bun
+      - name: Lint shared design-system sources
+        run: bun run lint
+      - name: Lint frontend
+        run: bunx turbo run lint --filter=openseat-frontend
+      - name: Check formatting
+        run: bun run format:check
+
+  build:
+    name: Build frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: ./.github/actions/setup-bun
+      - name: Build frontend
+        run: bunx turbo run build --filter=openseat-frontend
